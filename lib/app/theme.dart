@@ -9,7 +9,7 @@ class CustomTheme {
   static const Color darkGray = Color(0xFF3E3E3E);
   static const Color lightTextColor = Color(0xff131313);
   static const Color yellow = Color(0xFFFFC107);
-  static const Color backgroundColor = Color(0xFFF8F6F8);
+  static const Color backgroundColor = Color(0xFFF3F3F4);
   static const Color googleColor = Color(0xFFDB4437);
   static const Color facebookColor = Color(0xFF4267B2);
   static const Color twitter = Color(0xFF1DA1F2);
@@ -31,7 +31,7 @@ class CustomTheme {
     scaffoldBackgroundColor: backgroundColor,
     iconTheme: const IconThemeData(color: darkerBlack),
     bottomAppBarColor: Colors.white,
-    fontFamily: Fonts.montserrat,
+    fontFamily: Fonts.quickSand,
     textTheme: const TextTheme(
       headline1: TextStyle(
           color: lightTextColor, fontWeight: FontWeight.bold, fontSize: 24),
@@ -62,7 +62,7 @@ class CustomTheme {
     scaffoldBackgroundColor: darkGray,
     iconTheme: const IconThemeData(color: Colors.white),
     bottomAppBarColor: darkGray,
-    fontFamily: Fonts.montserrat,
+    fontFamily: Fonts.quickSand,
     textTheme: const TextTheme(
       headline1: TextStyle(
           color: darkTextColor, fontWeight: FontWeight.bold, fontSize: 24),

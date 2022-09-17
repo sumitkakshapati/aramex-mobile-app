@@ -16,7 +16,8 @@ class SplashWidget extends StatelessWidget {
         if (state is StartupSuccess) {
           if (state.isFirstTime) {
             NavigationService.pushReplacementNamed(
-                routeName: Routes.onboarding);
+              routeName: Routes.dashboard,
+            );
           } else {
             NavigationService.pushReplacementNamed(routeName: Routes.dashboard);
           }

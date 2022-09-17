@@ -1,5 +1,5 @@
 import 'package:boilerplate/common/route/routes.dart';
-import 'package:boilerplate/feature/onboard/ui/screen/onboard_page.dart';
+import 'package:boilerplate/feature/dashboard/ui/screens/dashboard_screens.dart';
 import 'package:boilerplate/feature/splash/ui/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +11,9 @@ class RouteGenerator {
           builder: (_) => const SplashScreens(),
           settings: RouteSettings(name: settings.name),
         );
-      case Routes.onboarding:
+      case Routes.dashboard:
         return MaterialPageRoute(
-          builder: (_) => OnboardPage(),
+          builder: (_) => const DashboardScreens(),
           settings: RouteSettings(name: settings.name),
         );
       default:
