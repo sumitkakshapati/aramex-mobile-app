@@ -22,6 +22,7 @@ dependencies:
   social_share: ^2.2.1
   equatable: ^2.0.3
   google_api_availability: ^3.0.1
+  package_info_plus: ^1.4.3+1
 
   # state management
   flutter_bloc: ^8.0.1

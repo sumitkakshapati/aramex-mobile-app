@@ -2,8 +2,8 @@ import 'package:boilerplate/common/constant/fonts.dart';
 import 'package:flutter/material.dart';
 
 class CustomTheme {
-  static const Color primaryColor = Color(0xff68A037);
-  static const double symmetricHozPadding = 13.0;
+  static const Color primaryColor = Color(0xffE12626);
+  static const double symmetricHozPadding = 15.0;
   static const Color lightGray = Color(0xFF707070);
   static const Color gray = Color(0xFFDEDEDE);
   static const Color darkGray = Color(0xFF3E3E3E);

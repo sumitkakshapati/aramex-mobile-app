@@ -1,5 +1,6 @@
 {
-  "appName": "This app",
+  "appName": "Aramex",
+  "version": "Version",
   "auth": {
     "unableToLogin": "Unable to login"
   }
