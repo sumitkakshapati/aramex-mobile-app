@@ -1,7 +1,15 @@
 {
-  "appName": "Aramex",
+  "aramex": "Aramex",
   "version": "Version",
   "auth": {
-    "unableToLogin": "Unable to login"
+    "unableToLogin": "Unable to login",
+    "loginToAramex": "Login to Aramex",
+    "weCoverAllKindOfTransportation": "We cover all kind of transportation",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "forgotPassword": "Forgot Password",
+    "login": "Login",
+    "dontHaveAnAccount": "Don't have an account?",
+    "registerNow": "Register Now"
   }
 }

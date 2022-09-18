@@ -53,7 +53,7 @@ class _SplashWidgetState extends State<SplashWidget> {
             children: [
               Center(
                 child: Text(
-                  LocaleKeys.appName.tr().toLowerCase(),
+                  LocaleKeys.aramex.tr().toLowerCase(),
                   style: _textTheme.headline1!.copyWith(
                     fontWeight: FontWeight.w900,
                     fontSize: 64,
