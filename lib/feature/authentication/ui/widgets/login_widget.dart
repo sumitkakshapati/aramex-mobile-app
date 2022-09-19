@@ -2,6 +2,7 @@ import 'package:boilerplate/app/theme.dart';
 import 'package:boilerplate/common/util/size_utils.dart';
 import 'package:boilerplate/common/widget/button/rounded_button.dart';
 import 'package:boilerplate/common/widget/text_field/custom_textfield.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidgets extends StatelessWidget {
@@ -72,24 +73,20 @@ class LoginWidgets extends StatelessWidget {
               onPressed: () {},
             ),
             SizedBox(height: 24.hp),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: RichText(
-                text: TextSpan(
-                  text: "Don't have an account? ",
-                  style: _textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.w400,
+            RichText(
+              text: TextSpan(
+                text: "Don't have an account?",
+                style: _textTheme.headline6,
+                children: [
+                  TextSpan(
+                    text: " Register Now",
+                    style: _textTheme.headline6!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: CustomTheme.primaryColor,
+                    ),
+                    recognizer: TapGestureRecognizer()..onTap = () {},
                   ),
-                  children: [
-                    TextSpan(
-                      text: "Register Now",
-                      style: _textTheme.headline6!.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: CustomTheme.primaryColor,
-                      ),
-                    )
-                  ],
-                ),
+                ],
               ),
             )
           ],

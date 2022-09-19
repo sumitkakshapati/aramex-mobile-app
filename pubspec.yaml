@@ -12,6 +12,7 @@ dependencies:
 
   # ui  widgets
   cupertino_icons: ^1.0.4
+  pin_code_fields: ^7.4.0
   flutter_svg: ^1.0.3
 
   cached_network_image: ^3.2.0
