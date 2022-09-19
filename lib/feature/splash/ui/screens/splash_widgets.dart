@@ -4,6 +4,7 @@ import 'package:boilerplate/common/navigation/navigation_service.dart';
 import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/common/util/device_utils.dart';
 import 'package:boilerplate/common/widget/page_wrapper.dart';
+import 'package:boilerplate/feature/authentication/ui/screens/register_screens.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/verification_screens.dart';
 import 'package:boilerplate/feature/splash/cubit/startup_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -45,7 +46,7 @@ class _SplashWidgetState extends State<SplashWidget> {
           //   NavigationService.pushReplacementNamed(routeName: Routes.dashboard);
           // }
           // NavigationService.pushReplacementNamed(routeName: Routes.login);
-          NavigationService.push(target: VerificationScreens());
+          NavigationService.push(target: RegisterScreens());
         }
       },
       child: PageWrapper(
