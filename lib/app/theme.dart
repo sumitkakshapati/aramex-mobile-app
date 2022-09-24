@@ -5,7 +5,7 @@ class CustomTheme {
   static const Color primaryColor = Color(0xffE12626);
   static const double symmetricHozPadding = 15.0;
   static const Color lightGray = Color(0xFF707070);
-  static const Color gray = Color(0xFFDEDEDE);
+  static const Color gray = Color(0xFFCDCFD3);
   static const Color darkGray = Color(0xFF3E3E3E);
   static const Color lightTextColor = Color(0xff131313);
   static const Color yellow = Color(0xFFFFC107);
@@ -18,6 +18,7 @@ class CustomTheme {
   static const Color orangeColor = Color(0xFFEF8767);
   static const Color shadowColor = Color(0x1A000000);
   static const Color darkerBlack = Color(0xff060606);
+  static const Color green = Color(0xFF59C139);
 
   static const Color darkTextColor = Color(0xfff8f8f8);
 

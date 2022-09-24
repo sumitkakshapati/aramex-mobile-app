@@ -1,4 +1,6 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/navigation/navigation_service.dart';
+import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:boilerplate/common/widget/button/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,9 @@ class VerificationWidgets extends StatelessWidget {
         leading: Center(
           child: CustomIconButton(
             icon: Icons.keyboard_arrow_left_rounded,
-            onPressed: () {},
+            onPressed: () {
+              NavigationService.pop();
+            },
           ),
         ),
       ),
@@ -31,7 +35,7 @@ class VerificationWidgets extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.only(top: 54, bottom: 8),
+              padding: const EdgeInsets.only(top: 54, bottom: 8),
               child: Text(
                 "Verify OTP",
                 style: _textTheme.headline1!.copyWith(
@@ -87,7 +91,11 @@ class VerificationWidgets extends StatelessWidget {
             const Spacer(),
             CustomRoundedButtom(
               title: "Verify OTP",
-              onPressed: () {},
+              onPressed: () {
+                NavigationService.pushNamedAndRemoveUntil(
+                  routeName: Routes.dashboard,
+                );
+              },
             ),
             SizedBox(
               height: MediaQuery.of(context).viewPadding.bottom > 0

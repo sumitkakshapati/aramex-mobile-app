@@ -6,6 +6,6 @@ class LoginScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginWidgets();
+    return const LoginWidgets();
   }
 }

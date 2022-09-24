@@ -1,7 +1,9 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/navigation/navigation_service.dart';
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:boilerplate/common/widget/button/rounded_button.dart';
 import 'package:boilerplate/common/widget/text_field/custom_textfield.dart';
+import 'package:boilerplate/feature/authentication/ui/screens/verification_screens.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,9 @@ class RegisterWidgets extends StatelessWidget {
         leading: Center(
           child: CustomIconButton(
             icon: Icons.keyboard_arrow_left_rounded,
-            onPressed: () {},
+            onPressed: () {
+              NavigationService.pop();
+            },
           ),
         ),
       ),
@@ -57,11 +61,11 @@ class RegisterWidgets extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.all(4),
                     padding: const EdgeInsets.all(42),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.image,
                       color: CustomTheme.primaryColor,
                       size: 30,
@@ -69,32 +73,32 @@ class RegisterWidgets extends StatelessWidget {
                   ),
                 ),
               ),
-              CustomTextField(
+              const CustomTextField(
                 label: "Account Number",
                 hintText: "12345678",
               ),
-              CustomTextField(
+              const CustomTextField(
                 label: "Full Name",
                 hintText: "Ram Shrestha",
               ),
-              CustomTextField(
+              const CustomTextField(
                 label: "Email",
                 hintText: "******@gmail.com",
               ),
-              CustomTextField(
+              const CustomTextField(
                 label: "Phone Number",
                 hintText: "98xxxxxxxx",
               ),
-              CustomTextField(
+              const CustomTextField(
                 label: "Address",
                 hintText: "Enter Address",
               ),
-              CustomTextField(
+              const CustomTextField(
                 label: "Password",
                 obscureText: true,
                 hintText: "******",
               ),
-              CustomTextField(
+              const CustomTextField(
                 label: "Password",
                 obscureText: true,
                 hintText: "******",
@@ -102,7 +106,9 @@ class RegisterWidgets extends StatelessWidget {
               ),
               CustomRoundedButtom(
                 title: "Register Now",
-                onPressed: () {},
+                onPressed: () {
+                  NavigationService.push(target: const VerificationScreens());
+                },
               ),
               SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 20),
             ],

@@ -8,6 +8,6 @@ class VerificationScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VerificationWidgets();
+    return const VerificationWidgets();
   }
 }

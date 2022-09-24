@@ -6,6 +6,7 @@ import 'package:boilerplate/common/util/device_utils.dart';
 import 'package:boilerplate/common/widget/page_wrapper.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/register_screens.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/verification_screens.dart';
+import 'package:boilerplate/feature/home/ui/screens/homepage_screens.dart';
 import 'package:boilerplate/feature/splash/cubit/startup_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +46,7 @@ class _SplashWidgetState extends State<SplashWidget> {
           // } else {
           //   NavigationService.pushReplacementNamed(routeName: Routes.dashboard);
           // }
-          // NavigationService.pushReplacementNamed(routeName: Routes.login);
-          NavigationService.push(target: RegisterScreens());
+          NavigationService.pushReplacementNamed(routeName: Routes.login);
         }
       },
       child: PageWrapper(
