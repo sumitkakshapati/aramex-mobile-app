@@ -68,7 +68,7 @@ class DashboardWidgets extends StatelessWidget {
           _currentIndex.value = index;
         },
         controller: _pageController,
-        children: [
+        children: const [
           HomepageScreens(),
           SearchPage(),
           ShippingPage(),

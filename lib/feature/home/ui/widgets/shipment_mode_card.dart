@@ -1,4 +1,5 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/util/number_utils.dart';
 import 'package:flutter/material.dart';
 
 class ShipmentModeCard extends StatelessWidget {
@@ -59,14 +60,14 @@ class ShipmentModeCard extends StatelessWidget {
                   child: RichText(
                     text: TextSpan(
                       text: "No of Shipping ",
-                      style: _textTheme.bodyText2!.copyWith(
+                      style: _textTheme.bodyText1!.copyWith(
                         fontWeight: FontWeight.w400,
                         color: CustomTheme.gray,
                       ),
                       children: [
                         TextSpan(
                           text: "$noOfShipment",
-                          style: _textTheme.bodyText2!.copyWith(
+                          style: _textTheme.bodyText1!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         )
@@ -77,14 +78,14 @@ class ShipmentModeCard extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: "COD Value ",
-                    style: _textTheme.bodyText2!.copyWith(
+                    style: _textTheme.bodyText1!.copyWith(
                       fontWeight: FontWeight.w400,
                       color: CustomTheme.gray,
                     ),
                     children: [
                       TextSpan(
-                        text: "Rs. $amount",
-                        style: _textTheme.bodyText2!.copyWith(
+                        text: "${amount.formatInRupee()}",
+                        style: _textTheme.bodyText1!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       )
