@@ -18,6 +18,7 @@ dependencies:
   dotted_line: ^3.1.0
   sliver_tools: ^0.2.8
   iconsax: ^0.0.8
+  boxy: ^2.0.6+2
 
   cached_network_image: ^3.2.0
   flutter_cache_manager: ^3.3.0
