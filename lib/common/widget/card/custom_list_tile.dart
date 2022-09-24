@@ -16,6 +16,8 @@ class CustomListTile extends StatelessWidget {
   final Color iconColor;
   final double topPadding;
   final double bottomPadding;
+  final bool showBorder;
+  final bool showNextIcon;
   CustomListTile({
     required this.title,
     this.description = "",
@@ -29,8 +31,10 @@ class CustomListTile extends StatelessWidget {
     this.descriptionColor = CustomTheme.gray,
     this.icon,
     this.iconColor = CustomTheme.primaryColor,
-    this.bottomPadding = 0,
-    this.topPadding = 0,
+    this.bottomPadding = 14,
+    this.topPadding = 14,
+    this.showBorder = true,
+    this.showNextIcon = false,
   }) : assert(image.isEmpty || leading == null || icon == null);
 
   @override
@@ -43,7 +47,17 @@ class CustomListTile extends StatelessWidget {
         top: topPadding,
         bottom: bottomPadding,
       ),
+      decoration: BoxDecoration(
+        border: showBorder
+            ? Border(
+                bottom: BorderSide(
+                color: CustomTheme.gray.withOpacity(0.4),
+                width: 1,
+              ))
+            : null,
+      ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (leading != null) leading!,
           if (image.isNotEmpty)
@@ -77,18 +91,28 @@ class CustomListTile extends StatelessWidget {
                     fontWeight: titleFontWeight,
                   ),
                 ),
-                const SizedBox(height: 6),
-                Text(
-                  description,
-                  style: _textTheme.headline6!.copyWith(
-                    fontSize: descriptionFontSize,
-                    color: descriptionColor,
-                    fontWeight: descriptionFontWeight,
+                if (description.isNotEmpty) const SizedBox(height: 6),
+                if (description.isNotEmpty)
+                  Text(
+                    description,
+                    style: _textTheme.headline6!.copyWith(
+                      fontSize: descriptionFontSize,
+                      color: descriptionColor,
+                      fontWeight: descriptionFontWeight,
+                    ),
                   ),
-                ),
               ],
             ),
-          )
+          ),
+          if (showNextIcon)
+            Container(
+              padding: const EdgeInsets.only(left: 12),
+              child: const Icon(
+                Icons.keyboard_arrow_right_rounded,
+                size: 26,
+                color: CustomTheme.gray,
+              ),
+            ),
         ],
       ),
     );

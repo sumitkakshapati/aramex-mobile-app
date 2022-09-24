@@ -71,6 +71,8 @@ class HomePageWidgets extends StatelessWidget {
                       description: "Rs. 100,000.00",
                       bottomPadding: 14,
                       descriptionColor: CustomTheme.lightTextColor,
+                      topPadding: 0,
+                      showBorder: false,
                     ),
                     const DottedLine(
                       direction: Axis.horizontal,
@@ -82,6 +84,8 @@ class HomePageWidgets extends StatelessWidget {
                       description: "Rs. 100,000.00",
                       descriptionColor: CustomTheme.lightTextColor,
                       topPadding: 14,
+                      bottomPadding: 0,
+                      showBorder: false,
                     ),
                   ],
                 ),
