@@ -1,9 +1,11 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/icons/aramex_icons.dart';
 import 'package:boilerplate/feature/home/ui/screens/homepage_screens.dart';
 import 'package:boilerplate/feature/profile/ui/screens/profile_screens.dart';
 import 'package:boilerplate/feature/search/ui/screens/search_page.dart';
 import 'package:boilerplate/feature/shipping/ui/screens/shipping_page.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class DashboardWidgets extends StatelessWidget {
   DashboardWidgets({Key? key}) : super(key: key);
@@ -43,19 +45,19 @@ class DashboardWidgets extends StatelessWidget {
               },
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.dashboard),
+                  icon: Icon(Iconsax.category),
                   label: "Dashboard",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.search),
+                  icon: Icon(Iconsax.search_normal),
                   label: "Search",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.production_quantity_limits),
+                  icon: Icon(Iconsax.box),
                   label: "Shipping",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
+                  icon: Icon(Iconsax.user),
                   label: "Profile",
                 )
               ],

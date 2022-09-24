@@ -1,11 +1,13 @@
 import 'package:boilerplate/app/theme.dart';
 import 'package:boilerplate/common/constant/assets.dart';
+import 'package:boilerplate/common/icons/aramex_icons.dart';
 import 'package:boilerplate/common/util/size_utils.dart';
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:boilerplate/common/widget/card/custom_list_tile.dart';
 import 'package:boilerplate/common/widget/card_wrapper.dart';
 import 'package:boilerplate/common/widget/image/rounded_image.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class ProfileWidgets extends StatelessWidget {
   const ProfileWidgets({Key? key}) : super(key: key);
@@ -20,9 +22,11 @@ class ProfileWidgets extends StatelessWidget {
         backgroundColor: _theme.scaffoldBackgroundColor,
         elevation: 0,
         actions: [
-          CustomIconButton(
-            icon: Icons.notifications,
-            onPressed: () {},
+          Center(
+            child: CustomIconButton(
+              icon: Icons.notifications,
+              onPressed: () {},
+            ),
           ),
           SizedBox(width: 16.wp),
         ],
@@ -128,32 +132,32 @@ class ProfileWidgets extends StatelessWidget {
                   children: [
                     CustomListTile(
                       title: "Personal Information",
-                      leading: const Icon(Icons.person),
+                      leading: const Icon(Iconsax.user),
                       showNextIcon: true,
                     ),
                     CustomListTile(
                       title: "Account payment",
-                      leading: const Icon(Icons.payment),
+                      leading: const Icon(Iconsax.bank),
                       showNextIcon: true,
                     ),
                     CustomListTile(
                       title: "Change Password",
-                      leading: const Icon(Icons.lock),
+                      leading: const Icon(Iconsax.lock),
                       showNextIcon: true,
                     ),
                     CustomListTile(
                       title: "Payment History",
-                      leading: const Icon(Icons.payment),
+                      leading: const Icon(Iconsax.bank),
                       showNextIcon: true,
                     ),
                     CustomListTile(
                       title: "Help and Support",
-                      leading: const Icon(Icons.help),
+                      leading: const Icon(Aramex.help),
                       showNextIcon: true,
                     ),
                     CustomListTile(
                       title: "Terms and Condition",
-                      leading: const Icon(Icons.dock),
+                      leading: const Icon(Iconsax.document),
                       showBorder: false,
                       showNextIcon: true,
                     ),
@@ -168,7 +172,7 @@ class ProfileWidgets extends StatelessWidget {
                   title: "Log Out",
                   titleColor: _theme.primaryColor,
                   leading: Icon(
-                    Icons.logout_rounded,
+                    Iconsax.logout,
                     color: _theme.primaryColor,
                   ),
                   showBorder: false,

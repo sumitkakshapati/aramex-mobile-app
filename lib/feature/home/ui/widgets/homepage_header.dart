@@ -1,5 +1,6 @@
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class HomePageHeader extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           CustomIconButton(
-            icon: Icons.notifications,
+            icon: Iconsax.notification,
             onPressed: () {},
           ),
         ],
