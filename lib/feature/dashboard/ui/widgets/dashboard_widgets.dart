@@ -1,5 +1,8 @@
 import 'package:boilerplate/app/theme.dart';
 import 'package:boilerplate/feature/home/ui/screens/homepage_screens.dart';
+import 'package:boilerplate/feature/profile/ui/screens/profile_screens.dart';
+import 'package:boilerplate/feature/search/ui/screens/search_page.dart';
+import 'package:boilerplate/feature/shipping/ui/screens/shipping_page.dart';
 import 'package:flutter/material.dart';
 
 class DashboardWidgets extends StatelessWidget {
@@ -65,6 +68,9 @@ class DashboardWidgets extends StatelessWidget {
         controller: _pageController,
         children: [
           HomepageScreens(),
+          SearchPage(),
+          ShippingPage(),
+          ProfileScreens()
         ],
       ),
     );
