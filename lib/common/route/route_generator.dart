@@ -1,6 +1,7 @@
 import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/login_screens.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/register_screens.dart';
+import 'package:boilerplate/feature/dashboard/ui/screens/dashboard_screens.dart';
 import 'package:boilerplate/feature/home/ui/screens/homepage_screens.dart';
 import 'package:boilerplate/feature/splash/ui/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class RouteGenerator {
         );
       case Routes.dashboard:
         return MaterialPageRoute(
-          builder: (_) => const HomepageScreens(),
+          builder: (_) => const DashboardScreens(),
           settings: RouteSettings(name: settings.name),
         );
       case Routes.login:
