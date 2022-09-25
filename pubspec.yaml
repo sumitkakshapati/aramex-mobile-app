@@ -20,6 +20,8 @@ dependencies:
   iconsax: ^0.0.8
   boxy: ^2.0.6+2
   syncfusion_flutter_charts: ^20.2.50
+  page_transition: ^2.0.9
+  animations: ^2.0.5
 
   cached_network_image: ^3.2.0
   flutter_cache_manager: ^3.3.0

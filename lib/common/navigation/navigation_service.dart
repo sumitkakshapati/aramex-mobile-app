@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class NavigationService {
   //Singleton Method
@@ -34,8 +35,9 @@ class NavigationService {
   static Future<dynamic> push(
       {String routeName = '', required Widget target, Object? args}) {
     return _navigatorKey.currentState!.push(
-      MaterialPageRoute(
-        builder: (context) => target,
+      PageTransition(
+        child: target,
+        type: PageTransitionType.fade,
         settings: RouteSettings(name: routeName, arguments: args),
       ),
     );
@@ -46,8 +48,9 @@ class NavigationService {
   static Future<dynamic> pushReplacement(
       {String routeName = '', required Widget target, Object? args}) {
     return _navigatorKey.currentState!.pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => target,
+      PageTransition(
+        child: target,
+        type: PageTransitionType.fade,
         settings: RouteSettings(name: routeName, arguments: args),
       ),
     );
@@ -58,8 +61,9 @@ class NavigationService {
   static Future<dynamic> pushUntil(
       {String routeName = '', required Widget target, Object? args}) {
     return _navigatorKey.currentState!.pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) => target,
+      PageTransition(
+        child: target,
+        type: PageTransitionType.fade,
         settings: RouteSettings(name: routeName, arguments: args),
       ),
       (Route<dynamic> route) => false,
