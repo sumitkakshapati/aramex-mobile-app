@@ -23,5 +23,23 @@
     "didntReceiveAnyCode": "Didn't received any code",
     "resend": "Resend",
     "sec": "sec"
+  },
+  "filter": {
+    "filter": "Filter",
+    "deliveryLocations": "Delivery Locations",
+    "country": "Country",
+    "originCity": "Origin City",
+    "destinationCity": "Destination City",
+    "dateTime": "Date Time",
+    "toDate": "To Date",
+    "fromDate": "From Date",
+    "weightRange": "Weight Range",
+    "fromKG": "From (KG.)",
+    "toKG": "To (KG.)",
+    "priceRange": "Price Range",
+    "fromRs": "From (Rs.)",
+    "toRs": "To (Rs.)",
+    "clear": "Clear",
+    "appleFilter": "Apple Filter"
   }
 }

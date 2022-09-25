@@ -7,12 +7,17 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final double bottomPadding;
   final bool obscureText;
+  final bool readOnly;
+  final IconData? suffixIcon;
+
   const CustomTextField({
     required this.label,
     required this.hintText,
     this.bottomPadding = 16,
     this.obscureText = false,
     this.textInputType,
+    this.readOnly = false,
+    this.suffixIcon,
   });
 
   @override
@@ -45,6 +50,7 @@ class CustomTextField extends StatelessWidget {
               maxLines: 1,
               keyboardType: TextInputType.text,
               obscureText: obscureText,
+              readOnly: readOnly,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 fillColor: Colors.transparent,
@@ -56,6 +62,11 @@ class CustomTextField extends StatelessWidget {
                 hintText: hintText,
                 hintStyle: _textTheme.headline6!.copyWith(
                   color: CustomTheme.lightGray,
+                ),
+                suffixIcon: Icon(
+                  suffixIcon,
+                  size: 26,
+                  color: CustomTheme.gray,
                 ),
               ),
             ),

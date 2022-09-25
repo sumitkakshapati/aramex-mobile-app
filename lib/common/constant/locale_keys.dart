@@ -25,4 +25,21 @@ class LocaleKeys {
   static const didntReceiveAnyCode = "auth.didntReceiveAnyCode";
   static const resend = "auth.resend";
   static const sec = "auth.sec";
+
+  static const filter = "filter.filter";
+  static const deliveryLocations = "filter.deliveryLocations";
+  static const country = "filter.country";
+  static const originCity = "filter.originCity";
+  static const destinationCity = "filter.destinationCity";
+  static const dateTime = "filter.dateTime";
+  static const toDate = "filter.toDate";
+  static const fromDate = "filter.fromDate";
+  static const weightRange = "filter.weightRange";
+  static const fromKG = "filter.fromKG";
+  static const toKG = "filter.toKG";
+  static const priceRange = "filter.priceRange";
+  static const fromRs = "filter.fromRs";
+  static const toRs = "filter.toRs";
+  static const clear = "filter.clear";
+  static const appleFilter = "filter.appleFilter";
 }

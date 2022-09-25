@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:boilerplate/app/theme.dart';
 import 'package:boilerplate/common/icons/aramex_icons.dart';
 import 'package:boilerplate/common/model/chart_data.dart';
@@ -11,6 +12,7 @@ import 'package:boilerplate/common/widget/card_wrapper.dart';
 import 'package:boilerplate/common/widget/donut_chart.dart';
 import 'package:boilerplate/common/widget/options_bottomsheet.dart';
 import 'package:boilerplate/feature/home/ui/widgets/cod_card.dart';
+import 'package:boilerplate/feature/home/ui/widgets/filter_widget.dart';
 import 'package:boilerplate/feature/home/ui/widgets/homepage_header.dart';
 import 'package:boilerplate/feature/home/ui/widgets/shipment_mode_card.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -222,11 +224,18 @@ class HomePageWidgets extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 16.wp),
-                        CustomOutlineIconButton(
-                          icon: Iconsax.filter_search4,
-                          borderColor: CustomTheme.gray.withOpacity(0.4),
-                          padding: 10,
-                        )
+                        OpenContainer(
+                          closedBuilder: (context, open) {
+                            return CustomOutlineIconButton(
+                              icon: Iconsax.filter_search4,
+                              borderColor: CustomTheme.gray.withOpacity(0.4),
+                              padding: 10,
+                            );
+                          },
+                          openBuilder: (context, close) {
+                            return ShipmentFilterWidgets();
+                          },
+                        ),
                       ],
                     ),
                     DonutChartWidget(
