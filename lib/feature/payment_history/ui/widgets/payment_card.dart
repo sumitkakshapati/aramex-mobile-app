@@ -1,6 +1,10 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/constant/locale_keys.dart';
 import 'package:boilerplate/common/util/size_utils.dart';
+import 'package:boilerplate/common/widget/options_bottomsheet.dart';
 import 'package:boilerplate/common/widget/vertical_key_value.dart';
+import 'package:boilerplate/feature/payment_history/ui/widgets/payment_actions_bottomsheet.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PaymentCard extends StatelessWidget {
@@ -46,6 +50,11 @@ class PaymentCard extends StatelessWidget {
               ),
               SizedBox(width: 20.wp),
               InkWell(
+                onTap: () {
+                  showPaymentActionsBottomSheet(
+                    context: context,
+                  );
+                },
                 child: Container(
                   margin: EdgeInsets.only(top: 8.hp),
                   padding: EdgeInsets.symmetric(vertical: 8.hp, horizontal: 16),
