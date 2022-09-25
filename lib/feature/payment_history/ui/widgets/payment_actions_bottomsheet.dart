@@ -4,6 +4,7 @@ import 'package:boilerplate/common/navigation/navigation_service.dart';
 import 'package:boilerplate/common/widget/bottomsheet_wrapper.dart';
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:boilerplate/common/widget/card/custom_list_tile.dart';
+import 'package:boilerplate/feature/payment_history/ui/screens/edit_payment_request_screens.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,7 @@ class _PaymentActionsBottomsheet extends StatelessWidget {
               color: CustomTheme.lightTextColor,
             ),
             onPressed: () {
-              NavigationService.pop();
+              NavigationService.push(target: const EditPaymentRequestScreens());
             },
           ),
           CustomListTile(

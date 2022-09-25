@@ -73,4 +73,11 @@ class LocaleKeys {
   static const editDetails = "paymentHistory.editDetails";
   static const downloadReports = "paymentHistory.downloadReports";
   static const cancelRequests = "paymentHistory.cancelRequests";
+  static const editRequests = "paymentHistory.editRequests";
+  static const receivingType = "paymentHistory.receivingType";
+  static const selectBank = "paymentHistory.selectBank";
+  static const accountHolderName = "paymentHistory.accountHolderName";
+  static const cancel = "paymentHistory.cancel";
+  static const saveUpdate = "paymentHistory.saveUpdate";
+  static const saveAccountForFuturetransaction = "paymentHistory.saveAccountForFuturetransaction";
 }

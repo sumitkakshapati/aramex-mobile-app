@@ -70,6 +70,13 @@
     "requestActions": "Request Actions",
     "editDetails": "Edit Details",
     "downloadReports": "Download Reports",
-    "cancelRequests": "Cancel Requests"
+    "cancelRequests": "Cancel Requests",
+    "editRequests": "Edit Requests",
+    "receivingType": "Receiving Type",
+    "selectBank": "Select Bank",
+    "accountHolderName": "Account Holder's Name",
+    "cancel": "Cancel",
+    "saveUpdate": "Save Update",
+    "saveAccountForFuturetransaction": "Save account for future transactions."
   }
 }
