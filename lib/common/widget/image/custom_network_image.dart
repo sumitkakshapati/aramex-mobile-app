@@ -1,5 +1,5 @@
-import 'package:boilerplate/common/constant/assets.dart';
-import 'package:boilerplate/common/widget/image/cache_manage.dart';
+import 'package:aramex/common/constant/assets.dart';
+import 'package:aramex/common/widget/image/cache_manage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

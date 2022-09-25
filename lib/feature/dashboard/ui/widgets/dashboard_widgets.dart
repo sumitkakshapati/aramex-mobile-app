@@ -1,9 +1,9 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/icons/aramex_icons.dart';
-import 'package:boilerplate/feature/home/ui/screens/homepage_screens.dart';
-import 'package:boilerplate/feature/profile/ui/screens/profile_screens.dart';
-import 'package:boilerplate/feature/search/ui/screens/search_page.dart';
-import 'package:boilerplate/feature/shipping/ui/screens/shipping_page.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/icons/aramex_icons.dart';
+import 'package:aramex/feature/home/ui/screens/homepage_screens.dart';
+import 'package:aramex/feature/profile/ui/screens/profile_screens.dart';
+import 'package:aramex/feature/search/ui/screens/search_page.dart';
+import 'package:aramex/feature/shipping/ui/screens/shipping_page.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 

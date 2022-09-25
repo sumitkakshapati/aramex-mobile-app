@@ -1,4 +1,4 @@
-import 'package:boilerplate/common/enum/environment.dart';
+import 'package:aramex/common/enum/environment.dart';
 
 class Env {
   Env({

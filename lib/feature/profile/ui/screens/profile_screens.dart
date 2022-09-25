@@ -1,5 +1,5 @@
 
-import 'package:boilerplate/feature/profile/ui/widgets/profile_widgets.dart';
+import 'package:aramex/feature/profile/ui/widgets/profile_widgets.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreens extends StatelessWidget {

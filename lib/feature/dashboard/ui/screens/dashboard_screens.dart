@@ -1,4 +1,4 @@
-import 'package:boilerplate/feature/dashboard/ui/widgets/dashboard_widgets.dart';
+import 'package:aramex/feature/dashboard/ui/widgets/dashboard_widgets.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreens extends StatelessWidget {

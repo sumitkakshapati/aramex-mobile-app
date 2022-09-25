@@ -1,6 +1,6 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
-import 'package:boilerplate/common/widget/vertical_key_value.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/util/size_utils.dart';
+import 'package:aramex/common/widget/vertical_key_value.dart';
 import 'package:flutter/material.dart';
 
 class ShipmentCard extends StatelessWidget {

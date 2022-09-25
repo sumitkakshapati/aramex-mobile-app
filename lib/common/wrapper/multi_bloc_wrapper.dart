@@ -1,6 +1,6 @@
-import 'package:boilerplate/common/constant/env.dart';
-import 'package:boilerplate/feature/authentication/cubit/social_login_cubit.dart';
-import 'package:boilerplate/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/common/constant/env.dart';
+import 'package:aramex/feature/authentication/cubit/social_login_cubit.dart';
+import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

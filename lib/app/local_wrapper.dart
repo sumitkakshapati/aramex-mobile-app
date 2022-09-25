@@ -1,4 +1,4 @@
-import 'package:boilerplate/common/constant/custom_locale.dart';
+import 'package:aramex/common/constant/custom_locale.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

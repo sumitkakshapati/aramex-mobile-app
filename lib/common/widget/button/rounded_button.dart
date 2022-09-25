@@ -1,5 +1,5 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/util/size_utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomRoundedButtom extends StatefulWidget {

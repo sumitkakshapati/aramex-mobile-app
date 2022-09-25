@@ -1,4 +1,4 @@
-import 'package:boilerplate/common/http/api_provider.dart';
+import 'package:aramex/common/http/api_provider.dart';
 
 class AuthApiProvider {
   final ApiProvider apiProvider;

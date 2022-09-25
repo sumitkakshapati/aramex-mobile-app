@@ -1,4 +1,4 @@
-import 'package:boilerplate/feature/payment_history/ui/widgets/payment_history_widgets.dart';
+import 'package:aramex/feature/payment_history/ui/widgets/payment_history_widgets.dart';
 import 'package:flutter/material.dart';
 
 class PaymentHistoryScreens extends StatelessWidget {

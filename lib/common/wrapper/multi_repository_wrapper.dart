@@ -1,8 +1,8 @@
-import 'package:boilerplate/common/constant/env.dart';
-import 'package:boilerplate/common/http/api_provider.dart';
-import 'package:boilerplate/common/util/internet_check.dart';
-import 'package:boilerplate/feature/authentication/resource/user_repository.dart';
-import 'package:boilerplate/feature/splash/resource/startup_repository.dart';
+import 'package:aramex/common/constant/env.dart';
+import 'package:aramex/common/http/api_provider.dart';
+import 'package:aramex/common/util/internet_check.dart';
+import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/splash/resource/startup_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

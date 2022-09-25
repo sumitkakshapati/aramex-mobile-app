@@ -1,4 +1,4 @@
-import 'package:boilerplate/feature/authentication/ui/widgets/login_widget.dart';
+import 'package:aramex/feature/authentication/ui/widgets/login_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreens extends StatelessWidget {

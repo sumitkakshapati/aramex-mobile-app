@@ -1,6 +1,6 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
-import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/util/size_utils.dart';
+import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {

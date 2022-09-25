@@ -1,9 +1,9 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
-import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
-import 'package:boilerplate/common/widget/card/custom_chip.dart';
-import 'package:boilerplate/common/widget/text_field/search_textfield.dart';
-import 'package:boilerplate/feature/shipping/ui/widgets/shipment_card.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/util/size_utils.dart';
+import 'package:aramex/common/widget/button/custom_icon_button.dart';
+import 'package:aramex/common/widget/card/custom_chip.dart';
+import 'package:aramex/common/widget/text_field/search_textfield.dart';
+import 'package:aramex/feature/shipping/ui/widgets/shipment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 

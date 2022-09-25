@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:boilerplate/common/constant/locale_keys.dart';
-import 'package:boilerplate/common/http/response.dart';
-import 'package:boilerplate/feature/authentication/model/user.dart';
-import 'package:boilerplate/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:aramex/common/http/response.dart';
+import 'package:aramex/feature/authentication/model/user.dart';
+import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 

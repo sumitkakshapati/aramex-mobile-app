@@ -1,13 +1,13 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/app/update_wrapper.dart';
-import 'package:boilerplate/common/constant/env.dart';
-import 'package:boilerplate/common/constant/strings.dart';
-import 'package:boilerplate/common/navigation/navigation_service.dart';
-import 'package:boilerplate/common/route/route_generator.dart';
-import 'package:boilerplate/common/route/routes.dart';
-import 'package:boilerplate/common/widget/global_error_widget.dart';
-import 'package:boilerplate/common/wrapper/multi_bloc_wrapper.dart';
-import 'package:boilerplate/common/wrapper/multi_repository_wrapper.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/app/update_wrapper.dart';
+import 'package:aramex/common/constant/env.dart';
+import 'package:aramex/common/constant/strings.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/route/route_generator.dart';
+import 'package:aramex/common/route/routes.dart';
+import 'package:aramex/common/widget/global_error_widget.dart';
+import 'package:aramex/common/wrapper/multi_bloc_wrapper.dart';
+import 'package:aramex/common/wrapper/multi_repository_wrapper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

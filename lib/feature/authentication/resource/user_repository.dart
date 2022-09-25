@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:boilerplate/common/constant/env.dart';
-import 'package:boilerplate/common/http/api_provider.dart';
-import 'package:boilerplate/common/http/custom_exception.dart';
-import 'package:boilerplate/common/http/response.dart';
-import 'package:boilerplate/common/shared_pref/shared_pref.dart';
-import 'package:boilerplate/common/util/google_play_service_utils.dart';
-import 'package:boilerplate/feature/authentication/model/user.dart';
-import 'package:boilerplate/feature/authentication/resource/auth_api_provider.dart';
+import 'package:aramex/common/constant/env.dart';
+import 'package:aramex/common/http/api_provider.dart';
+import 'package:aramex/common/http/custom_exception.dart';
+import 'package:aramex/common/http/response.dart';
+import 'package:aramex/common/shared_pref/shared_pref.dart';
+import 'package:aramex/common/util/google_play_service_utils.dart';
+import 'package:aramex/feature/authentication/model/user.dart';
+import 'package:aramex/feature/authentication/resource/auth_api_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';

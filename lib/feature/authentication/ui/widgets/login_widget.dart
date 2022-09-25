@@ -1,10 +1,10 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/constant/locale_keys.dart';
-import 'package:boilerplate/common/navigation/navigation_service.dart';
-import 'package:boilerplate/common/route/routes.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
-import 'package:boilerplate/common/widget/button/rounded_button.dart';
-import 'package:boilerplate/common/widget/text_field/custom_textfield.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/route/routes.dart';
+import 'package:aramex/common/util/size_utils.dart';
+import 'package:aramex/common/widget/button/rounded_button.dart';
+import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

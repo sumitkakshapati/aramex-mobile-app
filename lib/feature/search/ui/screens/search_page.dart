@@ -1,4 +1,4 @@
-import 'package:boilerplate/feature/search/ui/widgets/search_widgets.dart';
+import 'package:aramex/feature/search/ui/widgets/search_widgets.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

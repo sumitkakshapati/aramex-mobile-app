@@ -1,4 +1,4 @@
-import 'package:boilerplate/common/constant/fonts.dart';
+import 'package:aramex/common/constant/fonts.dart';
 import 'package:flutter/material.dart';
 
 class CustomTheme {

@@ -1,13 +1,13 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/constant/assets.dart';
-import 'package:boilerplate/common/icons/aramex_icons.dart';
-import 'package:boilerplate/common/navigation/navigation_service.dart';
-import 'package:boilerplate/common/route/routes.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
-import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
-import 'package:boilerplate/common/widget/card/custom_list_tile.dart';
-import 'package:boilerplate/common/widget/card_wrapper.dart';
-import 'package:boilerplate/common/widget/image/rounded_image.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/constant/assets.dart';
+import 'package:aramex/common/icons/aramex_icons.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/route/routes.dart';
+import 'package:aramex/common/util/size_utils.dart';
+import 'package:aramex/common/widget/button/custom_icon_button.dart';
+import 'package:aramex/common/widget/card/custom_list_tile.dart';
+import 'package:aramex/common/widget/card_wrapper.dart';
+import 'package:aramex/common/widget/image/rounded_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 

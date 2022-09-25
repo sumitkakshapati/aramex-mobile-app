@@ -1,5 +1,5 @@
-import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
-import 'package:boilerplate/common/widget/image/custom_network_image.dart';
+import 'package:aramex/common/widget/button/custom_icon_button.dart';
+import 'package:aramex/common/widget/image/custom_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 

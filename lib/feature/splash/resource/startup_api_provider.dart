@@ -1,5 +1,5 @@
-import 'package:boilerplate/common/http/api_provider.dart';
-import 'package:boilerplate/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/common/http/api_provider.dart';
+import 'package:aramex/feature/authentication/resource/user_repository.dart';
 
 class StartUpApiProvider {
   StartUpApiProvider({

@@ -1,8 +1,8 @@
-import 'package:boilerplate/common/constant/env.dart';
-import 'package:boilerplate/common/http/api_provider.dart';
-import 'package:boilerplate/common/http/response.dart';
-import 'package:boilerplate/feature/authentication/resource/user_repository.dart';
-import 'package:boilerplate/feature/splash/resource/startup_api_provider.dart';
+import 'package:aramex/common/constant/env.dart';
+import 'package:aramex/common/http/api_provider.dart';
+import 'package:aramex/common/http/response.dart';
+import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/splash/resource/startup_api_provider.dart';
 
 class StartUpRepository {
   ApiProvider apiProvider;

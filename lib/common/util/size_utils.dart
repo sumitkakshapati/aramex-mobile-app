@@ -1,4 +1,4 @@
-import 'package:boilerplate/common/enum/device_type.dart';
+import 'package:aramex/common/enum/device_type.dart';
 import 'package:flutter/material.dart';
 
 class SizeUtils {

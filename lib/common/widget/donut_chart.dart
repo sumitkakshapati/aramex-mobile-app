@@ -1,6 +1,6 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/model/chart_data.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/model/chart_data.dart';
+import 'package:aramex/common/util/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

@@ -1,4 +1,4 @@
-import 'package:boilerplate/app/theme.dart';
+import 'package:aramex/app/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomChip extends StatelessWidget {

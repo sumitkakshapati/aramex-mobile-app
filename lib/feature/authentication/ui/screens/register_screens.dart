@@ -1,4 +1,4 @@
-import 'package:boilerplate/feature/authentication/ui/widgets/register_widgets.dart';
+import 'package:aramex/feature/authentication/ui/widgets/register_widgets.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreens extends StatelessWidget {

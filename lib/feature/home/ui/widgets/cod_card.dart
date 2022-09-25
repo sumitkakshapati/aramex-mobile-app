@@ -1,5 +1,5 @@
-import 'package:boilerplate/common/util/number_utils.dart';
-import 'package:boilerplate/common/util/size_utils.dart';
+import 'package:aramex/common/util/number_utils.dart';
+import 'package:aramex/common/util/size_utils.dart';
 import 'package:flutter/material.dart';
 
 class CODCard extends StatelessWidget {

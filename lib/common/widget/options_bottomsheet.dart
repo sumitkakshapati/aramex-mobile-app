@@ -1,8 +1,8 @@
-import 'package:boilerplate/app/theme.dart';
-import 'package:boilerplate/common/navigation/navigation_service.dart';
-import 'package:boilerplate/common/widget/bottomsheet_wrapper.dart';
-import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
-import 'package:boilerplate/common/widget/card/custom_list_tile.dart';
+import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/widget/bottomsheet_wrapper.dart';
+import 'package:aramex/common/widget/button/custom_icon_button.dart';
+import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:flutter/material.dart';
 
 showOptionsBottomSheet({
