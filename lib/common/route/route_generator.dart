@@ -2,6 +2,7 @@ import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/login_screens.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/register_screens.dart';
 import 'package:boilerplate/feature/dashboard/ui/screens/dashboard_screens.dart';
+import 'package:boilerplate/feature/payment_history/ui/screens/payment_history_screens.dart';
 import 'package:boilerplate/feature/request_pay/ui/screens/request_pay_screen.dart';
 import 'package:boilerplate/feature/splash/ui/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,12 @@ class RouteGenerator {
       case Routes.requestPay:
         return PageTransition(
           child: const RequestPayScreens(),
+          type: PageTransitionType.fade,
+          settings: RouteSettings(name: settings.name),
+        );
+      case Routes.paymentHistory:
+        return PageTransition(
+          child: const PaymentHistoryScreens(),
           type: PageTransitionType.fade,
           settings: RouteSettings(name: settings.name),
         );

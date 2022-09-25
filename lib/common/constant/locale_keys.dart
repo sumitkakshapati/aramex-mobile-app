@@ -63,4 +63,14 @@ class LocaleKeys {
   static const twentyFourHours = "requestPay.twentyFourHours";
   static const ofRequestedTimeFrame = "requestPay.ofRequestedTimeFrame";
   static const done = "requestPay.done";
+
+  static const paymentHistory = "paymentHistory.paymentHistory";
+  static const requestAmount = "paymentHistory.requestAmount";
+  static const requestDate = "paymentHistory.requestDate";
+  static const status = "paymentHistory.status";
+  static const paymentType = "paymentHistory.paymentType";
+  static const requestActions = "paymentHistory.requestActions";
+  static const editDetails = "paymentHistory.editDetails";
+  static const downloadReports = "paymentHistory.downloadReports";
+  static const cancelRequests = "paymentHistory.cancelRequests";
 }

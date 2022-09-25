@@ -3,10 +3,10 @@ import 'package:boilerplate/common/util/size_utils.dart';
 import 'package:boilerplate/common/widget/vertical_key_value.dart';
 import 'package:flutter/material.dart';
 
-class ShipmentCard extends StatelessWidget {
+class PaymentCard extends StatelessWidget {
   final double horizontalMargin;
   final double bottomMargin;
-  const ShipmentCard({
+  const PaymentCard({
     Key? key,
     this.horizontalMargin = 0,
     this.bottomMargin = 16,
@@ -37,28 +37,21 @@ class ShipmentCard extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(top: 16.hp),
                   child: Text(
-                    "#47411112276",
+                    "#REQ86547",
                     style: _textTheme.headline3!.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  ),
-                  color: CustomTheme.skyBlue.withOpacity(0.15),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                child: Text(
-                  "On Transit",
-                  style: _textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: CustomTheme.skyBlue,
+              SizedBox(width: 20.wp),
+              InkWell(
+                child: Container(
+                  margin: EdgeInsets.only(top: 8.hp),
+                  padding: EdgeInsets.symmetric(vertical: 8.hp, horizontal: 16),
+                  child: const Icon(
+                    Icons.more_vert_rounded,
+                    color: CustomTheme.gray,
                   ),
                 ),
               )
@@ -69,15 +62,15 @@ class ShipmentCard extends StatelessWidget {
             children: [
               const Expanded(
                 child: VerticalKeyValue(
-                  title: "Amount:",
+                  title: "Request Amount",
                   value: "Rs. 75,000",
                 ),
               ),
               SizedBox(width: 12.wp),
               const Expanded(
                 child: VerticalKeyValue(
-                  title: "Consignee Number",
-                  value: "+977 9851235864",
+                  title: "Completed Date",
+                  value: "12 JULY, 2022",
                 ),
               ),
               const SizedBox(width: CustomTheme.symmetricHozPadding),
@@ -92,35 +85,23 @@ class ShipmentCard extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(
-                "Pickup Date:",
-                style: _textTheme.headline6!.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: CustomTheme.gray,
+              const Expanded(
+                child: VerticalKeyValue(
+                  title: "Status",
+                  value: "Requested",
+                  valueColor: CustomTheme.purple,
                 ),
               ),
-              SizedBox(width: 4.hp),
-              Expanded(
-                child: Text(
-                  "12 JULY, 2022",
-                  style: _textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              InkWell(
-                child: Text(
-                  "View Details",
-                  style: _textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: _theme.primaryColor,
-                    decoration: TextDecoration.underline,
-                  ),
+              SizedBox(width: 12.wp),
+              const Expanded(
+                child: VerticalKeyValue(
+                  title: "Payment Type",
+                  value: "Wallet Transfer",
                 ),
               ),
               const SizedBox(width: CustomTheme.symmetricHozPadding),
             ],
-          )
+          ),
         ],
       ),
     );

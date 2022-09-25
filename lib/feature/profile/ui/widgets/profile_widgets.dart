@@ -1,6 +1,8 @@
 import 'package:boilerplate/app/theme.dart';
 import 'package:boilerplate/common/constant/assets.dart';
 import 'package:boilerplate/common/icons/aramex_icons.dart';
+import 'package:boilerplate/common/navigation/navigation_service.dart';
+import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/common/util/size_utils.dart';
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:boilerplate/common/widget/card/custom_list_tile.dart';
@@ -149,6 +151,11 @@ class ProfileWidgets extends StatelessWidget {
                       title: "Payment History",
                       leading: const Icon(Iconsax.bank),
                       showNextIcon: true,
+                      onPressed: () {
+                        NavigationService.pushNamed(
+                          routeName: Routes.paymentHistory,
+                        );
+                      },
                     ),
                     CustomListTile(
                       title: "Help and Support",

@@ -4,4 +4,5 @@ class Routes {
   static const login = "/login";
   static const registration = "/registration";
   static const requestPay = "/requestPay";
+  static const paymentHistory = "/paymentHistory";
 }

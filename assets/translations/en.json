@@ -60,5 +60,16 @@
     "twentyFourHours": "24 hours",
     "ofRequestedTimeFrame": "of requested time frame",
     "done": "Done"
+  },
+  "paymentHistory": {
+    "paymentHistory": "Payment History",
+    "requestAmount": "Request Amount",
+    "requestDate": "Request Date",
+    "status": "Status",
+    "paymentType": "Payment Type",
+    "requestActions": "Request Actions",
+    "editDetails": "Edit Details",
+    "downloadReports": "Download Reports",
+    "cancelRequests": "Cancel Requests"
   }
 }
