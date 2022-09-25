@@ -52,6 +52,13 @@
     "cash": "Cash",
     "bankTransfer": "Bank Transfer",
     "walletTransfer": "Wallet Transfer",
-    "youCanRequestPaymentUpToNinCashinHandOptions": "You can request payment upto {} in cash in hand option."
+    "youCanRequestPaymentUpToNinCashinHandOptions": "You can request payment upto {} in cash in hand option.",
+    "requestConfirmed": "Request Confirmed",
+    "yourPaymentRequestWillBe": "Your payment request will",
+    "reviewed": "reviewed",
+    "byOurTeamAndDeliveriedWithIn": "be by out team and delivered with in",
+    "twentyFourHours": "24 hours",
+    "ofRequestedTimeFrame": "of requested time frame",
+    "done": "Done"
   }
 }

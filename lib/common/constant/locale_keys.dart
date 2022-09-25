@@ -44,7 +44,8 @@ class LocaleKeys {
   static const appleFilter = "filter.appleFilter";
 
   static const requestPay = "requestPay.requestPay";
-  static const availableAmountToWithdraw = "requestPay.availableAmountToWithdraw";
+  static const availableAmountToWithdraw =
+      "requestPay.availableAmountToWithdraw";
   static const note = "requestPay.note";
   static const remainingRequestPay = "requestPay.remainingRequestPay";
   static const requestAmountRs = "requestPay.requestAmountRs";
@@ -54,4 +55,12 @@ class LocaleKeys {
   static const walletTransfer = "requestPay.walletTransfer";
   static const youCanRequestPaymentUpToNinCashinHandOptions =
       "requestPay.youCanRequestPaymentUpToNinCashinHandOptions";
+  static const requestConfirmed = "requestPay.requestConfirmed";
+  static const yourPaymentRequestWillBe = "requestPay.yourPaymentRequestWillBe";
+  static const reviewed = "requestPay.reviewed";
+  static const byOurTeamAndDeliveriedWithIn =
+      "requestPay.byOurTeamAndDeliveriedWithIn";
+  static const twentyFourHours = "requestPay.twentyFourHours";
+  static const ofRequestedTimeFrame = "requestPay.ofRequestedTimeFrame";
+  static const done = "requestPay.done";
 }

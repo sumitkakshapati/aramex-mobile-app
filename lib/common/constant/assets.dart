@@ -4,4 +4,5 @@ class Assets {
 
   static const String _baseUrl = "assets/images";
   static const String fallbackImage = '$_baseUrl/fallback.png';
+  static const String okBro = '$_baseUrl/okBro.png';
 }

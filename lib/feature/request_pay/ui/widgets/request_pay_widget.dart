@@ -5,6 +5,7 @@ import 'package:boilerplate/common/util/size_utils.dart';
 import 'package:boilerplate/common/widget/card/custom_list_tile.dart';
 import 'package:boilerplate/common/widget/card_wrapper.dart';
 import 'package:boilerplate/common/widget/custom_app_bar.dart';
+import 'package:boilerplate/common/widget/dialog/request_confirm_dialog.dart';
 import 'package:boilerplate/common/widget/text_field/custom_textfield.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -111,6 +112,9 @@ class RequestPayWidgets extends StatelessWidget {
                       icon: Iconsax.money,
                       iconColor: CustomTheme.purple,
                       showNextIcon: true,
+                      onPressed: () {
+                        showRequestConfirmDialog(context: context);
+                      },
                     ),
                     CustomListTile(
                       title: LocaleKeys.bankTransfer.tr(),

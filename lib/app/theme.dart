@@ -22,6 +22,7 @@ class CustomTheme {
   static const Color skyBlue = Color(0xFF5BCADD);
   static const Color purple = Color(0xFF775AF4);
   static const Color lightRed = Color(0xFFEF5265);
+  static const Color lightestGray = Color(0xFFF3F3F4);
 
   static const Color darkTextColor = Color(0xfff8f8f8);
 
