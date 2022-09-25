@@ -80,4 +80,12 @@ class LocaleKeys {
   static const cancel = "paymentHistory.cancel";
   static const saveUpdate = "paymentHistory.saveUpdate";
   static const saveAccountForFuturetransaction = "paymentHistory.saveAccountForFuturetransaction";
+  static const confirmRequest = "paymentHistory.confirmRequest";
+  static const newBank = "paymentHistory.newBank";
+  static const newWallet = "paymentHistory.newWallet";
+  static const addBankDetails = "paymentHistory.addBankDetails";
+  static const addWalletDetails = "paymentHistory.addWalletDetails";
+  static const selectWallet = "paymentHistory.selectWallet";
+  static const walletID = "paymentHistory.walletID";
+  static const savedAccount = "paymentHistory.savedAccount";
 }

@@ -1,12 +1,14 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/icons/aramex_icons.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/dialog/request_confirm_dialog.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
+import 'package:aramex/feature/request_pay/ui/screens/bank_transfer_request_pay_screens.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -121,6 +123,11 @@ class RequestPayWidgets extends StatelessWidget {
                       icon: Iconsax.bank,
                       iconColor: CustomTheme.skyBlue,
                       showNextIcon: true,
+                      onPressed: () {
+                        NavigationService.push(
+                          target: const BankTransferRequestPayScreen(),
+                        );
+                      },
                     ),
                     CustomListTile(
                       title: LocaleKeys.walletTransfer.tr(),

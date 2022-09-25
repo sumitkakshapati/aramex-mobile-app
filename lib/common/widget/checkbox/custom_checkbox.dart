@@ -1,4 +1,3 @@
-import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:flutter/material.dart';
 

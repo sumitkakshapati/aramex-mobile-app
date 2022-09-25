@@ -18,6 +18,8 @@ class CustomListTile extends StatelessWidget {
   final double bottomPadding;
   final bool showBorder;
   final bool showNextIcon;
+  final IconData? suffixIcon;
+  final Color suffixColor;
   final VoidCallback? onPressed;
   CustomListTile({
     required this.title,
@@ -36,6 +38,8 @@ class CustomListTile extends StatelessWidget {
     this.topPadding = 14,
     this.showBorder = true,
     this.showNextIcon = false,
+    this.suffixIcon,
+    this.suffixColor = CustomTheme.gray,
     this.onPressed,
   }) : assert(image.isEmpty || leading == null || icon == null);
 
@@ -108,13 +112,13 @@ class CustomListTile extends StatelessWidget {
                 ],
               ),
             ),
-            if (showNextIcon)
+            if (showNextIcon || suffixIcon != null)
               Container(
                 padding: const EdgeInsets.only(left: 12),
-                child: const Icon(
-                  Icons.keyboard_arrow_right_rounded,
+                child: Icon(
+                  suffixIcon ?? Icons.keyboard_arrow_right_rounded,
                   size: 26,
-                  color: CustomTheme.gray,
+                  color: suffixColor,
                 ),
               ),
           ],

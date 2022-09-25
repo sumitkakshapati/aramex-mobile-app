@@ -77,6 +77,14 @@
     "accountHolderName": "Account Holder's Name",
     "cancel": "Cancel",
     "saveUpdate": "Save Update",
-    "saveAccountForFuturetransaction": "Save account for future transactions."
+    "saveAccountForFuturetransaction": "Save account for future transactions.",
+    "confirmRequest": "Confirm Request",
+    "newBank": "New Bank",
+    "newWallet": "New Wallet",
+    "addBankDetails": "Add Bank Details",
+    "addWalletDetails": "Add Wallet Details",
+    "selectWallet": "Select Wallet",
+    "walletID": "Wallet ID",
+    "savedAccount": "Saved Account"
   }
 }
