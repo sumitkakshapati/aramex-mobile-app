@@ -12,7 +12,7 @@ class HomePageHeader extends StatelessWidget {
     final _textTheme = _theme.textTheme;
 
     return Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+      margin: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top + 20),
       child: Row(
         children: [
           ClipRRect(

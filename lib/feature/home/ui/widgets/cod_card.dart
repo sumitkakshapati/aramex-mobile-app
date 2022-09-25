@@ -33,6 +33,7 @@ class CODCard extends StatelessWidget {
         children: [
           Text(
             title,
+            maxLines: 1,
             style: _textTheme.headline6!.copyWith(
               color: Colors.white,
             ),
@@ -40,6 +41,7 @@ class CODCard extends StatelessWidget {
           SizedBox(height: 4.hp),
           Text(
             "${amount.formatInRupee()}",
+            maxLines: 1,
             style: _textTheme.headline3!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
