@@ -3,17 +3,23 @@ import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_outline_button.dart';
 import 'package:aramex/common/widget/button/rounded_button.dart';
-import 'package:aramex/common/widget/card/custom_list_tile.dart';
-import 'package:aramex/common/widget/card_wrapper.dart';
+import 'package:aramex/common/widget/checkbox/custom_checkbox.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
-class EditPaymentRequestWidgets extends StatelessWidget {
+class EditPaymentRequestWidgets extends StatefulWidget {
   const EditPaymentRequestWidgets({Key? key}) : super(key: key);
+
+  @override
+  State<EditPaymentRequestWidgets> createState() =>
+      _EditPaymentRequestWidgetsState();
+}
+
+class _EditPaymentRequestWidgetsState extends State<EditPaymentRequestWidgets> {
+  bool _saveForFutureTransaction = false;
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +103,18 @@ class EditPaymentRequestWidgets extends StatelessWidget {
                       CustomTextField(
                         label: LocaleKeys.accountNumber.tr(),
                         hintText: "eg. 1234 5678 9123",
-                        bottomPadding: 32.hp,
+                        bottomPadding: 16.hp,
                       ),
+                      CustomCheckbox(
+                        status: _saveForFutureTransaction,
+                        onChanged: (val) {
+                          setState(() {
+                            _saveForFutureTransaction = val;
+                          });
+                        },
+                        title: LocaleKeys.saveAccountForFuturetransaction.tr(),
+                      ),
+                      SizedBox(height: 20.hp),
                     ],
                   ),
                 ),

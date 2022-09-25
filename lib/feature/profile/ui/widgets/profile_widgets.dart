@@ -159,7 +159,7 @@ class ProfileWidgets extends StatelessWidget {
                     ),
                     CustomListTile(
                       title: "Help and Support",
-                      leading: const Icon(Aramex.help),
+                      leading: const Icon(Iconsax.support),
                       showNextIcon: true,
                     ),
                     CustomListTile(
