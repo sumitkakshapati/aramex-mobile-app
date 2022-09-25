@@ -14,17 +14,17 @@ import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class BankTransferRequestPayWidget extends StatefulWidget {
-  const BankTransferRequestPayWidget({Key? key}) : super(key: key);
+class WalletTransferRequestPayWidget extends StatefulWidget {
+  const WalletTransferRequestPayWidget({Key? key}) : super(key: key);
 
   @override
-  State<BankTransferRequestPayWidget> createState() =>
-      _BankTransferRequestPayWidgetState();
+  State<WalletTransferRequestPayWidget> createState() =>
+      _WalletTransferRequestPayWidgetState();
 }
 
-class _BankTransferRequestPayWidgetState
-    extends State<BankTransferRequestPayWidget> {
-  bool showAddBankOptions = false;
+class _WalletTransferRequestPayWidgetState
+    extends State<WalletTransferRequestPayWidget> {
+  bool showAddWalletOptions = false;
   bool _saveForFutureTransaction = false;
 
   @override
@@ -62,8 +62,8 @@ class _BankTransferRequestPayWidgetState
                         child: Column(
                           children: [
                             CustomListTile(
-                              title: "SunRise Bank",
-                              description: "1234 **** **** ****",
+                              title: "Esewa",
+                              description: "984*******",
                               descriptionFontWeight: FontWeight.w400,
                               descriptionFontSize: 14,
                               titleFontSize: 16,
@@ -71,14 +71,14 @@ class _BankTransferRequestPayWidgetState
                               suffixColor: _theme.primaryColor,
                               titleFontWeight: FontWeight.bold,
                               image:
-                                  "https://play-lh.googleusercontent.com/bSFfTcSuDPC9EjVA5BrFpCKw38QtRT6fvBU6C5yvQ_imwY8MgUf2ZW2kJOsiwLKi4hc",
+                                  "https://p7.hiclipart.com/preview/261/608/1001/esewa-zone-office-bayalbas-google-play-iphone-iphone.jpg",
                               onPressed: () {},
                             ),
                             CustomListTile(
-                              title: "NIC Asia",
+                              title: "Khalti",
                               image:
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/NIC_Asia_Bank_Logo.svg/1200px-NIC_Asia_Bank_Logo.svg.png",
-                              description: "1234 **** **** ****",
+                                  "https://play-lh.googleusercontent.com/Xh_OlrdkF1UnGCnMN__4z-yXffBAEl0eUDeVDPr4UthOERV4Fll9S-TozSfnlXDFzw",
+                              description: "984*******",
                               descriptionFontWeight: FontWeight.w400,
                               descriptionFontSize: 14,
                               titleFontSize: 16,
@@ -92,7 +92,7 @@ class _BankTransferRequestPayWidgetState
                       InkWell(
                         onTap: () {
                           setState(() {
-                            showAddBankOptions = true;
+                            showAddWalletOptions = true;
                           });
                         },
                         child: Row(
@@ -103,7 +103,7 @@ class _BankTransferRequestPayWidgetState
                             ),
                             SizedBox(width: 20.wp),
                             Text(
-                              LocaleKeys.newBank.tr(),
+                              LocaleKeys.newWallet.tr(),
                               style: _textTheme.headline6!.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),
@@ -114,31 +114,27 @@ class _BankTransferRequestPayWidgetState
                       SizedBox(height: 20.hp),
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 300),
-                        child: showAddBankOptions
+                        child: showAddWalletOptions
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    LocaleKeys.addBankDetails.tr(),
+                                    LocaleKeys.addWalletDetails.tr(),
                                     style: _textTheme.headline3!.copyWith(
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                   SizedBox(height: 16.hp),
                                   CustomTextField(
-                                    label: LocaleKeys.selectBank.tr(),
-                                    hintText: "SunRise bank",
+                                    label: LocaleKeys.selectWallet.tr(),
+                                    hintText: "ESewa",
                                     readOnly: true,
                                     suffixIcon:
                                         Icons.keyboard_arrow_down_rounded,
                                   ),
                                   CustomTextField(
-                                    label: LocaleKeys.accountHolderName.tr(),
-                                    hintText: "eg. Sumit Kakshapati",
-                                  ),
-                                  CustomTextField(
-                                    label: LocaleKeys.accountNumber.tr(),
-                                    hintText: "eg. 1234 5678 9123",
+                                    label: LocaleKeys.walletID.tr(),
+                                    hintText: "eg. 9844774503",
                                     bottomPadding: 16.hp,
                                   ),
                                   CustomCheckbox(

@@ -9,6 +9,7 @@ import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/dialog/request_confirm_dialog.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:aramex/feature/request_pay/ui/screens/bank_transfer_request_pay_screens.dart';
+import 'package:aramex/feature/request_pay/ui/widgets/wallet_transfer_request_pay_widget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -135,6 +136,11 @@ class RequestPayWidgets extends StatelessWidget {
                       iconColor: CustomTheme.green,
                       showBorder: false,
                       showNextIcon: true,
+                      onPressed: () {
+                        NavigationService.push(
+                          target: const WalletTransferRequestPayWidget(),
+                        );
+                      },
                     ),
                   ],
                 ),
