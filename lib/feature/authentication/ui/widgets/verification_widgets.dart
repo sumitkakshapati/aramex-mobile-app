@@ -1,8 +1,10 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/constant/locale_keys.dart';
 import 'package:boilerplate/common/navigation/navigation_service.dart';
 import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:boilerplate/common/widget/button/rounded_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -37,14 +39,14 @@ class VerificationWidgets extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(top: 54, bottom: 8),
               child: Text(
-                "Verify OTP",
+                LocaleKeys.verifyOTP.tr(),
                 style: _textTheme.headline1!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Text(
-              "Please enter 4 digit OTP code.",
+              LocaleKeys.pleaseEnter4DigitOTP.tr(),
               style: _textTheme.headline6!.copyWith(
                 fontWeight: FontWeight.w400,
               ),
@@ -75,11 +77,12 @@ class VerificationWidgets extends StatelessWidget {
             const SizedBox(height: 24),
             RichText(
               text: TextSpan(
-                text: "Didn't received any code?",
+                text: LocaleKeys.didntReceiveAnyCode.tr(),
                 style: _textTheme.headline6,
                 children: [
                   TextSpan(
-                    text: " Resend 48 Sec",
+                    text:
+                        " ${LocaleKeys.resend.tr()} 48 ${LocaleKeys.sec.tr()}",
                     style: _textTheme.headline6!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: CustomTheme.primaryColor,
@@ -90,7 +93,7 @@ class VerificationWidgets extends StatelessWidget {
             ),
             const Spacer(),
             CustomRoundedButtom(
-              title: "Verify OTP",
+              title: LocaleKeys.verifyOTP.tr(),
               onPressed: () {
                 NavigationService.pushNamedAndRemoveUntil(
                   routeName: Routes.dashboard,

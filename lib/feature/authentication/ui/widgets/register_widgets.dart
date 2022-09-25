@@ -1,10 +1,12 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/constant/locale_keys.dart';
 import 'package:boilerplate/common/navigation/navigation_service.dart';
 import 'package:boilerplate/common/widget/button/custom_icon_button.dart';
 import 'package:boilerplate/common/widget/button/rounded_button.dart';
 import 'package:boilerplate/common/widget/text_field/custom_textfield.dart';
 import 'package:boilerplate/feature/authentication/ui/screens/verification_screens.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class RegisterWidgets extends StatelessWidget {
@@ -38,14 +40,14 @@ class RegisterWidgets extends StatelessWidget {
             children: [
               const SizedBox(height: 16),
               Text(
-                "Register to Aramax",
+                LocaleKeys.registerToAramex.tr(),
                 style: _textTheme.headline1!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 6),
               Text(
-                "We cover all kind of transportation.",
+                LocaleKeys.weCoverAllKindOfTransportation.tr(),
                 style: _textTheme.headline6!.copyWith(
                   fontWeight: FontWeight.w400,
                 ),
@@ -73,39 +75,39 @@ class RegisterWidgets extends StatelessWidget {
                   ),
                 ),
               ),
-              const CustomTextField(
-                label: "Account Number",
+              CustomTextField(
+                label: LocaleKeys.accountNumber.tr(),
                 hintText: "12345678",
               ),
-              const CustomTextField(
-                label: "Full Name",
+              CustomTextField(
+                label: LocaleKeys.fullName.tr(),
                 hintText: "Ram Shrestha",
               ),
-              const CustomTextField(
-                label: "Email",
+              CustomTextField(
+                label: LocaleKeys.email.tr(),
                 hintText: "******@gmail.com",
               ),
-              const CustomTextField(
-                label: "Phone Number",
+              CustomTextField(
+                label: LocaleKeys.phoneNumber.tr(),
                 hintText: "98xxxxxxxx",
               ),
-              const CustomTextField(
-                label: "Address",
+              CustomTextField(
+                label: LocaleKeys.address.tr(),
                 hintText: "Enter Address",
               ),
-              const CustomTextField(
-                label: "Password",
+              CustomTextField(
+                label: LocaleKeys.password.tr(),
                 obscureText: true,
                 hintText: "******",
               ),
-              const CustomTextField(
-                label: "Password",
+              CustomTextField(
+                label: LocaleKeys.confirmPassword.tr(),
                 obscureText: true,
                 hintText: "******",
                 bottomPadding: 24,
               ),
               CustomRoundedButtom(
-                title: "Register Now",
+                title: LocaleKeys.registerNow.tr(),
                 onPressed: () {
                   NavigationService.push(target: const VerificationScreens());
                 },

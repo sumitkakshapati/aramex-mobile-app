@@ -1,9 +1,11 @@
 import 'package:boilerplate/app/theme.dart';
+import 'package:boilerplate/common/constant/locale_keys.dart';
 import 'package:boilerplate/common/navigation/navigation_service.dart';
 import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/common/util/size_utils.dart';
 import 'package:boilerplate/common/widget/button/rounded_button.dart';
 import 'package:boilerplate/common/widget/text_field/custom_textfield.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -16,89 +18,91 @@ class LoginWidgets extends StatelessWidget {
     final _textTheme = _theme.textTheme;
 
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: CustomTheme.symmetricHozPadding,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: MediaQuery.of(context).viewPadding.top + 40.hp),
-            Text(
-              "aramex",
-              style: _textTheme.headline1!.copyWith(
-                fontSize: 56,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 0.2,
-                color: CustomTheme.primaryColor,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 48.hp, bottom: 8.hp),
-              child: Text(
-                "Login to Aramex",
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: CustomTheme.symmetricHozPadding,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: MediaQuery.of(context).viewPadding.top + 40.hp),
+              Text(
+                LocaleKeys.aramex.tr().toLowerCase(),
                 style: _textTheme.headline1!.copyWith(
-                  fontWeight: FontWeight.w700,
+                  fontSize: 56,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.2,
+                  color: CustomTheme.primaryColor,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 48.hp, bottom: 8.hp),
+                child: Text(
+                  LocaleKeys.loginToAramex.tr(),
+                  style: _textTheme.headline1!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.2,
+                  ),
+                ),
+              ),
+              Text(
+                LocaleKeys.weCoverAllKindOfTransportation.tr(),
+                style: _textTheme.headline6!.copyWith(
+                  fontWeight: FontWeight.w400,
                   letterSpacing: 0.2,
                 ),
               ),
-            ),
-            Text(
-              "We cover all kind of transportation.",
-              style: _textTheme.headline6!.copyWith(
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.2,
+              SizedBox(height: 48.hp),
+              CustomTextField(
+                label: LocaleKeys.emailAddress.tr(),
+                hintText: "******@gmail.com",
               ),
-            ),
-            SizedBox(height: 48.hp),
-            const CustomTextField(
-              label: "Email Address",
-              hintText: "******@gmail.com",
-            ),
-            const CustomTextField(
-              label: "Password",
-              hintText: "********",
-              obscureText: true,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "Forgot Password?",
-                style: _textTheme.headline6!.copyWith(
-                  fontWeight: FontWeight.w400,
+              CustomTextField(
+                label: LocaleKeys.password.tr(),
+                hintText: "********",
+                obscureText: true,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "${LocaleKeys.forgotPassword.tr()}?",
+                  style: _textTheme.headline6!.copyWith(
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 24.hp),
-            CustomRoundedButtom(
-              title: "Login",
-              onPressed: () {
-                NavigationService.pushNamedAndRemoveUntil(
-                    routeName: Routes.dashboard);
-              },
-            ),
-            SizedBox(height: 24.hp),
-            RichText(
-              text: TextSpan(
-                text: "Don't have an account?",
-                style: _textTheme.headline6,
-                children: [
-                  TextSpan(
-                    text: " Register Now",
-                    style: _textTheme.headline6!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: CustomTheme.primaryColor,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        NavigationService.pushNamed(
-                            routeName: Routes.registration);
-                      },
-                  ),
-                ],
+              SizedBox(height: 24.hp),
+              CustomRoundedButtom(
+                title: LocaleKeys.login.tr(),
+                onPressed: () {
+                  NavigationService.pushNamedAndRemoveUntil(
+                      routeName: Routes.dashboard);
+                },
               ),
-            )
-          ],
+              SizedBox(height: 24.hp),
+              RichText(
+                text: TextSpan(
+                  text: "${LocaleKeys.dontHaveAnAccount.tr()}",
+                  style: _textTheme.headline6,
+                  children: [
+                    TextSpan(
+                      text: " ${LocaleKeys.registerNow.tr()}",
+                      style: _textTheme.headline6!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: CustomTheme.primaryColor,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          NavigationService.pushNamed(
+                              routeName: Routes.registration);
+                        },
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

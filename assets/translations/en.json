@@ -10,6 +10,18 @@
     "forgotPassword": "Forgot Password",
     "login": "Login",
     "dontHaveAnAccount": "Don't have an account?",
-    "registerNow": "Register Now"
+    "registerNow": "Register Now",
+    "registerToAramex": "Register to Aramex",
+    "accountNumber": "Account Number",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "address": "Address",
+    "confirmPassword": "Confirm Password",
+    "verifyOTP": "Verify OTP",
+    "pleaseEnter4DigitOTP": "Please enter 4 digit OTP Code",
+    "didntReceiveAnyCode": "Didn't received any code",
+    "resend": "Resend",
+    "sec": "sec"
   }
 }
