@@ -41,5 +41,17 @@
     "toRs": "To (Rs.)",
     "clear": "Clear",
     "appleFilter": "Apple Filter"
+  },
+  "requestPay": {
+    "requestPay": "Request Pay",
+    "availableAmountToWithdraw": "Available amount to withdraw.",
+    "note": "Note",
+    "remainingRequestPay": "Remaining request pay",
+    "requestAmountRs": "Request Amount (Rs.)",
+    "paymentOptions": "Payment Options",
+    "cash": "Cash",
+    "bankTransfer": "Bank Transfer",
+    "walletTransfer": "Wallet Transfer",
+    "youCanRequestPaymentUpToNinCashinHandOptions": "You can request payment upto {} in cash in hand option."
   }
 }

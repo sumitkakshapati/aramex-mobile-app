@@ -42,4 +42,16 @@ class LocaleKeys {
   static const toRs = "filter.toRs";
   static const clear = "filter.clear";
   static const appleFilter = "filter.appleFilter";
+
+  static const requestPay = "requestPay.requestPay";
+  static const availableAmountToWithdraw = "requestPay.availableAmountToWithdraw";
+  static const note = "requestPay.note";
+  static const remainingRequestPay = "requestPay.remainingRequestPay";
+  static const requestAmountRs = "requestPay.requestAmountRs";
+  static const paymentOptions = "requestPay.paymentOptions";
+  static const cash = "requestPay.cash";
+  static const bankTransfer = "requestPay.bankTransfer";
+  static const walletTransfer = "requestPay.walletTransfer";
+  static const youCanRequestPaymentUpToNinCashinHandOptions =
+      "requestPay.youCanRequestPaymentUpToNinCashinHandOptions";
 }

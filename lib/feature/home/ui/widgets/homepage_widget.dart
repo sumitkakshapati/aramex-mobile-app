@@ -2,6 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:boilerplate/app/theme.dart';
 import 'package:boilerplate/common/icons/aramex_icons.dart';
 import 'package:boilerplate/common/model/chart_data.dart';
+import 'package:boilerplate/common/navigation/navigation_service.dart';
+import 'package:boilerplate/common/route/routes.dart';
 import 'package:boilerplate/common/util/number_utils.dart';
 import 'package:boilerplate/common/util/size_utils.dart';
 import 'package:boilerplate/common/widget/button/custom_outline_icon_button.dart';
@@ -130,7 +132,11 @@ class HomePageWidgets extends StatelessWidget {
                         const SizedBox(width: 12),
                         CustomRoundedButtom(
                           title: "Request Pay",
-                          onPressed: () {},
+                          onPressed: () {
+                            NavigationService.pushNamed(
+                              routeName: Routes.requestPay,
+                            );
+                          },
                           verticalPadding: 14,
                           horizontalPadding: 16,
                         )
@@ -233,7 +239,7 @@ class HomePageWidgets extends StatelessWidget {
                             );
                           },
                           openBuilder: (context, close) {
-                            return ShipmentFilterWidgets();
+                            return const ShipmentFilterWidgets();
                           },
                         ),
                       ],
