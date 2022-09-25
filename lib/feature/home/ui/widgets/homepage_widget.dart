@@ -231,6 +231,8 @@ class HomePageWidgets extends StatelessWidget {
                         ),
                         SizedBox(width: 16.wp),
                         OpenContainer(
+                          openElevation: 0,
+                          closedElevation: 0,
                           closedBuilder: (context, open) {
                             return CustomOutlineIconButton(
                               icon: Iconsax.filter_search4,

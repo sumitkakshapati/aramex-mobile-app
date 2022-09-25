@@ -7,9 +7,11 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class DonutChartWidget extends StatelessWidget {
   final List<ChartData> chartItem;
   final bool showPercentage;
+  final bool showActualValue;
   const DonutChartWidget({
     Key? key,
     required this.chartItem,
+    this.showActualValue = true,
     this.showPercentage = true,
   }) : super(key: key);
 
@@ -86,13 +88,14 @@ class DonutChartWidget extends StatelessWidget {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              "${chartItem[index].value}",
-                              style: _textTheme.headline6!.copyWith(
-                                fontWeight: FontWeight.bold,
+                            if (showActualValue)
+                              Text(
+                                "${chartItem[index].value}",
+                                style: _textTheme.headline6!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            if (showPercentage)
+                            if (showPercentage && showActualValue)
                               Container(
                                 height: 4,
                                 width: 4,

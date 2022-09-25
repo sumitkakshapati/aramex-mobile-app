@@ -79,7 +79,8 @@ class LocaleKeys {
   static const accountHolderName = "paymentHistory.accountHolderName";
   static const cancel = "paymentHistory.cancel";
   static const saveUpdate = "paymentHistory.saveUpdate";
-  static const saveAccountForFuturetransaction = "paymentHistory.saveAccountForFuturetransaction";
+  static const saveAccountForFuturetransaction =
+      "paymentHistory.saveAccountForFuturetransaction";
   static const confirmRequest = "paymentHistory.confirmRequest";
   static const newBank = "paymentHistory.newBank";
   static const newWallet = "paymentHistory.newWallet";
@@ -88,4 +89,14 @@ class LocaleKeys {
   static const selectWallet = "paymentHistory.selectWallet";
   static const walletID = "paymentHistory.walletID";
   static const savedAccount = "paymentHistory.savedAccount";
+
+  static const customerDetails = "customer.customerDetails";
+  static const consigneeNumber = "customer.consigneeNumber";
+  static const clickOnChartForMoreInformation =
+      "customer.clickOnChartForMoreInformation";
+  static const averageShippingSummary = "customer.averageShippingSummary";
+  static const totalCollected = "customer.totalCollected";
+  static const inTransit = "customer.inTransit";
+  static const returned = "customer.returned";
+  static const delivered = "customer.delivered";
 }

@@ -1,6 +1,8 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/text_field/search_textfield.dart';
+import 'package:aramex/feature/customer/ui/screens/customer_details_screens.dart';
 import 'package:boxy/slivers.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -68,6 +70,11 @@ class SearchWidgets extends StatelessWidget {
                   return CustomListTile(
                     title: "9844774503",
                     showNextIcon: true,
+                    onPressed: () {
+                      NavigationService.push(
+                        target: const CustomerDetailsScreens(),
+                      );
+                    },
                   );
                 },
                 childCount: 5,

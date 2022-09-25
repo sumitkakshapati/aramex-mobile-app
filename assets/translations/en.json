@@ -86,5 +86,15 @@
     "selectWallet": "Select Wallet",
     "walletID": "Wallet ID",
     "savedAccount": "Saved Account"
+  },
+  "customer": {
+    "customerDetails": "Customer Details",
+    "consigneeNumber": "Consignee Number",
+    "clickOnChartForMoreInformation": "Click on chart for more information.",
+    "averageShippingSummary": "Average Shipping Summary",
+    "totalCollected": "Total Collected",
+    "inTransit": "In Transit",
+    "returned": "Returned",
+    "delivered": "Delivered"
   }
 }
