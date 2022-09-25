@@ -9,6 +9,7 @@ import 'package:boilerplate/common/widget/button/rounded_button.dart';
 import 'package:boilerplate/common/widget/card/custom_list_tile.dart';
 import 'package:boilerplate/common/widget/card_wrapper.dart';
 import 'package:boilerplate/common/widget/donut_chart.dart';
+import 'package:boilerplate/common/widget/options_bottomsheet.dart';
 import 'package:boilerplate/feature/home/ui/widgets/cod_card.dart';
 import 'package:boilerplate/feature/home/ui/widgets/homepage_header.dart';
 import 'package:boilerplate/feature/home/ui/widgets/shipment_mode_card.dart';
@@ -165,7 +166,19 @@ class HomePageWidgets extends StatelessWidget {
                       children: [
                         CustomDropdownButton(
                           title: "7 Days",
-                          onPressed: () {},
+                          onPressed: () {
+                            showOptionsBottomSheet(
+                              label: "Time Period",
+                              options: [
+                                "7 Days",
+                                "15 Days",
+                                "1 Month",
+                                "365 Days"
+                              ],
+                              onChanged: (val) {},
+                              context: context,
+                            );
+                          },
                         ),
                         SizedBox(width: 16.wp),
                         Expanded(
