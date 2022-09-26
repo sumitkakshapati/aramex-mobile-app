@@ -1,7 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:aramex/common/enum/shipment_status.dart';
 import 'package:aramex/common/model/chart_data.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_outline_icon_button.dart';
 import 'package:aramex/common/widget/button/dropdown_button.dart';
@@ -9,6 +11,7 @@ import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/donut_chart.dart';
 import 'package:aramex/common/widget/options_bottomsheet.dart';
+import 'package:aramex/feature/customer/ui/screens/customer_returned_details_screens.dart';
 import 'package:aramex/feature/home/ui/widgets/cod_card.dart';
 import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -97,23 +100,33 @@ class CustomerDetailsWidgets extends StatelessWidget {
                         ),
                       ],
                     ),
-                    DonutChartWidget(
+                    DonutChartWidget<ShipmentStatus>(
                       showActualValue: false,
+                      onChartPressed: (status) {
+                        if (status == ShipmentStatus.Returned) {
+                          NavigationService.push(
+                            target: const CustomerReturnDetailsScreens(),
+                          );
+                        }
+                      },
                       chartItem: [
-                        ChartData(
+                        ChartData<ShipmentStatus>(
                           title: "In Transit",
                           value: 150,
                           color: CustomTheme.skyBlue,
+                          type: ShipmentStatus.OnTransit,
                         ),
-                        ChartData(
+                        ChartData<ShipmentStatus>(
                           title: "Delivered",
                           value: 70,
                           color: CustomTheme.purple,
+                          type: ShipmentStatus.Delivered,
                         ),
-                        ChartData(
+                        ChartData<ShipmentStatus>(
                           title: "Returned",
                           value: 100,
                           color: CustomTheme.lightRed,
+                          type: ShipmentStatus.Returned,
                         ),
                       ],
                     ),

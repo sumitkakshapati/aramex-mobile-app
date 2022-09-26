@@ -99,4 +99,5 @@ class LocaleKeys {
   static const inTransit = "customer.inTransit";
   static const returned = "customer.returned";
   static const delivered = "customer.delivered";
+  static const returnedShipping = "customer.returnedShipping";
 }

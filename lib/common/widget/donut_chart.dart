@@ -4,15 +4,17 @@ import 'package:aramex/common/util/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class DonutChartWidget extends StatelessWidget {
+class DonutChartWidget<T> extends StatelessWidget {
   final List<ChartData> chartItem;
   final bool showPercentage;
   final bool showActualValue;
+  final ValueChanged<T>? onChartPressed;
   const DonutChartWidget({
     Key? key,
     required this.chartItem,
     this.showActualValue = true,
     this.showPercentage = true,
+    this.onChartPressed,
   }) : super(key: key);
 
   @override
@@ -50,11 +52,20 @@ class DonutChartWidget extends StatelessWidget {
             ],
             series: <CircularSeries>[
               DoughnutSeries<ChartData, String>(
-                  dataSource: chartItem,
-                  pointColorMapper: (ChartData data, _) => data.color,
-                  xValueMapper: (ChartData data, _) => data.title,
-                  yValueMapper: (ChartData data, _) => data.value,
-                  innerRadius: '75%')
+                dataSource: chartItem,
+                pointColorMapper: (ChartData data, _) => data.color,
+                xValueMapper: (ChartData data, _) => data.title,
+                yValueMapper: (ChartData data, _) => data.value,
+                onPointTap: (pointInteractionDetails) {
+                  if (onChartPressed != null &&
+                      pointInteractionDetails.pointIndex != null) {
+                    onChartPressed!(
+                      chartItem[pointInteractionDetails.pointIndex!].type,
+                    );
+                  }
+                },
+                innerRadius: '75%',
+              )
             ],
           ),
         ),

@@ -95,6 +95,7 @@
     "totalCollected": "Total Collected",
     "inTransit": "In Transit",
     "returned": "Returned",
-    "delivered": "Delivered"
+    "delivered": "Delivered",
+    "returnedShipping": "Returned Shippings"
   }
 }
