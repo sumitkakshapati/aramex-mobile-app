@@ -1,6 +1,8 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/vertical_key_value.dart';
+import 'package:aramex/feature/shipping/ui/screens/shipping_details_screens.dart';
 import 'package:flutter/material.dart';
 
 class ShipmentCard extends StatelessWidget {
@@ -109,6 +111,11 @@ class ShipmentCard extends StatelessWidget {
                 ),
               ),
               InkWell(
+                onTap: () {
+                  NavigationService.push(
+                    target: const ShipmentDetailScreens(),
+                  );
+                },
                 child: Text(
                   "View Details",
                   style: _textTheme.headline6!.copyWith(

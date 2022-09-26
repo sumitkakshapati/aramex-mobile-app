@@ -100,4 +100,29 @@ class LocaleKeys {
   static const returned = "customer.returned";
   static const delivered = "customer.delivered";
   static const returnedShipping = "customer.returnedShipping";
+
+  static const shipmentDetails = "shipment.shipmentDetails";
+  static const initialDetails = "shipment.initialDetails";
+  static const AWB = "shipment.AWB";
+  static const pickUpDate = "shipment.pickUpDate";
+  static const productGroup = "shipment.productGroup";
+  static const type = "shipment.type";
+  static const service = "shipment.service";
+  static const shipmentNumber = "shipment.shipmentNumber";
+  static const shipperName = "shipment.shipperName";
+  static const consigneeTel = "shipment.consigneeTel";
+  static const pcs = "shipment.pcs";
+  static const chargingWeight = "shipment.chargingWeight";
+  static const codValue = "shipment.codValue";
+  static const codLiableBranch = "shipment.codLiableBranch";
+  static const codPaid = "shipment.codPaid";
+  static const codPaidDate = "shipment.codPaidDate";
+  static const shippingStatus = "shipment.shippingStatus";
+  static const returnDate = "shipment.returnDate";
+  static const returnReason = "shipment.returnReason";
+  static const shippingCharge = "shipment.shippingCharge";
+  static const codFee = "shipment.codFee";
+  static const totalAmountRs = "shipment.totalAmountRs";
+  static const vatAmountRs = "shipment.vatAmountRs";
+  static const grandTotalRs = "shipment.grandTotalRs";
 }
