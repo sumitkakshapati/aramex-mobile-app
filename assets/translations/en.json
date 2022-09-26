@@ -123,5 +123,8 @@
     "totalAmountRs": "Total Amount (Rs.)",
     "vatAmountRs": "VAT Amount (Rs.)",
     "grandTotalRs": "Grand Total(Rs.)"
+  },
+  "profile": {
+    "profileDetails": "Profile Details"
   }
 }

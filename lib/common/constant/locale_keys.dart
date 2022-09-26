@@ -125,4 +125,6 @@ class LocaleKeys {
   static const totalAmountRs = "shipment.totalAmountRs";
   static const vatAmountRs = "shipment.vatAmountRs";
   static const grandTotalRs = "shipment.grandTotalRs";
+
+  static const profileDetails = "profile.profileDetails";
 }

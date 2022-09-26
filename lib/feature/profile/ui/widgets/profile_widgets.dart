@@ -136,6 +136,11 @@ class ProfileWidgets extends StatelessWidget {
                       title: "Personal Information",
                       leading: const Icon(Iconsax.user),
                       showNextIcon: true,
+                      onPressed: () {
+                        NavigationService.pushNamed(
+                          routeName: Routes.profileDetails,
+                        );
+                      },
                     ),
                     CustomListTile(
                       title: "Account payment",

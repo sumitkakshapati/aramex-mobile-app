@@ -5,4 +5,5 @@ class Routes {
   static const registration = "/registration";
   static const requestPay = "/requestPay";
   static const paymentHistory = "/paymentHistory";
+  static const profileDetails = "/profileDetails";
 }

@@ -3,6 +3,7 @@ import 'package:aramex/feature/authentication/ui/screens/login_screens.dart';
 import 'package:aramex/feature/authentication/ui/screens/register_screens.dart';
 import 'package:aramex/feature/dashboard/ui/screens/dashboard_screens.dart';
 import 'package:aramex/feature/payment_history/ui/screens/payment_history_screens.dart';
+import 'package:aramex/feature/profile/ui/screens/profile_details_screens.dart';
 import 'package:aramex/feature/request_pay/ui/screens/request_pay_screen.dart';
 import 'package:aramex/feature/splash/ui/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,12 @@ class RouteGenerator {
       case Routes.paymentHistory:
         return PageTransition(
           child: const PaymentHistoryScreens(),
+          type: PageTransitionType.fade,
+          settings: RouteSettings(name: settings.name),
+        );
+      case Routes.profileDetails:
+        return PageTransition(
+          child: const ProfileDetailScreens(),
           type: PageTransitionType.fade,
           settings: RouteSettings(name: settings.name),
         );
