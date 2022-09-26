@@ -1,4 +1,5 @@
 import 'package:aramex/common/route/routes.dart';
+import 'package:aramex/feature/account_payment/ui/screens/account_payment_screens.dart';
 import 'package:aramex/feature/authentication/ui/screens/change_password_screens.dart';
 import 'package:aramex/feature/authentication/ui/screens/login_screens.dart';
 import 'package:aramex/feature/authentication/ui/screens/register_screens.dart';
@@ -58,6 +59,12 @@ class RouteGenerator {
       case Routes.changePassword:
         return PageTransition(
           child: const ChangePasswordScreens(),
+          type: PageTransitionType.fade,
+          settings: RouteSettings(name: settings.name),
+        );
+      case Routes.accountPayment:
+        return PageTransition(
+          child: const AccountPaymentScreens(),
           type: PageTransitionType.fade,
           settings: RouteSettings(name: settings.name),
         );

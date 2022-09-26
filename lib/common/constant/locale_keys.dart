@@ -136,4 +136,11 @@ class LocaleKeys {
   static const enterConfirmPassword = "profile.enterConfirmPassword";
   static const youCanChangeAppPasswordFromHere =
       "profile.youCanChangeAppPasswordFromHere";
+
+  static const personalInformation = "account.personalInformation";
+  static const accountPayment = "account.accountPayment";
+  static const helpAndSupport = "account.helpAndSupport";
+  static const termsAndConditions = "account.termsAndConditions";
+  static const logout = "account.logout";
+  static const totalShipping = "account.totalShipping";
 }

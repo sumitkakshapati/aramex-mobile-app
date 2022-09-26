@@ -134,5 +134,13 @@
     "enterCurrentPassword": "Enter Current Password",
     "enterNewPassword": "Enter New Password",
     "enterConfirmPassword": "Enter Confirm Password"
+  },
+  "account": {
+    "personalInformation": "Personal Information",
+    "accountPayment": "Account Payment",
+    "helpAndSupport": "Help and Support",
+    "termsAndConditions": "Terms and Conditions",
+    "logout": "Logout",
+    "totalShipping": "Total Shipping"
   }
 }

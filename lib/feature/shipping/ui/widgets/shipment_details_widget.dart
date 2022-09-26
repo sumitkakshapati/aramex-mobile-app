@@ -1,6 +1,5 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
-import 'package:aramex/common/icons/aramex_icons.dart';
 import 'package:aramex/common/util/number_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
@@ -10,10 +9,6 @@ import 'package:aramex/common/widget/custom_divider.dart';
 import 'package:aramex/common/widget/horiontal_key_value.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:iconsax/iconsax.dart';
 
 class ShipmentDetailsWidgets extends StatelessWidget {
   const ShipmentDetailsWidgets({Key? key}) : super(key: key);

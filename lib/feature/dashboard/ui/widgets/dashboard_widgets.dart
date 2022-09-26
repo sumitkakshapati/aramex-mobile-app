@@ -1,5 +1,4 @@
 import 'package:aramex/app/theme.dart';
-import 'package:aramex/common/icons/aramex_icons.dart';
 import 'package:aramex/feature/home/ui/screens/homepage_screens.dart';
 import 'package:aramex/feature/profile/ui/screens/profile_screens.dart';
 import 'package:aramex/feature/search/ui/screens/search_page.dart';

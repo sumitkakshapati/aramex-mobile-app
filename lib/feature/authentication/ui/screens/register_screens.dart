@@ -6,6 +6,6 @@ class RegisterScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RegisterWidgets();
+    return const RegisterWidgets();
   }
 }

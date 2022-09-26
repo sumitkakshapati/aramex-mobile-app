@@ -1,6 +1,6 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/assets.dart';
-import 'package:aramex/common/icons/aramex_icons.dart';
+import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/route/routes.dart';
 import 'package:aramex/common/util/size_utils.dart';
@@ -8,6 +8,7 @@ import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/image/rounded_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -84,7 +85,7 @@ class ProfileWidgets extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Account Number",
+                                LocaleKeys.accountNumber.tr(),
                                 style: _textTheme.headline6!.copyWith(
                                   fontWeight: FontWeight.w400,
                                   color: CustomTheme.gray,
@@ -106,7 +107,7 @@ class ProfileWidgets extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Total Shipping",
+                                LocaleKeys.totalShipping.tr(),
                                 style: _textTheme.headline6!.copyWith(
                                   fontWeight: FontWeight.w400,
                                   color: CustomTheme.gray,
@@ -133,7 +134,7 @@ class ProfileWidgets extends StatelessWidget {
                 child: Column(
                   children: [
                     CustomListTile(
-                      title: "Personal Information",
+                      title: LocaleKeys.personalInformation.tr(),
                       leading: const Icon(Iconsax.user),
                       showNextIcon: true,
                       onPressed: () {
@@ -143,12 +144,17 @@ class ProfileWidgets extends StatelessWidget {
                       },
                     ),
                     CustomListTile(
-                      title: "Account payment",
+                      title: LocaleKeys.accountPayment.tr(),
                       leading: const Icon(Iconsax.bank),
                       showNextIcon: true,
+                      onPressed: () {
+                        NavigationService.pushNamed(
+                          routeName: Routes.accountPayment,
+                        );
+                      },
                     ),
                     CustomListTile(
-                      title: "Change Password",
+                      title: LocaleKeys.changePassword.tr(),
                       leading: const Icon(Iconsax.lock),
                       showNextIcon: true,
                       onPressed: () {
@@ -158,7 +164,7 @@ class ProfileWidgets extends StatelessWidget {
                       },
                     ),
                     CustomListTile(
-                      title: "Payment History",
+                      title: LocaleKeys.paymentHistory.tr(),
                       leading: const Icon(Iconsax.bank),
                       showNextIcon: true,
                       onPressed: () {
@@ -168,12 +174,12 @@ class ProfileWidgets extends StatelessWidget {
                       },
                     ),
                     CustomListTile(
-                      title: "Help and Support",
+                      title: LocaleKeys.helpAndSupport.tr(),
                       leading: const Icon(Iconsax.support),
                       showNextIcon: true,
                     ),
                     CustomListTile(
-                      title: "Terms and Condition",
+                      title: LocaleKeys.termsAndConditions.tr(),
                       leading: const Icon(Iconsax.document),
                       showBorder: false,
                       showNextIcon: true,
@@ -186,7 +192,7 @@ class ProfileWidgets extends StatelessWidget {
                 topMargin: 28,
                 bottomMargin: 32,
                 child: CustomListTile(
-                  title: "Log Out",
+                  title: LocaleKeys.logout.tr(),
                   titleColor: _theme.primaryColor,
                   leading: Icon(
                     Iconsax.logout,

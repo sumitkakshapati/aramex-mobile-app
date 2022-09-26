@@ -7,4 +7,5 @@ class Routes {
   static const paymentHistory = "/paymentHistory";
   static const profileDetails = "/profileDetails";
   static const changePassword = "/changePassword";
+  static const accountPayment = "/accountPayment";
 }

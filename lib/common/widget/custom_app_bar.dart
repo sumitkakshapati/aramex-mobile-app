@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final _theme = Theme.of(context);
     final _textTheme = _theme.textTheme;
 
-    bool _canPop = Navigator.of(context).canPop();
+    final bool _canPop = Navigator.of(context).canPop();
 
     return Container(
       child: Column(

@@ -1,6 +1,5 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
-import 'package:aramex/common/icons/aramex_icons.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';

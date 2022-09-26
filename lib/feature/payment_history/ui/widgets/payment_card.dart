@@ -1,10 +1,7 @@
 import 'package:aramex/app/theme.dart';
-import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/util/size_utils.dart';
-import 'package:aramex/common/widget/options_bottomsheet.dart';
 import 'package:aramex/common/widget/vertical_key_value.dart';
 import 'package:aramex/feature/payment_history/ui/widgets/payment_actions_bottomsheet.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PaymentCard extends StatelessWidget {

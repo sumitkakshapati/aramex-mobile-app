@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:aramex/common/shared_pref/shared_pref.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:aramex/feature/splash/resource/startup_repository.dart';
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'startup_state.dart';
