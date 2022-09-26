@@ -125,6 +125,14 @@
     "grandTotalRs": "Grand Total(Rs.)"
   },
   "profile": {
-    "profileDetails": "Profile Details"
+    "profileDetails": "Profile Details",
+    "changePassword": "Change Password",
+    "confirmChange": "Confirm Change",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "youCanChangeAppPasswordFromHere": "You can change app password from here",
+    "enterCurrentPassword": "Enter Current Password",
+    "enterNewPassword": "Enter New Password",
+    "enterConfirmPassword": "Enter Confirm Password"
   }
 }

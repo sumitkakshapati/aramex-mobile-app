@@ -151,6 +151,11 @@ class ProfileWidgets extends StatelessWidget {
                       title: "Change Password",
                       leading: const Icon(Iconsax.lock),
                       showNextIcon: true,
+                      onPressed: () {
+                        NavigationService.pushNamed(
+                          routeName: Routes.changePassword,
+                        );
+                      },
                     ),
                     CustomListTile(
                       title: "Payment History",

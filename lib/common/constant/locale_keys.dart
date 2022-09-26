@@ -127,4 +127,13 @@ class LocaleKeys {
   static const grandTotalRs = "shipment.grandTotalRs";
 
   static const profileDetails = "profile.profileDetails";
+  static const changePassword = "profile.changePassword";
+  static const confirmChange = "profile.confirmChange";
+  static const currentPassword = "profile.currentPassword";
+  static const newPassword = "profile.newPassword";
+  static const enterCurrentPassword = "profile.enterCurrentPassword";
+  static const enterNewPassword = "profile.enterNewPassword";
+  static const enterConfirmPassword = "profile.enterConfirmPassword";
+  static const youCanChangeAppPasswordFromHere =
+      "profile.youCanChangeAppPasswordFromHere";
 }
