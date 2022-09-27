@@ -1,4 +1,3 @@
-import 'package:aramex/app/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomTab extends StatelessWidget {
@@ -18,9 +17,6 @@ class CustomTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
-    final _textTheme = _theme.textTheme;
-
     return Container(
       width: double.infinity,
       child: Tab(

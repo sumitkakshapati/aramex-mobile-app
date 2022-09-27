@@ -1,6 +1,9 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
+import 'package:aramex/feature/account_payment/ui/screens/add_bank_details_screens.dart';
+import 'package:aramex/feature/account_payment/ui/widgets/show_account_actions_bottomsheet.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +45,16 @@ class BankTabWidgets extends StatelessWidget {
                   titleFontWeight: FontWeight.bold,
                   image:
                       "https://play-lh.googleusercontent.com/bSFfTcSuDPC9EjVA5BrFpCKw38QtRT6fvBU6C5yvQ_imwY8MgUf2ZW2kJOsiwLKi4hc",
-                  onPressed: () {},
+                  onPressed: () {
+                    showAccountActionsBottomSheet(
+                      context: context,
+                      onEditDetails: () {
+                        NavigationService.push(
+                          target: const AddBankDetailsScreens(),
+                        );
+                      },
+                    );
+                  },
                 ),
               );
             },
