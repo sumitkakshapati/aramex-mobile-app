@@ -9,8 +9,8 @@ import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class AddBankWalletWidgets extends StatelessWidget {
-  const AddBankWalletWidgets({Key? key}) : super(key: key);
+class AddBankDetailsWidgets extends StatelessWidget {
+  const AddBankDetailsWidgets({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

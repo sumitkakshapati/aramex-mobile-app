@@ -2,7 +2,8 @@ import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/tab/custom_tab_bar.dart';
-import 'package:aramex/feature/account_payment/ui/screens/add_bank_wallet_screens.dart';
+import 'package:aramex/feature/account_payment/ui/screens/add_bank_details_screens.dart';
+import 'package:aramex/feature/account_payment/ui/screens/add_wallet_details_screens.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/bank_tab_widget.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/wallet_tab_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -38,8 +39,10 @@ class _AccountPaymentWidgetsState extends State<AccountPaymentWidgets>
           color: Colors.white,
         ),
         onPressed: () {
-          if(tabController.index == 0){
-            NavigationService.push(target: const AddBankWalletScreens());
+          if (tabController.index == 0) {
+            NavigationService.push(target: const AddBankDetailsScreens());
+          } else {
+            NavigationService.push(target: const AddWalletDetailsScreens());
           }
         },
       ),
