@@ -141,6 +141,8 @@
     "helpAndSupport": "Help and Support",
     "termsAndConditions": "Terms and Conditions",
     "logout": "Logout",
-    "totalShipping": "Total Shipping"
+    "totalShipping": "Total Shipping",
+    "bank": "Bank",
+    "wallets": "Wallets"
   }
 }

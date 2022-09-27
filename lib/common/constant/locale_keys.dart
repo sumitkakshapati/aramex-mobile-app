@@ -143,4 +143,6 @@ class LocaleKeys {
   static const termsAndConditions = "account.termsAndConditions";
   static const logout = "account.logout";
   static const totalShipping = "account.totalShipping";
+  static const bank = "account.bank";
+  static const wallets = "account.wallets";
 }
