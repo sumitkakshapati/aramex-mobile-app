@@ -8,8 +8,10 @@ import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/image/rounded_image.dart';
+import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileWidgets extends StatelessWidget {
@@ -194,6 +196,12 @@ class ProfileWidgets extends StatelessWidget {
                 child: CustomListTile(
                   title: LocaleKeys.logout.tr(),
                   titleColor: _theme.primaryColor,
+                  onPressed: () {
+                    RepositoryProvider.of<UserRepository>(context).logout();
+                    NavigationService.pushNamedAndRemoveUntil(
+                      routeName: Routes.login,
+                    );
+                  },
                   leading: Icon(
                     Iconsax.logout,
                     color: _theme.primaryColor,
