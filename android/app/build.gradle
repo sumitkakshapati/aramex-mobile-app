@@ -51,19 +51,19 @@ android {
     productFlavors {
         prod {
             dimension "app"
-            applicationId "com.example.boilerplate"
+            applicationId "com.aramex.app"
             versionCode flutterVersionCode.toInteger()
             versionName flutterVersionName
         }
         stage {
             dimension "app"
-            applicationId "com.example.boilerplate.dev"
+            applicationId "com.aramex.app.dev"
             versionCode flutterVersionCode.toInteger()
             versionName flutterVersionName
         }
         dev {
             dimension "app"
-            applicationId "com.example.boilerplate.dev"
+            applicationId "com.aramex.app.dev"
             versionCode flutterVersionCode.toInteger()
             versionName flutterVersionName
         }

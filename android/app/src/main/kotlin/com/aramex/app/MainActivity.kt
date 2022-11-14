@@ -1,4 +1,4 @@
-package com.example.boilerplate
+package com.aramex.app
 
 import io.flutter.embedding.android.FlutterActivity
 
