@@ -1,18 +1,14 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:aramex/common/constant/env.dart';
 import 'package:aramex/common/http/api_provider.dart';
 import 'package:aramex/common/http/custom_exception.dart';
 import 'package:aramex/common/http/response.dart';
 import 'package:aramex/common/shared_pref/shared_pref.dart';
-import 'package:aramex/common/util/google_play_service_utils.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/auth_api_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class UserRepository {
   ApiProvider apiProvider;
@@ -88,68 +84,19 @@ class UserRepository {
 
   ValueNotifier<bool> get isLoggedIn => _isLoggedIn;
 
-  Future<DataResponse<User>> signInGoogle() async {
+  Future<DataResponse<User>> signInWithEmail(
+      {required String email, required String password}) async {
     try {
-      if (Platform.isAndroid) {
-        final _playServiceAvailability =
-            await GooglePlayServiceUtils().checkGoogleService;
-        if (!_playServiceAvailability) {
-          return DataResponse.error("Google play service not available");
-        }
-      }
-      final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
-        'email',
-        'https://www.googleapis.com/auth/userinfo.profile'
-      ]);
-
-      await _googleSignIn.signOut();
-      final googleUser = await _googleSignIn.signIn();
-
-      if (googleUser != null) {
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
-        final _res = await authApiProvider.googleSignIn(
-            accessToken: googleAuth.accessToken!);
-        final _result = Map<String, dynamic>.from(_res);
-        _token = _result['data']['token']['accessToken'];
-        await persistToken(_token);
-        _user.value = User.fromJson(_result['data']['user']);
-        SharedPref.setUser(_user.value!);
-        await _getAndUpdateNotificationToken();
-        _isLoggedIn.value = true;
-        return DataResponse.success(_user.value!);
-      } else {
-        return DataResponse.error("Unable to Login!!");
-      }
-    } on CustomException catch (e) {
-      return DataResponse.error(e.message!);
-    } catch (e) {
-      return DataResponse.error(e.toString());
-    }
-  }
-
-  Future<DataResponse<User>> signInFacebook() async {
-    try {
-      await FacebookAuth.instance.logOut();
-      final LoginResult result =
-          await FacebookAuth.instance.login(permissions: ['email']);
-      if (result.status == LoginStatus.success) {
-        final AccessToken accessToken = result.accessToken!;
-        final _res = await authApiProvider.facebookSignIn(
-            accessToken: accessToken.token);
-        final _result = Map<String, dynamic>.from(_res);
-        _token = _result['data']['token']['accessToken'];
-        await persistToken(_token);
-        _user.value = User.fromJson(_result['data']['user']);
-        SharedPref.setUser(_user.value!);
-        await _getAndUpdateNotificationToken();
-        _isLoggedIn.value = true;
-        return DataResponse.success(_user.value!);
-      } else if (result.status == LoginStatus.failed) {
-        return DataResponse.error(result.message ?? "Unable to login!!");
-      } else {
-        return DataResponse.error("Unable to login!!");
-      }
+      final _res =
+          await authApiProvider.emailLogin(email: email, password: password);
+      final _result = Map<String, dynamic>.from(_res);
+      _token = _result['data']['results']['token'];
+      await persistToken(_token);
+      _user.value = User.fromJson(_result['data']['results']['user']);
+      SharedPref.setUser(_user.value!);
+      // await _getAndUpdateNotificationToken();
+      _isLoggedIn.value = true;
+      return DataResponse.success(_user.value!);
     } on CustomException catch (e) {
       return DataResponse.error(e.message!);
     } catch (e) {

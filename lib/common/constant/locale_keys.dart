@@ -25,6 +25,7 @@ class LocaleKeys {
   static const didntReceiveAnyCode = "auth.didntReceiveAnyCode";
   static const resend = "auth.resend";
   static const sec = "auth.sec";
+  static const name = "auth.name";
 
   static const filter = "filter.filter";
   static const deliveryLocations = "filter.deliveryLocations";
@@ -145,4 +146,14 @@ class LocaleKeys {
   static const totalShipping = "account.totalShipping";
   static const bank = "account.bank";
   static const wallets = "account.wallets";
+
+  //Validation Message
+  static const pleaseEnterValidField =
+      "validationMessage.pleaseEnterValidField";
+  static const fieldCannotBeEmpty = "validationMessage.fieldCannotBeEmpty";
+  static const invalidPasswordMessage =
+      "validationMessage.invalidPasswordMessage";
+  static const doesnotMatch = "validationMessage.doesnotMatch";
+  static const enterValidPhoneNumber =
+      "validationMessage.enterValidPhoneNumber";
 }

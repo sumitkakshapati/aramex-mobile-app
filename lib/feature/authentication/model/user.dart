@@ -1,59 +1,52 @@
 class User {
+  //"_id", "full_name", "email", "email_verified", "phone", "email_verified", "account_number", "address", "status"
   int id;
-  String username;
-  String firstName;
-  String lastName;
-  String? phone;
-  String? email;
-  String? facebookId;
-  String? appleId;
-  String? googleId;
+  String fullname;
+  String email;
   bool isEmailVerified;
+  String phone;
   bool isPhoneVerified;
+  String accountNumber;
+  String address;
+  String status;
 
   User({
     required this.id,
-    required this.username,
-    required this.firstName,
-    required this.lastName,
+    required this.fullname,
     required this.phone,
     required this.email,
-    required this.facebookId,
-    required this.appleId,
-    required this.googleId,
     required this.isEmailVerified,
     required this.isPhoneVerified,
+    required this.accountNumber,
+    required this.address,
+    required this.status,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      username: json['username'] ?? "",
-      firstName: json['firstName'] ?? "",
-      lastName: json['lastName'] ?? "",
-      phone: json['phone'],
+      id: json['_id'],
+      fullname: json['full_name'] ?? "",
       email: json['email'],
-      facebookId: json['facebookId'],
-      appleId: json['appleId'],
-      googleId: json['googleId'],
-      isEmailVerified: json['isEmailVerified'] ?? false,
-      isPhoneVerified: json['isPhoneVerified'] ?? false,
+      isEmailVerified: json['email_verified'] ?? false,
+      phone: json['phone'],
+      isPhoneVerified: json['phone_verified'] ?? false,
+      accountNumber: json['account_number'],
+      address: json['address'],
+      status: json['status'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['username'] = username;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['phone'] = phone;
+    data['_id'] = id;
+    data['full_name'] = fullname;
     data['email'] = email;
-    data['facebookId'] = facebookId;
-    data['appleId'] = appleId;
-    data['googleId'] = googleId;
-    data['isEmailVerified'] = isEmailVerified;
-    data['isPhoneVerified'] = isPhoneVerified;
+    data['email_verified'] = isEmailVerified;
+    data['phone'] = phone;
+    data['phone_verified'] = isPhoneVerified;
+    data['account_number'] = accountNumber;
+    data['address'] = address;
+    data['status'] = status;
 
     return data;
   }

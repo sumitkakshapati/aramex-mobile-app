@@ -9,6 +9,8 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final bool readOnly;
   final IconData? suffixIcon;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
 
   const CustomTextField({
     required this.label,
@@ -18,6 +20,8 @@ class CustomTextField extends StatelessWidget {
     this.textInputType,
     this.readOnly = false,
     this.suffixIcon,
+    this.controller,
+    this.validator,
   });
 
   @override
@@ -38,25 +42,32 @@ class CustomTextField extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: TextField(
+            child: TextFormField(
               style: _textTheme.headline6!.copyWith(
                 fontWeight: FontWeight.w600,
               ),
+              validator: validator,
+              controller: controller,
               cursorColor: CustomTheme.primaryColor,
               maxLines: 1,
               keyboardType: TextInputType.text,
               obscureText: obscureText,
               readOnly: readOnly,
               decoration: InputDecoration(
-                border: InputBorder.none,
-                fillColor: Colors.transparent,
+                border: getBorder(false),
+                enabledBorder: getBorder(false),
+                focusedBorder: getBorder(false),
+                disabledBorder: getBorder(false),
+                errorBorder: getBorder(true),
+                fillColor: Colors.white,
+                filled: true,
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 20,
                   horizontal: 12,
+                ),
+                errorStyle: _textTheme.bodyText2!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.red,
                 ),
                 counterText: "",
                 hintText: hintText,
@@ -73,6 +84,13 @@ class CustomTextField extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  InputBorder getBorder(bool isError) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: isError ? Colors.red : Colors.white),
     );
   }
 }

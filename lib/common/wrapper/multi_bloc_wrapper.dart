@@ -1,5 +1,5 @@
 import 'package:aramex/common/constant/env.dart';
-import 'package:aramex/feature/authentication/cubit/social_login_cubit.dart';
+import 'package:aramex/feature/authentication/cubit/email_login_cubit.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +13,7 @@ class MultiBlocWrapper extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SocialLoginCubit(
+          create: (context) => EmailLoginCubit(
             userRepository: RepositoryProvider.of<UserRepository>(context),
           ),
         )
