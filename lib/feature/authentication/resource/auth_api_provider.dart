@@ -15,6 +15,25 @@ class AuthApiProvider {
     return await apiProvider.post('$baseUrl/auth/login', body);
   }
 
+  Future<dynamic> register({
+    required String accountNumber,
+    required String fullName,
+    required String email,
+    required String phoneNumber,
+    required String address,
+    required String password,
+  }) async {
+    final Map<String, dynamic> body = {
+      "full_name": fullName,
+      "email": email,
+      "phone": phoneNumber,
+      "account_number": accountNumber,
+      "password": password,
+      "address": address,
+    };
+    return await apiProvider.post('$baseUrl/auth/register', body);
+  }
+
   Future<dynamic> fetchProfile({required String token}) async {
     return await apiProvider.get('$baseUrl/user/profile', token: token);
   }

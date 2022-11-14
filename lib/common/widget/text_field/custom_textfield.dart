@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   final IconData? suffixIcon;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
+  final bool isRequired;
 
   const CustomTextField({
     required this.label,
@@ -22,6 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.validator,
+    this.isRequired = false,
   });
 
   @override
@@ -34,11 +36,24 @@ class CustomTextField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            label,
-            style: _textTheme.headline6!.copyWith(
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: _textTheme.headline6!.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              if (isRequired)
+                Text(
+                  " *",
+                  style: _textTheme.headline6!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.red,
+                  ),
+                )
+            ],
           ),
           const SizedBox(height: 12),
           Container(

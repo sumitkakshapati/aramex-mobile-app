@@ -34,15 +34,13 @@ class FormValidator {
 
   static String? validateConfirmPassword(String? val, String? newPassword,
       {String? label}) {
-    final RegExp _regex = RegExp(
-        r"^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$");
     if (val == null) {
       return LocaleKeys.fieldCannotBeEmpty
           .tr(args: [label ?? LocaleKeys.password.tr()]);
     } else if (val.isEmpty) {
       return LocaleKeys.fieldCannotBeEmpty
           .tr(args: [label ?? LocaleKeys.password.tr()]);
-    } else if (_regex.hasMatch(val)) {
+    } else if (val.length >= 6) {
       if (val == newPassword) {
         return null;
       } else {

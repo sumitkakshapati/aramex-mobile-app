@@ -7,6 +7,7 @@ import 'package:aramex/common/http/response.dart';
 import 'package:aramex/common/shared_pref/shared_pref.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/auth_api_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
@@ -99,6 +100,31 @@ class UserRepository {
       return DataResponse.success(_user.value!);
     } on CustomException catch (e) {
       return DataResponse.error(e.message!);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<bool>> register({
+    required String accountNumber,
+    required String fullName,
+    required String email,
+    required String phoneNumber,
+    required String address,
+    required String password,
+  }) async {
+    try {
+      final _ = await authApiProvider.register(
+        accountNumber: accountNumber,
+        fullName: fullName,
+        email: email,
+        phoneNumber: phoneNumber,
+        address: address,
+        password: password,
+      );
+      return DataResponse.success(true);
+    } on DioError catch (e) {
+      return DataResponse.error(e.message);
     } catch (e) {
       return DataResponse.error(e.toString());
     }
