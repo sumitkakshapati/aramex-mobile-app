@@ -36,14 +36,13 @@ class _SplashWidgetState extends State<SplashWidget> {
     return BlocListener<StartupCubit, StartupState>(
       listener: (context, state) {
         if (state is StartupSuccess) {
-          // if (state.isFirstTime) {
-          //   NavigationService.pushReplacementNamed(
-          //     routeName: Routes.dashboard,
-          //   );
-          // } else {
-          //   NavigationService.pushReplacementNamed(routeName: Routes.dashboard);
-          // }
-          NavigationService.pushReplacementNamed(routeName: Routes.login);
+          if (state.isLogged) {
+            NavigationService.pushNamedAndRemoveUntil(
+              routeName: Routes.dashboard,
+            );
+          } else {
+            NavigationService.pushNamedAndRemoveUntil(routeName: Routes.login);
+          }
         }
       },
       child: PageWrapper(
