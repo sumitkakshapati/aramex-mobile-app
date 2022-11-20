@@ -126,7 +126,9 @@
     "codFee": "COD Fee",
     "totalAmountRs": "Total Amount (Rs.)",
     "vatAmountRs": "VAT Amount (Rs.)",
-    "grandTotalRs": "Grand Total(Rs.)"
+    "grandTotalRs": "Grand Total(Rs.)",
+    "amount": "Amount",
+    "viewDetails": "View Details"
   },
   "profile": {
     "profileDetails": "Profile Details",

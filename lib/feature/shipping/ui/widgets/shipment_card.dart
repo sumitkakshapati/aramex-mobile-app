@@ -1,4 +1,5 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/util/number_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
@@ -6,6 +7,7 @@ import 'package:aramex/common/widget/vertical_key_value.dart';
 import 'package:aramex/feature/shipping/enum/shipment_status.dart';
 import 'package:aramex/feature/shipping/model/shipment.dart';
 import 'package:aramex/feature/shipping/ui/screens/shipping_details_screens.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 
@@ -88,14 +90,14 @@ class ShipmentCard extends StatelessWidget {
             children: [
               Expanded(
                 child: VerticalKeyValue(
-                  title: "Amount:",
+                  title: "${LocaleKeys.amount.tr()}:",
                   value: shipment.codValue.formatInRupee(),
                 ),
               ),
               SizedBox(width: 12.wp),
               Expanded(
                 child: VerticalKeyValue(
-                  title: "Consignee Number",
+                  title: LocaleKeys.consigneeNumber.tr(),
                   value: shipment.consigneeTel,
                 ),
               ),
@@ -113,7 +115,7 @@ class ShipmentCard extends StatelessWidget {
             children: [
               if (shipment.pickupDate != null)
                 Text(
-                  "Pickup Date:",
+                  "${LocaleKeys.pickUpDate.tr()}:",
                   style: _textTheme.headline6!.copyWith(
                     fontWeight: FontWeight.w400,
                     color: CustomTheme.gray,
@@ -137,7 +139,7 @@ class ShipmentCard extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  "View Details",
+                  LocaleKeys.viewDetails.tr(),
                   style: _textTheme.headline6!.copyWith(
                     fontWeight: FontWeight.w500,
                     color: _theme.primaryColor,
