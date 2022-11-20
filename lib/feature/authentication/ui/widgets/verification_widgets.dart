@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerificationWidgets extends StatelessWidget {
-  const VerificationWidgets({Key? key}) : super(key: key);
+  final String email;
+  const VerificationWidgets({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

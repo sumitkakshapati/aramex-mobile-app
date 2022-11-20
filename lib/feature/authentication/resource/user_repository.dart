@@ -7,7 +7,6 @@ import 'package:aramex/common/http/response.dart';
 import 'package:aramex/common/shared_pref/shared_pref.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/auth_api_provider.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
@@ -99,7 +98,7 @@ class UserRepository {
       _isLoggedIn.value = true;
       return DataResponse.success(_user.value!);
     } on CustomException catch (e) {
-      return DataResponse.error(e.message!);
+      return DataResponse.error(e.message!, e.statusCode);
     } catch (e) {
       return DataResponse.error(e.toString());
     }
@@ -123,8 +122,8 @@ class UserRepository {
         password: password,
       );
       return DataResponse.success(true);
-    } on DioError catch (e) {
-      return DataResponse.error(e.message);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message, e.statusCode);
     } catch (e) {
       return DataResponse.error(e.toString());
     }
@@ -147,7 +146,9 @@ class UserRepository {
       return DataResponse.success(true);
     } on CustomException catch (e) {
       return DataResponse.error(
-          e.message ?? "Unable to update notification token");
+        e.message ?? "Unable to update notification token",
+        e.statusCode,
+      );
     } catch (e) {
       return DataResponse.error(e.toString());
     }
@@ -161,7 +162,7 @@ class UserRepository {
       SharedPref.setUser(_user.value!);
       return DataResponse.success(_user.value!);
     } on CustomException catch (e) {
-      return DataResponse.error(e.message!);
+      return DataResponse.error(e.message!, e.statusCode);
     } catch (e) {
       return DataResponse.error(e.toString());
     }

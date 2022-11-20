@@ -19,6 +19,7 @@ class EmailLoginSuccess extends EmailLoginState {
 
 class EmailLoginError extends EmailLoginState {
   final String message;
+  final int? statusCode;
 
-  const EmailLoginError({required this.message});
+  const EmailLoginError({required this.message, this.statusCode});
 }

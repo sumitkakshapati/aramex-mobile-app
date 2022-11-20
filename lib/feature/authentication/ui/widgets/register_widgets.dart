@@ -2,7 +2,6 @@ import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
-import 'package:aramex/common/route/routes.dart';
 import 'package:aramex/common/util/form_validator.dart';
 import 'package:aramex/common/util/snackbar_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
@@ -76,7 +75,9 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
                 context: context,
                 message: "Registered successfully",
               );
-              NavigationService.push(target: const VerificationScreens());
+              NavigationService.push(
+                target: VerificationScreens(email: _emailcontroller.text),
+              );
             } else if (state is CommonErrorState) {
               SnackBarUtils.showErrorBar(
                 context: context,

@@ -14,8 +14,8 @@ class Env {
 
 class EnvValue {
   static final Env development = Env(
-    baseUrl: 'http://192.168.21.142:8848/api',
-    imageUrl: 'http://192.168.21.142:8848/api',
+    baseUrl: 'http://192.168.1.75:8848/api',
+    imageUrl: 'http://192.168.1.75:8848/api',
     appEnvironment: AppEnvironment.Development,
   );
 

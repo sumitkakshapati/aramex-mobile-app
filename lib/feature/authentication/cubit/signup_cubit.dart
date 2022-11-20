@@ -28,7 +28,12 @@ class SignupCubit extends Cubit<CommonState> {
     if (_res.status == Status.Success && _res.data != null) {
       emit(CommonDataSuccessState());
     } else {
-      emit(CommonErrorState(message: _res.message ?? "Unable to register"));
+      emit(
+        CommonErrorState(
+          message: _res.message ?? "Unable to register",
+          statusCode: _res.statusCode,
+        ),
+      );
     }
   }
 }

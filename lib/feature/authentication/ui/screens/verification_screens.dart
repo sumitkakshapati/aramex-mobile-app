@@ -2,10 +2,11 @@ import 'package:aramex/feature/authentication/ui/widgets/verification_widgets.da
 import 'package:flutter/material.dart';
 
 class VerificationScreens extends StatelessWidget {
-  const VerificationScreens({Key? key}) : super(key: key);
+  final String email;
+  const VerificationScreens({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const VerificationWidgets();
+    return VerificationWidgets(email: email);
   }
 }

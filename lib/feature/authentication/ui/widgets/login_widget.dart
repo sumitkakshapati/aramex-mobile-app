@@ -5,10 +5,10 @@ import 'package:aramex/common/route/routes.dart';
 import 'package:aramex/common/util/form_validator.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/util/snackbar_utils.dart';
-import 'package:aramex/common/util/text_utils.dart';
 import 'package:aramex/common/widget/button/rounded_button.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:aramex/feature/authentication/cubit/email_login_cubit.dart';
+import 'package:aramex/feature/authentication/ui/screens/verification_screens.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +62,11 @@ class _LoginWidgetsState extends State<LoginWidgets> {
               context: context,
               message: state.message,
             );
+            if (state.statusCode == 403) {
+              NavigationService.push(
+                target: VerificationScreens(email: _emailController.text),
+              );
+            }
           }
         },
         child: Scaffold(

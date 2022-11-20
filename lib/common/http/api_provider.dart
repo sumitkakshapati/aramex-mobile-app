@@ -259,20 +259,40 @@ class ApiProvider {
       case 201:
         return responseJson;
       case 400:
-        throw BadRequestException(getErrorMessage(res));
+        throw BadRequestException(
+          getErrorMessage(res),
+          response.statusCode,
+        );
+      case 401:
+      case 402:
+        throw UnauthorizedException(
+          getErrorMessage(res),
+          response.statusCode,
+        );
+      case 403:
+        throw ForbittenException(
+          getErrorMessage(res),
+          response.statusCode,
+        );
       case 404:
-        throw ResourceNotFoundException(getErrorMessage(res));
+        throw ResourceNotFoundException(
+            getErrorMessage(res), response.statusCode);
       case 422:
         responseJson['error'] = getErrorMessage(res);
-        throw BadRequestException(getErrorMessage(res));
-      case 401:
-      case 403:
-        throw UnauthorisedException(getErrorMessage(res));
+        throw BadRequestException(
+          getErrorMessage(res),
+          response.statusCode,
+        );
       case 500:
-        throw InternalServerErrorException(getErrorMessage(res));
+        throw InternalServerErrorException(
+          getErrorMessage(res),
+          response.statusCode,
+        );
       default:
         throw NoInternetException(
-            'Error occured while Communication with Server');
+          'Error occured while Communication with Server',
+          response.statusCode,
+        );
     }
   }
 
@@ -287,6 +307,10 @@ class ApiProvider {
         });
       } else if (res["message"] is String) {
         message = res["message"];
+      } else if (res["error"] is Map) {
+        if (res["error"]["message"] is String) {
+          message = res["error"]["message"];
+        }
       }
     } catch (e) {
       return message;

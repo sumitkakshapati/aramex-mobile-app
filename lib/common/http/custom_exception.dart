@@ -1,8 +1,9 @@
 class CustomException implements Exception {
-  CustomException([this._message, this._prefix]);
+  CustomException([this._message, this._prefix, this.statusCode]);
 
   final dynamic _message;
   final dynamic _prefix;
+  final int? statusCode;
 
   dynamic get message => _message;
   String toString() {
@@ -11,33 +12,41 @@ class CustomException implements Exception {
 }
 
 class FetchDataException extends CustomException {
-  FetchDataException([String? message])
-      : super(message, "Error During Communication: ");
+  FetchDataException([String? message, int? statusCode])
+      : super(message, "Error During Communication: ", statusCode);
 }
 
 class NoInternetException extends CustomException {
-  NoInternetException([String? message])
-      : super(message, "No Ineternet Connection");
+  NoInternetException([String? message, int? statusCode])
+      : super(message, "No Internet Connection", statusCode);
 }
 
 class BadRequestException extends CustomException {
-  BadRequestException([String? message]) : super(message, "Invalid Request ");
+  BadRequestException([String? message, int? statusCode])
+      : super(message, "Invalid Request", statusCode);
 }
 
 class ResourceNotFoundException extends CustomException {
-  ResourceNotFoundException([String? message])
-      : super(message, "Resource not found.Error code  404 ");
+  ResourceNotFoundException([String? message, int? statusCode])
+      : super(message, "Resource not found.Error code  404 ", statusCode);
 }
 
-class UnauthorisedException extends CustomException {
-  UnauthorisedException([String? message]) : super(message, "Unauthorised  ");
+class UnauthorizedException extends CustomException {
+  UnauthorizedException([String? message, int? statusCode])
+      : super(message, "Unauthorised ", statusCode);
+}
+
+class ForbittenException extends CustomException {
+  ForbittenException([String? message, int? statusCode])
+      : super(message, "Forbitten  ", statusCode);
 }
 
 class InternalServerErrorException extends CustomException {
-  InternalServerErrorException([String? message])
-      : super(message, "Server error ");
+  InternalServerErrorException([String? message, int? statusCode])
+      : super(message, "Server error ", statusCode);
 }
 
 class InvalidInputException extends CustomException {
-  InvalidInputException([String? message]) : super(message, "Invalid Input ");
+  InvalidInputException([String? message, int? statusCode])
+      : super(message, "Invalid Input ", statusCode);
 }

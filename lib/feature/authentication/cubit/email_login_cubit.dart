@@ -15,12 +15,17 @@ class EmailLoginCubit extends Cubit<EmailLoginState> {
 
   loginWithEmail({required String email, required String password}) async {
     emit(EmailLoginLoading());
-    final res = await userRepository.signInWithEmail(email: email, password: password);
+    final res =
+        await userRepository.signInWithEmail(email: email, password: password);
     if (res.status == Status.Success && res.data != null) {
       emit(EmailLoginSuccess(user: res.data!));
     } else {
-      emit(EmailLoginError(
-          message: res.message ?? LocaleKeys.unableToLogin.tr()));
+      emit(
+        EmailLoginError(
+          message: res.message ?? LocaleKeys.unableToLogin.tr(),
+          statusCode: res.statusCode,
+        ),
+      );
     }
   }
 }

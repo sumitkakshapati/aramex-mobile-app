@@ -18,6 +18,6 @@ class CommonDataFetchedState<T> extends CommonState {
 
 class CommonErrorState extends CommonState {
   final String message;
-
-  CommonErrorState({required this.message});
+  final int? statusCode;
+  CommonErrorState({required this.message, this.statusCode});
 }
