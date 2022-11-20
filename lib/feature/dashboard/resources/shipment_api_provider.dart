@@ -18,4 +18,11 @@ class ShipmentApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> allShipments() async {
+    return await apiProvider.get(
+      '$baseUrl/shipments/feeds',
+      token: userRepository.token,
+    );
+  }
 }

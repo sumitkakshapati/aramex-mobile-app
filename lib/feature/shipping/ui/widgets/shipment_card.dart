@@ -1,18 +1,35 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/util/number_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/vertical_key_value.dart';
+import 'package:aramex/feature/shipping/enum/shipment_status.dart';
+import 'package:aramex/feature/shipping/model/shipment.dart';
 import 'package:aramex/feature/shipping/ui/screens/shipping_details_screens.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 class ShipmentCard extends StatelessWidget {
   final double horizontalMargin;
   final double bottomMargin;
+  final Shipment shipment;
   const ShipmentCard({
     Key? key,
     this.horizontalMargin = 0,
     this.bottomMargin = 16,
+    required this.shipment,
   }) : super(key: key);
+
+  Color get shipmentStatusColor {
+    switch (shipment.status) {
+      case ShipmentStatus.OnTransit:
+        return CustomTheme.skyBlue;
+      case ShipmentStatus.Delivered:
+        return CustomTheme.purple;
+      case ShipmentStatus.Returned:
+        return CustomTheme.lightRed;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +56,7 @@ class ShipmentCard extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(top: 16.hp),
                   child: Text(
-                    "#47411112276",
+                    "#${shipment.awbNumber}",
                     style: _textTheme.headline3!.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
@@ -57,10 +74,10 @@ class ShipmentCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Text(
-                  "On Transit",
+                  shipment.status.value,
                   style: _textTheme.headline6!.copyWith(
                     fontWeight: FontWeight.w500,
-                    color: CustomTheme.skyBlue,
+                    color: shipmentStatusColor,
                   ),
                 ),
               )
@@ -69,17 +86,17 @@ class ShipmentCard extends StatelessWidget {
           SizedBox(height: 8.hp),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: VerticalKeyValue(
                   title: "Amount:",
-                  value: "Rs. 75,000",
+                  value: shipment.codValue.formatInRupee(),
                 ),
               ),
               SizedBox(width: 12.wp),
-              const Expanded(
+              Expanded(
                 child: VerticalKeyValue(
                   title: "Consignee Number",
-                  value: "+977 9851235864",
+                  value: shipment.consigneeTel,
                 ),
               ),
               const SizedBox(width: CustomTheme.symmetricHozPadding),
@@ -94,22 +111,25 @@ class ShipmentCard extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(
-                "Pickup Date:",
-                style: _textTheme.headline6!.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: CustomTheme.gray,
-                ),
-              ),
-              SizedBox(width: 4.hp),
-              Expanded(
-                child: Text(
-                  "12 JULY, 2022",
+              if (shipment.pickupDate != null)
+                Text(
+                  "Pickup Date:",
                   style: _textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
+                    color: CustomTheme.gray,
                   ),
                 ),
-              ),
+              if (shipment.pickupDate != null) SizedBox(width: 4.hp),
+              if (shipment.pickupDate != null)
+                Expanded(
+                  child: Text(
+                    Jiffy(shipment.pickupDate).format("dd MMMM, yyyy"),
+                    style: _textTheme.headline6!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              if (shipment.pickupDate == null) const Spacer(),
               InkWell(
                 onTap: () {
                   NavigationService.push(

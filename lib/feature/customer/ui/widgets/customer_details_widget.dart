@@ -1,7 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
-import 'package:aramex/common/enum/shipment_status.dart';
 import 'package:aramex/common/model/chart_data.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/util/size_utils.dart';
@@ -14,6 +13,7 @@ import 'package:aramex/common/widget/options_bottomsheet.dart';
 import 'package:aramex/feature/customer/ui/screens/customer_returned_details_screens.dart';
 import 'package:aramex/feature/home/ui/widgets/cod_card.dart';
 import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
+import 'package:aramex/feature/shipping/enum/shipment_status.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';

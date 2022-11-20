@@ -1,10 +1,18 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card/custom_chip.dart';
+import 'package:aramex/common/widget/common_error_widget.dart';
+import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/common/widget/text_field/search_textfield.dart';
+import 'package:aramex/feature/dashboard/resources/shipment_repository.dart';
+import 'package:aramex/feature/shipping/cubit/all_shipment_bloc.dart';
+import 'package:aramex/feature/shipping/cubit/all_shipment_event.dart';
+import 'package:aramex/feature/shipping/model/shipment.dart';
 import 'package:aramex/feature/shipping/ui/widgets/shipment_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 class ShippingWidgets extends StatefulWidget {
@@ -25,9 +33,17 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
   int _currentIndex = 0;
 
   @override
+  void initState() {
+    context.read<AllShipmentBloc>().add(FetchAllShipmentEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     final _textTheme = _theme.textTheme;
+    final _shipmentRepository =
+        RepositoryProvider.of<ShipmentRepository>(context);
 
     return Scaffold(
       body: CustomScrollView(
@@ -98,30 +114,55 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: CustomTheme.symmetricHozPadding,
-              ),
-              margin: EdgeInsets.only(bottom: 16.hp),
-              child: Text(
-                "125 Shipping Found",
-                style: _textTheme.headline6!.copyWith(
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return const ShipmentCard(
-                  horizontalMargin: CustomTheme.symmetricHozPadding,
+          BlocBuilder<AllShipmentBloc, CommonState>(
+            builder: (context, state) {
+              if (state is CommonDataFetchedState) {
+                return SliverToBoxAdapter(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: CustomTheme.symmetricHozPadding,
+                    ),
+                    margin: EdgeInsets.only(bottom: 16.hp),
+                    child: Text(
+                      "${_shipmentRepository.totalShipmentCount == -1 ? 0 : _shipmentRepository.totalShipmentCount} Shipping Found",
+                      style: _textTheme.headline6!.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
                 );
-              },
-              childCount: 10,
-            ),
-          )
+              } else {
+                return SliverToBoxAdapter(child: Container());
+              }
+            },
+          ),
+          BlocBuilder<AllShipmentBloc, CommonState>(
+            builder: (context, state) {
+              if (state is CommonLoadingState) {
+                return const SliverToBoxAdapter(
+                  child: CommonLoadingWidget(),
+                );
+              } else if (state is CommonErrorState) {
+                return SliverToBoxAdapter(
+                  child: CommonErrorWidget(message: state.message),
+                );
+              } else if (state is CommonDataFetchedState<Shipment>) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return ShipmentCard(
+                        horizontalMargin: CustomTheme.symmetricHozPadding,
+                        shipment: state.data[index],
+                      );
+                    },
+                    childCount: state.data.length,
+                  ),
+                );
+              } else {
+                return SliverToBoxAdapter(child: Container());
+              }
+            },
+          ),
         ],
       ),
     );
