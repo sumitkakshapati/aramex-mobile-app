@@ -160,4 +160,17 @@ class LocaleKeys {
   static const enterValidPhoneNumber =
       "validationMessage.enterValidPhoneNumber";
   static const otpMustBeNDigitLong = "validationMessage.otpMustBeNDigitLong";
+
+  //Homepage
+
+  static const shipmentMode = "homepage.shipmentMode";
+  static const codShipment = "homepage.codShipment";
+  static const prepaidShipment = "homepage.prepaidShipment";
+  static const totalCodCollected = "homepage.totalCodCollected";
+  static const totalCodPaid = "homepage.totalCodPaid";
+  static const balanceAvailable = "homepage.balanceAvailable";
+  static const nextPaymentCycle = "homepage.nextPaymentCycle";
+  static const timePeriod = "homepage.timePeriod";
+  static const from = "homepage.from";
+  static const to = "homepage.to";
 }

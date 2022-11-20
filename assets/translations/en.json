@@ -156,5 +156,17 @@
     "doesnotMatch": "{} doesnot match",
     "enterValidPhoneNumber": "Please enter valid phone number",
     "otpMustBeNDigitLong": "OTP must be {} digit long"
+  },
+  "homepage": {
+    "shipmentMode": "Shipping Mode",
+    "codShipment": "COD Shipment",
+    "prepaidShipment": "Prepaid Shipment",
+    "totalCodCollected": "Total COD Collected",
+    "totalCodPaid": "Total COD Paid",
+    "balanceAvailable": "Balance Available",
+    "nextPaymentCycle": "Next Payment Cycle",
+    "timePeriod": "Time Period",
+    "from": "From",
+    "to": "To"
   }
 }

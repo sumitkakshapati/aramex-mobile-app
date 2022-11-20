@@ -26,8 +26,6 @@ class UserRepository {
       baseUrl: env.baseUrl,
       apiProvider: apiProvider,
     );
-
-    print(authApiProvider);
   }
 
   Future initialState() async {

@@ -33,7 +33,7 @@ class VerificationWidgets extends StatefulWidget {
 
 class _VerificationWidgetsState extends State<VerificationWidgets> {
   bool _isLoading = false;
-  ValueNotifier<int> _expiryDuration = ValueNotifier(0);
+  final ValueNotifier<int> _expiryDuration = ValueNotifier(0);
 
   final TextEditingController _otpController = TextEditingController();
 
