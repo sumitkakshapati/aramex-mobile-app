@@ -47,4 +47,23 @@ class AuthApiProvider {
       token: token,
     );
   }
+
+  Future<dynamic> verifyUsingEmail(
+      {required String email, required String otpCode}) async {
+    final Map<String, dynamic> body = {
+      "email": email,
+      "token": otpCode,
+    };
+    return await apiProvider.post('$baseUrl/auth/verify-email', body);
+  }
+
+  Future<dynamic> resendOTPViaEmail({required String email}) async {
+    final Map<String, dynamic> body = {
+      "email": email,
+    };
+    return await apiProvider.post(
+      '$baseUrl/auth/send-token?type=email-verification',
+      body,
+    );
+  }
 }

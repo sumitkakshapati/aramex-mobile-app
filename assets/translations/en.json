@@ -23,7 +23,10 @@
     "didntReceiveAnyCode": "Didn't received any code",
     "resend": "Resend",
     "sec": "sec",
-    "name": "name"
+    "name": "name",
+    "otp": "OTP",
+    "hrs": "hrs",
+    "min": "min"
   },
   "filter": {
     "filter": "Filter",
@@ -151,6 +154,7 @@
     "fieldCannotBeEmpty": "{} field cannot be empty",
     "invalidPasswordMessage": "Make sure your {} contains atleast 1 upper case letter, special character as well as 8 letters long.",
     "doesnotMatch": "{} doesnot match",
-    "enterValidPhoneNumber": "Please enter valid phone number"
+    "enterValidPhoneNumber": "Please enter valid phone number",
+    "otpMustBeNDigitLong": "OTP must be {} digit long"
   }
 }

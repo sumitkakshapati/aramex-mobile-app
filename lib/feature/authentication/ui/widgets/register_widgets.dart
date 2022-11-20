@@ -76,7 +76,10 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
                 message: "Registered successfully",
               );
               NavigationService.push(
-                target: VerificationScreens(email: _emailcontroller.text),
+                target: VerificationScreens(
+                  email: _emailcontroller.text,
+                  expiryDuration: state.data ?? 0,
+                ),
               );
             } else if (state is CommonErrorState) {
               SnackBarUtils.showErrorBar(

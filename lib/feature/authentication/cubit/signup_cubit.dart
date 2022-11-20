@@ -26,7 +26,7 @@ class SignupCubit extends Cubit<CommonState> {
     );
 
     if (_res.status == Status.Success && _res.data != null) {
-      emit(CommonDataSuccessState());
+      emit(CommonDataSuccessState(data: _res.data));
     } else {
       emit(
         CommonErrorState(

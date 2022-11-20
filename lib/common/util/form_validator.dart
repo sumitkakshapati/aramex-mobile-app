@@ -103,4 +103,18 @@ class FormValidator {
       return null;
     }
   }
+
+  static String? validateOTP(String? val, {String? label}) {
+    if (val == null) {
+      return LocaleKeys.fieldCannotBeEmpty
+          .tr(args: [label ?? LocaleKeys.otp.tr()]);
+    } else if (val.isEmpty) {
+      return LocaleKeys.fieldCannotBeEmpty
+          .tr(args: [label ?? LocaleKeys.otp.tr()]);
+    } else if (val.length == 4) {
+      return null;
+    } else {
+      return LocaleKeys.otpMustBeNDigitLong.tr(args: ["4"]);
+    }
+  }
 }

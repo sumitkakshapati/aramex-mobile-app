@@ -26,6 +26,9 @@ class LocaleKeys {
   static const resend = "auth.resend";
   static const sec = "auth.sec";
   static const name = "auth.name";
+  static const otp = "auth.otp";
+  static const hrs = "auth.hrs";
+  static const min = "auth.min";
 
   static const filter = "filter.filter";
   static const deliveryLocations = "filter.deliveryLocations";
@@ -156,4 +159,5 @@ class LocaleKeys {
   static const doesnotMatch = "validationMessage.doesnotMatch";
   static const enterValidPhoneNumber =
       "validationMessage.enterValidPhoneNumber";
+  static const otpMustBeNDigitLong = "validationMessage.otpMustBeNDigitLong";
 }

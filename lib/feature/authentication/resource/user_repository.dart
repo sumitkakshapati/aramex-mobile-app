@@ -104,7 +104,7 @@ class UserRepository {
     }
   }
 
-  Future<DataResponse<bool>> register({
+  Future<DataResponse<int?>> register({
     required String accountNumber,
     required String fullName,
     required String email,
@@ -113,7 +113,7 @@ class UserRepository {
     required String password,
   }) async {
     try {
-      final _ = await authApiProvider.register(
+      final _res = await authApiProvider.register(
         accountNumber: accountNumber,
         fullName: fullName,
         email: email,
@@ -121,7 +121,7 @@ class UserRepository {
         address: address,
         password: password,
       );
-      return DataResponse.success(true);
+      return DataResponse.success(_res["data"]?["data"]?["expiry_time"]);
     } on CustomException catch (e) {
       return DataResponse.error(e.message, e.statusCode);
     } catch (e) {
@@ -163,6 +163,34 @@ class UserRepository {
       return DataResponse.success(_user.value!);
     } on CustomException catch (e) {
       return DataResponse.error(e.message!, e.statusCode);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<bool>> verifyUsingEmail({
+    required String email,
+    required String otpCode,
+  }) async {
+    try {
+      final _ = await authApiProvider.verifyUsingEmail(
+        email: email,
+        otpCode: otpCode,
+      );
+      return DataResponse.success(true);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message, e.statusCode);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<int>> resentOtpViaEmail({required String email}) async {
+    try {
+      final _res = await authApiProvider.resendOTPViaEmail(email: email);
+      return DataResponse.success(_res["data"]?["data"]?["expiry_time"]);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message, e.statusCode);
     } catch (e) {
       return DataResponse.error(e.toString());
     }
