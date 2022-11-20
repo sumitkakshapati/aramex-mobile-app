@@ -58,4 +58,15 @@ class ShipmentRepository {
       return DataResponse.error(e.toString());
     }
   }
+
+  Future<DataResponse<Shipment>> shipmentByID(int id) async {
+    try {
+      final _res = await shipmentApiProvider.shipmentsById(id);
+      return DataResponse.success(Shipment.fromJson(_res["data"]["results"]));
+    } on DioError catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
 }

@@ -1,17 +1,25 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/util/number_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
+import 'package:aramex/common/widget/common_error_widget.dart';
+import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/custom_divider.dart';
 import 'package:aramex/common/widget/horiontal_key_value.dart';
+import 'package:aramex/feature/shipping/cubit/shipment_details_cubit.dart';
+import 'package:aramex/feature/shipping/model/shipment.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jiffy/jiffy.dart';
 
 class ShipmentDetailsWidgets extends StatelessWidget {
-  const ShipmentDetailsWidgets({Key? key}) : super(key: key);
+  final int id;
+  const ShipmentDetailsWidgets({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,164 +37,182 @@ class ShipmentDetailsWidgets extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: CustomTheme.symmetricHozPadding,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 24.hp),
-              Text(
-                LocaleKeys.initialDetails.tr(),
-                style: _textTheme.headline5!.copyWith(
-                  fontWeight: FontWeight.bold,
+      body: BlocBuilder<ShipmentDetailsCubit, CommonState>(
+        builder: (context, state) {
+          if (state is CommonLoadingState) {
+            return const CommonLoadingWidget();
+          } else if (state is CommonErrorState) {
+            return CommonErrorWidget(message: state.message);
+          } else if (state is CommonDataSuccessState<Shipment>) {
+            final Shipment _shipment = state.data!;
+            return SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: CustomTheme.symmetricHozPadding,
                 ),
-              ),
-              CardWrapper(
-                topMargin: 16.hp,
-                bottomMargin: 32.hp,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    HorizontalKeyValue(
-                      title: LocaleKeys.AWB.tr(),
-                      value: "47411112276",
+                    SizedBox(height: 24.hp),
+                    Text(
+                      LocaleKeys.initialDetails.tr(),
+                      style: _textTheme.headline5!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.pickUpDate.tr(),
-                      value: "12/09/2022",
+                    CardWrapper(
+                      topMargin: 16.hp,
+                      bottomMargin: 32.hp,
+                      child: Column(
+                        children: [
+                          HorizontalKeyValue(
+                            title: LocaleKeys.AWB.tr(),
+                            value: _shipment.awbNumber,
+                          ),
+                          if (_shipment.pickupDate != null)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.pickUpDate.tr(),
+                              value: Jiffy(_shipment.pickupDate)
+                                  .format("dd MMMM, yyyy"),
+                            ),
+                          const CustomDivider(),
+                          if (_shipment.productGroup.isNotEmpty)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.productGroup.tr(),
+                              value: _shipment.productGroup,
+                            ),
+                          if (_shipment.type.isNotEmpty)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.type.tr(),
+                              value: _shipment.type,
+                            ),
+                          if (_shipment.services.isNotEmpty)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.service.tr(),
+                              value: _shipment.services,
+                            ),
+                          const CustomDivider(),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.shipmentNumber.tr(),
+                            value: _shipment.shipperNumber,
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.shipperName.tr(),
+                            value: _shipment.shipperName,
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.originCity.tr(),
+                            value: _shipment.originCity,
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.consigneeTel.tr(),
+                            value: _shipment.consigneeTel,
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.destinationCity.tr(),
+                            value: _shipment.destinationCity,
+                          ),
+                          const CustomDivider(),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.pcs.tr(),
+                            value: _shipment.pcs.toString(),
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.chargingWeight.tr(),
+                            value: _shipment.chargingWeight.toString(),
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.codValue.tr(),
+                            value: _shipment.codValue.toString(),
+                          ),
+                          if (_shipment.codLiableBranch.isNotEmpty)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.codLiableBranch.tr(),
+                              value: _shipment.codLiableBranch,
+                            ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.codPaid.tr(),
+                            value: "60 (Dummy)",
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.codPaidDate.tr(),
+                            value: "09/09/2022 (Dummy)",
+                          ),
+                        ],
+                      ),
                     ),
-                    const CustomDivider(),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.productGroup.tr(),
-                      value: "DOM",
+                    Text(
+                      LocaleKeys.shippingStatus.tr(),
+                      style: _textTheme.headline5!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.type.tr(),
-                      value: "ONP",
+                    CardWrapper(
+                      topMargin: 16.hp,
+                      bottomMargin: 32.hp,
+                      child: Column(
+                        children: [
+                          HorizontalKeyValue(
+                            title: LocaleKeys.status.tr(),
+                            value: _shipment.status.value,
+                          ),
+                          if (_shipment.returnStatusDate != null)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.returnDate.tr(),
+                              value: Jiffy(_shipment.returnStatusDate)
+                                  .format("dd MMMM, yyyy"),
+                            ),
+                          if (_shipment.returnReason != null)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.returnReason.tr(),
+                              value: _shipment.returnReason!,
+                            ),
+                        ],
+                      ),
                     ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.service.tr(),
-                      value: "RTRN",
+                    Text(
+                      LocaleKeys.shippingCharge.tr(),
+                      style: _textTheme.headline5!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    const CustomDivider(),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.shipmentNumber.tr(),
-                      value: "+977 9851203648",
+                    CardWrapper(
+                      topMargin: 16.hp,
+                      bottomMargin: 32.hp,
+                      child: Column(
+                        children: [
+                          HorizontalKeyValue(
+                            title: LocaleKeys.shippingCharge.tr(),
+                            value: _shipment.shippingCharges.formatInRupee(),
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.codFee.tr(),
+                            value: _shipment.codFee.formatInRupee(),
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.totalAmountRs.tr(),
+                            value: _shipment.totalAmount.formatInRupee(),
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.vatAmountRs.tr(),
+                            value: _shipment.vat.formatInRupee(),
+                          ),
+                          HorizontalKeyValue(
+                            title: LocaleKeys.grandTotalRs.tr(),
+                            value: _shipment.grandAmount.formatInRupee(),
+                          ),
+                        ],
+                      ),
                     ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.shipperName.tr(),
-                      value: "Motors Nepal Pvt. Ltd.",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.originCity.tr(),
-                      value: "Lalitpur",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.consigneeTel.tr(),
-                      value: "+977 9825364217",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.destinationCity.tr(),
-                      value: "Kathmandu",
-                    ),
-                    const CustomDivider(),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.pcs.tr(),
-                      value: "2",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.destinationCity.tr(),
-                      value: "Kathmandu",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.chargingWeight.tr(),
-                      value: "40",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.codValue.tr(),
-                      value: "1000",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.codLiableBranch.tr(),
-                      value: "Kathmandu",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.codPaid.tr(),
-                      value: "1000",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.codPaidDate.tr(),
-                      value: "09/09/2022",
-                    ),
+                    SafeArea(child: Container()),
                   ],
                 ),
               ),
-              Text(
-                LocaleKeys.shippingStatus.tr(),
-                style: _textTheme.headline5!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              CardWrapper(
-                topMargin: 16.hp,
-                bottomMargin: 32.hp,
-                child: Column(
-                  children: [
-                    HorizontalKeyValue(
-                      title: LocaleKeys.status.tr(),
-                      value: "Returned",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.returnDate.tr(),
-                      value: "12/09/2022",
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.returnReason.tr(),
-                      value: "Incorrect Contact Details WA/WN",
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                LocaleKeys.shippingCharge.tr(),
-                style: _textTheme.headline5!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              CardWrapper(
-                topMargin: 16.hp,
-                bottomMargin: 32.hp,
-                child: Column(
-                  children: [
-                    HorizontalKeyValue(
-                      title: LocaleKeys.shippingCharge.tr(),
-                      value: 100.formatInRupee(),
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.codFee.tr(),
-                      value: 50.formatInRupee(),
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.totalAmountRs.tr(),
-                      value: 109.formatInRupee(),
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.vatAmountRs.tr(),
-                      value: 20.formatInRupee(),
-                    ),
-                    HorizontalKeyValue(
-                      title: LocaleKeys.grandTotalRs.tr(),
-                      value: 129.formatInRupee(),
-                    ),
-                  ],
-                ),
-              ),
-              SafeArea(child: Container()),
-            ],
-          ),
-        ),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }

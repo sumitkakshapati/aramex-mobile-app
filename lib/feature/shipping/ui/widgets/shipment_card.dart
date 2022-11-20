@@ -133,7 +133,7 @@ class ShipmentCard extends StatelessWidget {
               InkWell(
                 onTap: () {
                   NavigationService.push(
-                    target: const ShipmentDetailScreens(),
+                    target: ShipmentDetailScreens(id: shipment.id),
                   );
                 },
                 child: Text(

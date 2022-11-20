@@ -25,4 +25,11 @@ class ShipmentApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> shipmentsById(int id) async {
+    return await apiProvider.get(
+      '$baseUrl/shipments/feeds/$id',
+      token: userRepository.token,
+    );
+  }
 }
