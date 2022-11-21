@@ -25,50 +25,52 @@ class DonutChartWidget<T> extends StatelessWidget {
         chartItem.fold<double>(0, (pv, e) => pv + e.value).toInt();
     return Column(
       children: [
-        Container(
-          height: 300.wp,
-          width: 300.wp,
-          child: SfCircularChart(
-            annotations: <CircularChartAnnotation>[
-              CircularChartAnnotation(
-                widget: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: RichText(
-                    text: TextSpan(
-                      text: "Total Shipments",
-                      style: _textTheme.headline6,
-                      children: [
-                        TextSpan(
-                          text: "\n$_totalValue",
-                          style: _textTheme.headline6!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      ],
+        if (_totalValue > 0)
+          Container(
+            height: 300.wp,
+            width: 300.wp,
+            child: SfCircularChart(
+              annotations: <CircularChartAnnotation>[
+                CircularChartAnnotation(
+                  widget: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Total Shipments",
+                        style: _textTheme.headline6,
+                        children: [
+                          TextSpan(
+                            text: "\n$_totalValue",
+                            style: _textTheme.headline6!.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-            series: <CircularSeries>[
-              DoughnutSeries<ChartData, String>(
-                dataSource: chartItem,
-                pointColorMapper: (ChartData data, _) => data.color,
-                xValueMapper: (ChartData data, _) => data.title,
-                yValueMapper: (ChartData data, _) => data.value,
-                onPointTap: (pointInteractionDetails) {
-                  if (onChartPressed != null &&
-                      pointInteractionDetails.pointIndex != null) {
-                    onChartPressed!(
-                      chartItem[pointInteractionDetails.pointIndex!].type,
-                    );
-                  }
-                },
-                innerRadius: '75%',
-              )
-            ],
+              ],
+              series: <CircularSeries>[
+                DoughnutSeries<ChartData, String>(
+                  dataSource: chartItem,
+                  pointColorMapper: (ChartData data, _) => data.color,
+                  xValueMapper: (ChartData data, _) => data.title,
+                  yValueMapper: (ChartData data, _) => data.value,
+                  onPointTap: (pointInteractionDetails) {
+                    if (onChartPressed != null &&
+                        pointInteractionDetails.pointIndex != null) {
+                      onChartPressed!(
+                        chartItem[pointInteractionDetails.pointIndex!].type,
+                      );
+                    }
+                  },
+                  innerRadius: '75%',
+                )
+              ],
+            ),
           ),
-        ),
+        if (_totalValue == 0) SizedBox(height: 20.hp),
         Row(
           children: List.generate(
             chartItem.length,
@@ -116,7 +118,7 @@ class DonutChartWidget<T> extends StatelessWidget {
                                   color: CustomTheme.gray,
                                 ),
                               ),
-                            if (showPercentage)
+                            if (showPercentage && _totalValue > 0)
                               Text(
                                 "${((chartItem[index].value / _totalValue) * 100).round()}%",
                                 style: _textTheme.headline6!.copyWith(

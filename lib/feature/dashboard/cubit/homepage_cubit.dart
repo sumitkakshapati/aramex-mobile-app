@@ -9,9 +9,12 @@ class HomepageCubit extends Cubit<CommonState> {
   HomepageCubit({required this.shipmentRepository})
       : super(CommonInitialState());
 
-  homepage() async {
+  homepage({DateTime? startDate, DateTime? endDate}) async {
     emit(CommonLoadingState());
-    final _res = await shipmentRepository.homepage();
+    final _res = await shipmentRepository.homepage(
+      startDate: startDate,
+      endDate: endDate,
+    );
     if (_res.status == Status.Success && _res.data != null) {
       emit(CommonDataSuccessState<HomepageData>(data: _res.data));
     } else {

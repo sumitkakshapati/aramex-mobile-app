@@ -1,9 +1,11 @@
 import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:aramex/common/enum/date_duration.dart';
 import 'package:aramex/common/util/text_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 
-class DateUtils {
+class DateTimeUtils {
   static String getTimeDotFomat(String? date) {
     return Jiffy(date).format('dd.MM.yyyy');
   }
@@ -75,6 +77,37 @@ class DateUtils {
       return "${twoDigits(duration.inMinutes.remainder(60))}:${twoDigits(duration.inSeconds.remainder(60))}";
     } else {
       return "${twoDigits(duration.inHours)}:${twoDigits(duration.inMinutes.remainder(60))}:${twoDigits(duration.inSeconds.remainder(60))}";
+    }
+  }
+
+  static DateTimeRange getDateRange(DateDuration dateDuration) {
+    final _currentDate = DateTime.now().toUtc();
+    switch (dateDuration) {
+      case DateDuration.Week:
+        return DateTimeRange(
+          start: _currentDate.subtract(const Duration(days: 7)),
+          end: _currentDate,
+        );
+      case DateDuration.HalfMonth:
+        return DateTimeRange(
+          start: _currentDate.subtract(const Duration(days: 15)),
+          end: _currentDate,
+        );
+      case DateDuration.Month:
+        return DateTimeRange(
+          start: DateTime(
+              _currentDate.year, _currentDate.month - 1, _currentDate.day),
+          end: _currentDate,
+        );
+      case DateDuration.Year:
+        return DateTimeRange(
+          start: DateTime(
+            _currentDate.year - 1,
+            _currentDate.month,
+            _currentDate.day,
+          ),
+          end: _currentDate,
+        );
     }
   }
 }

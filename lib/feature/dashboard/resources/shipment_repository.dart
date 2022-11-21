@@ -30,9 +30,13 @@ class ShipmentRepository {
 
   int get totalShipmentCount => _totalShipmentCount;
 
-  Future<DataResponse<HomepageData>> homepage() async {
+  Future<DataResponse<HomepageData>> homepage(
+      {DateTime? startDate, DateTime? endDate}) async {
     try {
-      final _res = await shipmentApiProvider.homepage();
+      final _res = await shipmentApiProvider.homepage(
+        startDate: startDate,
+        endDate: endDate,
+      );
       final _data = HomepageData.fromJson(json: _res["data"]["results"]);
       return DataResponse.success(_data);
     } on DioError catch (e) {
