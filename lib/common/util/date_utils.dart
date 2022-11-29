@@ -110,6 +110,16 @@ class DateTimeUtils {
         );
     }
   }
+
+  static Future<DateTime?> pickDate(
+      {required BuildContext context, DateTime? initialDate}) async {
+    return showDatePicker(
+      context: context,
+      initialDate: initialDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(3000),
+    );
+  }
 }
 
 extension CustomDuration on Duration {

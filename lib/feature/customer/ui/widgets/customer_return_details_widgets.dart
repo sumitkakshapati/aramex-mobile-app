@@ -8,6 +8,7 @@ import 'package:aramex/common/widget/button/dropdown_button.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/options_bottomsheet.dart';
+import 'package:aramex/feature/home/model/shipment_filter_data.dart';
 import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +117,11 @@ class CustomerReturnDetailsWidgets extends StatelessWidget {
                               );
                             },
                             openBuilder: (context, close) {
-                              return const ShipmentFilterWidgets();
+                              return ShipmentFilterWidgets(
+                                onChanged: (value) {},
+                                shipmentFilterData:
+                                    ShipmentFilterData.initial(),
+                              );
                             },
                           ),
                         ],

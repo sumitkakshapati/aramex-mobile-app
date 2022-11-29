@@ -61,7 +61,7 @@ class BottomSheetWrapper extends StatelessWidget {
                 ),
               ),
             SizedBox(height: widgetSpacing.hp),
-            child,
+            Expanded(child: child),
           ],
         ),
       ),

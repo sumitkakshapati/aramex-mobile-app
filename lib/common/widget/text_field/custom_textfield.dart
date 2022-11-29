@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final bool isRequired;
+  final VoidCallback? onPressed;
 
   const CustomTextField({
     required this.label,
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.validator,
     this.isRequired = false,
+    this.onPressed,
   });
 
   @override
@@ -68,6 +70,7 @@ class CustomTextField extends StatelessWidget {
               keyboardType: TextInputType.text,
               obscureText: obscureText,
               readOnly: readOnly,
+              onTap: onPressed,
               decoration: InputDecoration(
                 border: getBorder(false),
                 enabledBorder: getBorder(false),

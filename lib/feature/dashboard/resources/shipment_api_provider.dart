@@ -1,5 +1,6 @@
 import 'package:aramex/common/http/api_provider.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/home/model/shipment_filter_data.dart';
 import 'package:jiffy/jiffy.dart';
 
 class ShipmentApiProvider {
@@ -13,15 +14,42 @@ class ShipmentApiProvider {
     required this.userRepository,
   });
 
-  Future<dynamic> homepage({DateTime? startDate, DateTime? endDate}) async {
-    Map<String, dynamic> _params = {};
+  Future<dynamic> homepage({
+    ShipmentFilterData? shipmentFilterData,
+  }) async {
+    final Map<String, dynamic> _params = {};
 
-    if (startDate != null) {
-      _params["from"] = Jiffy(startDate).format("yyyy-MM-dd");
+    if (shipmentFilterData?.startDate != null) {
+      _params["from"] =
+          Jiffy(shipmentFilterData?.startDate).format("yyyy-MM-dd");
     }
 
-    if (endDate != null) {
-      _params["to"] = Jiffy(endDate).format("yyyy-MM-dd");
+    if (shipmentFilterData?.endDate != null) {
+      _params["to"] = Jiffy(shipmentFilterData?.endDate).format("yyyy-MM-dd");
+    }
+
+    if (shipmentFilterData?.originCity != null) {
+      _params["origin_city"] = shipmentFilterData?.originCity;
+    }
+
+    if (shipmentFilterData?.destinationCity != null) {
+      _params["destination_city"] = shipmentFilterData?.destinationCity;
+    }
+
+    if (shipmentFilterData?.fromRs != null) {
+      _params["min_price"] = shipmentFilterData?.fromRs;
+    }
+
+    if (shipmentFilterData?.toRs != null) {
+      _params["max_price"] = shipmentFilterData?.toRs;
+    }
+
+    if (shipmentFilterData?.fromKG != null) {
+      _params["min_weight"] = shipmentFilterData?.fromKG;
+    }
+
+    if (shipmentFilterData?.toKG != null) {
+      _params["max_weight"] = shipmentFilterData?.fromKG;
     }
 
     return await apiProvider.get(
@@ -41,6 +69,13 @@ class ShipmentApiProvider {
   Future<dynamic> shipmentsById(int id) async {
     return await apiProvider.get(
       '$baseUrl/shipments/feeds/$id',
+      token: userRepository.token,
+    );
+  }
+
+  Future<dynamic> fetchAllShipmentsCities() async {
+    return await apiProvider.get(
+      '$baseUrl/shipments/all-cities/',
       token: userRepository.token,
     );
   }

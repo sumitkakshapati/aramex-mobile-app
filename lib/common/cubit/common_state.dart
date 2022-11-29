@@ -4,6 +4,8 @@ class CommonInitialState extends CommonState {}
 
 class CommonLoadingState extends CommonState {}
 
+class CommonDummyLoadingState extends CommonState {}
+
 class CommonDataSuccessState<T> extends CommonState {
   T? data;
 

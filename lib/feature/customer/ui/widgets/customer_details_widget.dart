@@ -11,6 +11,7 @@ import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/donut_chart.dart';
 import 'package:aramex/common/widget/options_bottomsheet.dart';
 import 'package:aramex/feature/customer/ui/screens/customer_returned_details_screens.dart';
+import 'package:aramex/feature/home/model/shipment_filter_data.dart';
 import 'package:aramex/feature/home/ui/widgets/cod_card.dart';
 import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
 import 'package:aramex/feature/shipping/enum/shipment_status.dart';
@@ -95,7 +96,10 @@ class CustomerDetailsWidgets extends StatelessWidget {
                             );
                           },
                           openBuilder: (context, close) {
-                            return const ShipmentFilterWidgets();
+                            return ShipmentFilterWidgets(
+                              onChanged: (value) {},
+                              shipmentFilterData: ShipmentFilterData.initial(),
+                            );
                           },
                         ),
                       ],

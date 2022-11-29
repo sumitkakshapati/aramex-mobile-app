@@ -63,20 +63,40 @@ class _OptionsBottomsheet extends StatelessWidget {
               )
             ],
           ),
-          ...List.generate(
-            options.length,
-            (index) {
-              return CustomListTile(
-                title: options[index],
-                bottomPadding: 16,
-                topPadding: 16,
-                onPressed: () {
-                  onChanged(options[index]);
-                  NavigationService.pop();
-                },
-              );
-            },
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: List.generate(
+                  options.length,
+                  (index) {
+                    return CustomListTile(
+                      title: options[index],
+                      bottomPadding: 16,
+                      topPadding: 16,
+                      onPressed: () {
+                        onChanged(options[index]);
+                        NavigationService.pop();
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
           ),
+          // ...List.generate(
+          //   options.length,
+          //   (index) {
+          //     return CustomListTile(
+          //       title: options[index],
+          //       bottomPadding: 16,
+          //       topPadding: 16,
+          //       onPressed: () {
+          //         onChanged(options[index]);
+          //         NavigationService.pop();
+          //       },
+          //     );
+          //   },
+          // ),
           SafeArea(child: Container()),
         ],
       ),

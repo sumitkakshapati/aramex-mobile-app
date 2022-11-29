@@ -17,53 +17,63 @@ import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/donut_chart.dart';
 import 'package:aramex/common/widget/options_bottomsheet.dart';
+import 'package:aramex/feature/dashboard/cubit/homepage_cubit.dart';
 import 'package:aramex/feature/dashboard/model/homepage_data.dart';
+import 'package:aramex/feature/home/model/shipment_filter_data.dart';
 import 'package:aramex/feature/home/ui/widgets/cod_card.dart';
 import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
 import 'package:aramex/feature/home/ui/widgets/shipment_mode_card.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jiffy/jiffy.dart';
 
 class HomepageShipmentWidget extends StatefulWidget {
-  final ValueNotifier<DateDuration?> currentDateDuration;
   final HomepageData homepageData;
-  const HomepageShipmentWidget({
-    Key? key,
-    required this.homepageData,
-    required this.currentDateDuration,
-  }) : super(key: key);
+  const HomepageShipmentWidget({Key? key, required this.homepageData})
+      : super(key: key);
 
   @override
   State<HomepageShipmentWidget> createState() => _HomepageShipmentWidgetState();
 }
 
 class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
-  DateTime? _startDate;
-  DateTime? _endDate;
+  final ValueNotifier<DateDuration?> _currentDateDuration =
+      ValueNotifier(DateDuration.Week);
+  final ValueNotifier<ShipmentFilterData> _shipmentFilterData =
+      ValueNotifier(ShipmentFilterData.initial());
 
   @override
   void initState() {
     super.initState();
     updateOnTimePeriod();
+    _currentDateDuration.addListener(updateOnTimePeriod);
+    _shipmentFilterData.addListener(onUpdateShipmentMethod);
+  }
 
-    widget.currentDateDuration.addListener(updateOnTimePeriod);
+  onUpdateShipmentMethod() {
+    context
+        .read<HomepageCubit>()
+        .updateHomepage(shipmentFilterData: _shipmentFilterData.value);
   }
 
   updateOnTimePeriod() {
-    if (widget.currentDateDuration.value != null) {
+    if (_currentDateDuration.value != null) {
       final _currentDateRange =
-          DateTimeUtils.getDateRange(widget.currentDateDuration.value!);
-      _startDate = _currentDateRange.start;
-      _endDate = _currentDateRange.end;
+          DateTimeUtils.getDateRange(_currentDateDuration.value!);
+      _shipmentFilterData.value = _shipmentFilterData.value.copyWith(
+        startDate: _currentDateRange.start,
+        endDate: _currentDateRange.end,
+      );
     }
   }
 
   @override
   void dispose() {
-    widget.currentDateDuration.removeListener(updateOnTimePeriod);
+    _currentDateDuration.removeListener(updateOnTimePeriod);
+    _shipmentFilterData.removeListener(onUpdateShipmentMethod);
     super.dispose();
   }
 
@@ -211,11 +221,11 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
               Row(
                 children: [
                   ValueListenableBuilder<DateDuration?>(
-                    valueListenable: widget.currentDateDuration,
-                    builder: (context, _currentDateDuration, _) {
+                    valueListenable: _currentDateDuration,
+                    builder: (context, currentDateDuration, _) {
                       return CustomDropdownButton(
-                        title: _currentDateDuration != null
-                            ? _currentDateDuration.value
+                        title: currentDateDuration != null
+                            ? currentDateDuration.value
                             : "Select Duration",
                         onPressed: () {
                           showOptionsBottomSheet(
@@ -227,7 +237,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                               DateDuration.Year.value
                             ],
                             onChanged: (val) {
-                              widget.currentDateDuration.value =
+                              _currentDateDuration.value =
                                   DateDuration.fromString(val);
                             },
                             context: context,
@@ -241,7 +251,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (_startDate != null)
+                        if (_shipmentFilterData.value.startDate != null)
                           RichText(
                             text: TextSpan(
                               text: "${LocaleKeys.from.tr()}: ",
@@ -250,7 +260,9 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: Jiffy(_startDate).format("dd MMM,yyyy"),
+                                  text:
+                                      Jiffy(_shipmentFilterData.value.startDate)
+                                          .format("dd MMM,yyyy"),
                                   style: _textTheme.bodyText1!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -258,8 +270,9 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                               ],
                             ),
                           ),
-                        if (_startDate != null) SizedBox(height: 6.hp),
-                        if (_endDate != null)
+                        if (_shipmentFilterData.value.startDate != null)
+                          SizedBox(height: 6.hp),
+                        if (_shipmentFilterData.value.endDate != null)
                           RichText(
                             text: TextSpan(
                               text: "${LocaleKeys.to.tr()}:      ",
@@ -268,7 +281,8 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: Jiffy(_endDate).format("dd MMM,yyyy"),
+                                  text: Jiffy(_shipmentFilterData.value.endDate)
+                                      .format("dd MMM,yyyy"),
                                   style: _textTheme.bodyText1!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -291,7 +305,18 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                       );
                     },
                     openBuilder: (context, close) {
-                      return const ShipmentFilterWidgets();
+                      return ShipmentFilterWidgets(
+                        shipmentFilterData: _shipmentFilterData.value,
+                        onChanged: (value) {
+                          if (_shipmentFilterData.value.startDate !=
+                                  value.startDate ||
+                              _shipmentFilterData.value.endDate !=
+                                  value.endDate) {
+                            _currentDateDuration.value = null;
+                          }
+                          _shipmentFilterData.value = value;
+                        },
+                      );
                     },
                   ),
                 ],
