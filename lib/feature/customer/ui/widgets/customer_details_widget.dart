@@ -2,8 +2,10 @@ import 'package:animations/animations.dart';
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/cubit/common_state.dart';
+import 'package:aramex/common/enum/date_duration.dart';
 import 'package:aramex/common/model/chart_data.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/util/date_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_outline_icon_button.dart';
 import 'package:aramex/common/widget/button/dropdown_button.dart';
@@ -25,12 +27,53 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
-class CustomerDetailsWidgets extends StatelessWidget {
+class CustomerDetailsWidgets extends StatefulWidget {
   final String consigneeNumber;
   const CustomerDetailsWidgets({
     Key? key,
     required this.consigneeNumber,
   }) : super(key: key);
+
+  @override
+  State<CustomerDetailsWidgets> createState() => _CustomerDetailsWidgetsState();
+}
+
+class _CustomerDetailsWidgetsState extends State<CustomerDetailsWidgets> {
+  final ValueNotifier<DateDuration?> _currentDateDuration = ValueNotifier(null);
+  final ValueNotifier<ShipmentFilterData> _shipmentFilterData =
+      ValueNotifier(ShipmentFilterData.initial());
+
+  @override
+  void initState() {
+    _currentDateDuration.addListener(updateOnTimePeriod);
+    _shipmentFilterData.addListener(_updateData);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _currentDateDuration.removeListener(updateOnTimePeriod);
+    _shipmentFilterData.removeListener(_updateData);
+    super.dispose();
+  }
+
+  updateOnTimePeriod() {
+    if (_currentDateDuration.value != null) {
+      final _currentDateRange =
+          DateTimeUtils.getDateRange(_currentDateDuration.value!);
+      _shipmentFilterData.value = _shipmentFilterData.value.copyWith(
+        startDate: _currentDateRange.start,
+        endDate: _currentDateRange.end,
+      );
+    }
+  }
+
+  _updateData() {
+    context.read<CustomerDetailsCubit>().searchCustomerDetails(
+          phoneNumber: widget.consigneeNumber,
+          shipmentFilterData: _shipmentFilterData.value,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,21 +125,31 @@ class CustomerDetailsWidgets extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              CustomDropdownButton(
-                                title: "Weeks",
-                                onPressed: () {
-                                  showOptionsBottomSheet(
-                                    label: "Time Period",
-                                    options: [
-                                      "Weeks",
-                                      "Month",
-                                      "Years",
-                                    ],
-                                    onChanged: (val) {},
-                                    context: context,
-                                  );
-                                },
-                              ),
+                              ValueListenableBuilder<DateDuration?>(
+                                  valueListenable: _currentDateDuration,
+                                  builder: (context, currentDateDuration, _) {
+                                    return CustomDropdownButton(
+                                      title: currentDateDuration != null
+                                          ? currentDateDuration.value
+                                          : "Select Duration",
+                                      onPressed: () {
+                                        showOptionsBottomSheet(
+                                          label: LocaleKeys.timePeriod.tr(),
+                                          options: [
+                                            DateDuration.Week.value,
+                                            DateDuration.HalfMonth.value,
+                                            DateDuration.Month.value,
+                                            DateDuration.Year.value
+                                          ],
+                                          onChanged: (val) {
+                                            _currentDateDuration.value =
+                                                DateDuration.fromString(val);
+                                          },
+                                          context: context,
+                                        );
+                                      },
+                                    );
+                                  }),
                               SizedBox(width: 16.wp),
                               const Spacer(),
                               SizedBox(width: 16.wp),
@@ -113,9 +166,11 @@ class CustomerDetailsWidgets extends StatelessWidget {
                                 },
                                 openBuilder: (context, close) {
                                   return ShipmentFilterWidgets(
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      _shipmentFilterData.value = value;
+                                    },
                                     shipmentFilterData:
-                                        ShipmentFilterData.initial(),
+                                        _shipmentFilterData.value,
                                   );
                                 },
                               ),

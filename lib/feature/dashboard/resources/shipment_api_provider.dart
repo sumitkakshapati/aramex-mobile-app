@@ -140,9 +140,48 @@ class ShipmentApiProvider {
     final _body = {
       "mobile_number": phoneNumber,
     };
+
+    final Map<String, dynamic> _params = {};
+
+    if (shipmentFilterData?.startDate != null) {
+      _params["from"] =
+          Jiffy(shipmentFilterData?.startDate).format("yyyy-MM-dd");
+    }
+
+    if (shipmentFilterData?.endDate != null) {
+      _params["to"] = Jiffy(shipmentFilterData?.endDate).format("yyyy-MM-dd");
+    }
+
+    if (shipmentFilterData?.originCity != null) {
+      _params["origin_city"] = shipmentFilterData?.originCity;
+    }
+
+    if (shipmentFilterData?.destinationCity != null) {
+      _params["destination_city"] = shipmentFilterData?.destinationCity;
+    }
+
+    if (shipmentFilterData?.fromRs != null) {
+      _params["min_price"] = shipmentFilterData?.fromRs;
+    }
+
+    if (shipmentFilterData?.toRs != null) {
+      _params["max_price"] = shipmentFilterData?.toRs;
+    }
+
+    if (shipmentFilterData?.fromKG != null) {
+      _params["min_weight"] = shipmentFilterData?.fromKG;
+    }
+
+    if (shipmentFilterData?.toKG != null) {
+      _params["max_weight"] = shipmentFilterData?.fromKG;
+    }
+
+    final _url = "$baseUrl/customer-details/";
+
     return await apiProvider.post(
-      '$baseUrl/customer-details/',
+      _url.toString(),
       _body,
+      queryParam: _params,
       token: userRepository.token,
     );
   }

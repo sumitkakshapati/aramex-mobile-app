@@ -26,8 +26,8 @@ class HomepageData {
       balanceAvailable: double.tryParse(
               json["balance_info"]?["available"]?.toString() ?? "") ??
           0,
-      balanceNextCycle:
-          DateTime.tryParse(json["cod"]?["paid"]?.toString() ?? ""),
+      balanceNextCycle: DateTime.tryParse(
+          json["balance_info"]?["next_cycle"]?.toString() ?? ""),
       shipmentSummary: ShipmentSummary.fromJson(json: json["shipment_summary"]),
     );
   }

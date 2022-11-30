@@ -20,8 +20,13 @@ class ApiProvider {
     this.token = token;
   }
 
-  Future<Map<String, dynamic>> post(String url, dynamic body,
-      {String token = '', bool isRefreshRequest = false}) async {
+  Future<Map<String, dynamic>> post(
+    String url,
+    dynamic body, {
+    Map<String, dynamic>? queryParam,
+    String token = '',
+    bool isRefreshRequest = false,
+  }) async {
     dynamic responseJson;
     final Dio _dio = Dio(
       BaseOptions(receiveDataWhenStatusError: true),
@@ -36,9 +41,10 @@ class ApiProvider {
       if (token.isNotEmpty) {
         header['Authorization'] = 'Bearer ' + token;
       }
-      final dynamic response = await _dio.postUri(
-        Uri.parse(url),
+      final dynamic response = await _dio.post(
+        url,
         data: body,
+        queryParameters: queryParam,
         options: Options(headers: header),
       );
       responseJson = _response(response, url);

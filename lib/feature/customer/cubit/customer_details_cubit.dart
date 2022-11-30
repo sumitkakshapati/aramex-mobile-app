@@ -15,8 +15,10 @@ class CustomerDetailsCubit extends Cubit<CommonState> {
     ShipmentFilterData? shipmentFilterData,
   }) async {
     emit(CommonLoadingState());
-    final _res =
-        await shipmentRepository.fetchCustomerDetails(phoneNumber: phoneNumber);
+    final _res = await shipmentRepository.fetchCustomerDetails(
+      phoneNumber: phoneNumber,
+      shipmentFilterData: shipmentFilterData,
+    );
     if (_res.status == Status.Success && _res.data != null) {
       emit(CommonDataSuccessState<CustomerDetails>(data: _res.data));
     } else {
