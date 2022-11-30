@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/util/size_utils.dart';
@@ -8,6 +9,7 @@ import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/common/widget/text_field/search_textfield.dart';
 import 'package:aramex/feature/dashboard/resources/shipment_repository.dart';
 import 'package:aramex/feature/home/model/shipment_filter_data.dart';
+import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
 import 'package:aramex/feature/shipping/cubit/all_shipment_bloc.dart';
 import 'package:aramex/feature/shipping/cubit/all_shipment_event.dart';
 import 'package:aramex/feature/shipping/enum/shipment_status.dart';
@@ -125,16 +127,29 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
                             ),
                           ),
                           SizedBox(width: 12.wp),
-                          Center(
-                            child: CustomIconButton(
-                              icon: Icons.photo_filter_rounded,
-                              backgroundColor: _theme.primaryColor,
-                              iconColor: Colors.white,
-                              borderRadius: 12,
-                              padding: 14,
-                              onPressed: () {},
-                            ),
-                          )
+                          OpenContainer(
+                            openElevation: 0,
+                            closedElevation: 0,
+                            closedBuilder: (context, open) {
+                              return Center(
+                                child: CustomIconButton(
+                                  icon: Icons.photo_filter_rounded,
+                                  backgroundColor: _theme.primaryColor,
+                                  iconColor: Colors.white,
+                                  borderRadius: 12,
+                                  padding: 14,
+                                ),
+                              );
+                            },
+                            openBuilder: (context, close) {
+                              return ShipmentFilterWidgets(
+                                shipmentFilterData: _shipmentFilterData.value,
+                                onChanged: (value) {
+                                  _shipmentFilterData.value = value;
+                                },
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
