@@ -9,6 +9,7 @@ import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_outline_icon_button.dart';
 import 'package:aramex/common/widget/button/dropdown_button.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
+import 'package:aramex/common/widget/common_error_widget.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/options_bottomsheet.dart';
@@ -300,6 +301,8 @@ class _CustomerReturnDetailsWidgetsState
                   ),
                 ),
               );
+            } else if (state is CommonErrorState) {
+              return CommonErrorWidget(message: state.message);
             } else {
               return Container();
             }
