@@ -5,12 +5,14 @@ class SearchTextField extends StatelessWidget {
   final String hintText;
   final TextInputType? textInputType;
   final double bottomPadding;
-  final bool obscureText;
+  final TextEditingController? controller;
+  final VoidCallback? onSearched;
   const SearchTextField({
     required this.hintText,
     this.bottomPadding = 16,
-    this.obscureText = false,
+    this.controller,
     this.textInputType,
+    this.onSearched,
   });
 
   @override
@@ -43,7 +45,8 @@ class SearchTextField extends StatelessWidget {
                 cursorColor: CustomTheme.primaryColor,
                 maxLines: 1,
                 keyboardType: TextInputType.text,
-                obscureText: obscureText,
+                controller: controller,
+                textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   fillColor: Colors.transparent,
@@ -57,6 +60,12 @@ class SearchTextField extends StatelessWidget {
                     color: CustomTheme.lightGray,
                   ),
                 ),
+                onEditingComplete: () {
+                  FocusScope.of(context).unfocus();
+                  if (onSearched != null) {
+                    onSearched!();
+                  }
+                },
               ),
             ),
           ],

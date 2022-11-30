@@ -26,6 +26,7 @@ class ShippingWidgets extends StatefulWidget {
 }
 
 class _ShippingWidgetsState extends State<ShippingWidgets> {
+  final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final ValueNotifier<ShipmentFilterData> _shipmentFilterData =
       ValueNotifier(ShipmentFilterData.initial());
@@ -110,10 +111,17 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: SearchTextField(
                               hintText: "Search By Shipment ID",
                               bottomPadding: 0,
+                              controller: _searchController,
+                              onSearched: () {
+                                _shipmentFilterData.value =
+                                    _shipmentFilterData.value.copyWith(
+                                  shipmentId: _searchController.text,
+                                );
+                              },
                             ),
                           ),
                           SizedBox(width: 12.wp),
