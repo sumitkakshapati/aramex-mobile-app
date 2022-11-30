@@ -1,7 +1,7 @@
 enum ShipmentStatus {
-  OnTransit("On Transit"),
-  Delivered("Delivered"),
-  Returned("Returned");
+  OnTransit("in-transit"),
+  Delivered("delivered"),
+  Returned("returned");
 
   final String value;
   const ShipmentStatus(this.value);

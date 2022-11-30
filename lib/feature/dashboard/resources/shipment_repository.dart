@@ -29,10 +29,13 @@ class ShipmentRepository {
 
   final List<Shipment> _allShipments = [];
   int _totalShipmentCount = -1;
+  int _currentShipmentPage = 1;
 
   int get totalShipmentCount => _totalShipmentCount;
 
   ShipmentCities? _shipmentCities;
+
+  ShipmentFilterData? _currentShipmentFilterData;
 
   Future<DataResponse<HomepageData>> homepage({
     ShipmentFilterData? shipmentFilterData,
@@ -50,14 +53,32 @@ class ShipmentRepository {
     }
   }
 
-  Future<DataResponse<List<Shipment>>> allShipments() async {
+  Future<DataResponse<List<Shipment>>> allShipments(
+      {bool isLoadMore = false, ShipmentFilterData? shipmentFilterData}) async {
     try {
-      final _res = await shipmentApiProvider.allShipments();
+      if (_allShipments.length == _totalShipmentCount &&
+          isLoadMore &&
+          _currentShipmentFilterData == shipmentFilterData) {
+        return DataResponse.success(_allShipments);
+      }
+
+      if (isLoadMore && _currentShipmentFilterData == shipmentFilterData) {
+        _currentShipmentPage++;
+      } else {
+        _currentShipmentPage = 1;
+        _totalShipmentCount = -1;
+        _allShipments.clear();
+        _currentShipmentFilterData = shipmentFilterData;
+      }
+
+      final _res = await shipmentApiProvider.allShipments(
+        page: _currentShipmentPage,
+        shipmentFilterData: shipmentFilterData,
+      );
       final _items = List.from(_res["data"]["results"])
           .map((e) => Shipment.fromJson(e))
           .toList();
       _totalShipmentCount = _res["data"]["total"];
-      _allShipments.clear();
       _allShipments.addAll(_items);
       return DataResponse.success(_allShipments);
     } on DioError catch (e) {

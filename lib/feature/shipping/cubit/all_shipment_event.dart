@@ -1,19 +1,21 @@
+import 'package:aramex/feature/home/model/shipment_filter_data.dart';
+
 abstract class AllShipmentEvents {}
 
 class FetchAllShipmentEvent extends AllShipmentEvents {
-  int? id;
+  ShipmentFilterData? shipmentFilterData;
 
-  FetchAllShipmentEvent({this.id});
+  FetchAllShipmentEvent({this.shipmentFilterData});
 }
 
 class LoadMoreAllShipmentEvent extends AllShipmentEvents {
-  int? id;
+  ShipmentFilterData? shipmentFilterData;
 
-  LoadMoreAllShipmentEvent({this.id});
+  LoadMoreAllShipmentEvent({this.shipmentFilterData});
 }
 
 class RefreshAllShimentEvent extends AllShipmentEvents {
-  int? id;
+  ShipmentFilterData? shipmentFilterData;
 
-  RefreshAllShimentEvent({this.id});
+  RefreshAllShimentEvent({this.shipmentFilterData});
 }

@@ -52,6 +52,10 @@ class ShipmentApiProvider {
       _params["max_weight"] = shipmentFilterData?.fromKG;
     }
 
+    if (shipmentFilterData?.status != null) {
+      _params["status"] = shipmentFilterData?.status;
+    }
+
     return await apiProvider.get(
       '$baseUrl/shipments/home/feeds',
       queryParams: _params,
@@ -59,9 +63,58 @@ class ShipmentApiProvider {
     );
   }
 
-  Future<dynamic> allShipments() async {
+  Future<dynamic> allShipments({
+    ShipmentFilterData? shipmentFilterData,
+    int page = 1,
+  }) async {
+    final Map<String, dynamic> _params = {};
+
+    if (shipmentFilterData?.startDate != null) {
+      _params["from"] =
+          Jiffy(shipmentFilterData?.startDate).format("yyyy-MM-dd");
+    }
+
+    if (shipmentFilterData?.endDate != null) {
+      _params["to"] = Jiffy(shipmentFilterData?.endDate).format("yyyy-MM-dd");
+    }
+
+    if (shipmentFilterData?.originCity != null) {
+      _params["origin_city"] = shipmentFilterData?.originCity;
+    }
+
+    if (shipmentFilterData?.destinationCity != null) {
+      _params["destination_city"] = shipmentFilterData?.destinationCity;
+    }
+
+    if (shipmentFilterData?.fromRs != null) {
+      _params["min_price"] = shipmentFilterData?.fromRs;
+    }
+
+    if (shipmentFilterData?.toRs != null) {
+      _params["max_price"] = shipmentFilterData?.toRs;
+    }
+
+    if (shipmentFilterData?.fromKG != null) {
+      _params["min_weight"] = shipmentFilterData?.fromKG;
+    }
+
+    if (shipmentFilterData?.toKG != null) {
+      _params["max_weight"] = shipmentFilterData?.fromKG;
+    }
+
+    if (shipmentFilterData?.status != null) {
+      _params["status"] = shipmentFilterData?.status;
+    }
+
+    if (shipmentFilterData?.shipmentId != null) {
+      _params["shipment_id"] = shipmentFilterData?.shipmentId;
+    }
+
+    _params["page"] = page;
+
     return await apiProvider.get(
       '$baseUrl/shipments/feeds',
+      queryParams: _params,
       token: userRepository.token,
     );
   }
