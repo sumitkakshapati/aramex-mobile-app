@@ -181,7 +181,13 @@ class _CustomerDetailsWidgetsState extends State<CustomerDetailsWidgets> {
                             onChartPressed: (status) {
                               if (status == ShipmentStatus.Returned) {
                                 NavigationService.push(
-                                  target: const CustomerReturnDetailsScreens(),
+                                  target: CustomerReturnDetailsScreens(
+                                    phoneNumber: widget.consigneeNumber,
+                                    shipmentFilterData:
+                                        _shipmentFilterData.value,
+                                    currentDateDuration:
+                                        _currentDateDuration.value,
+                                  ),
                                 );
                               }
                             },

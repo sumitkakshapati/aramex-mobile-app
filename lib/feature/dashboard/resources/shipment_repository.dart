@@ -4,12 +4,12 @@ import 'package:aramex/common/http/custom_exception.dart';
 import 'package:aramex/common/http/response.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:aramex/feature/customer/model/customer_details.dart';
+import 'package:aramex/feature/customer/model/customer_returned_details.dart';
 import 'package:aramex/feature/dashboard/model/homepage_data.dart';
 import 'package:aramex/feature/dashboard/model/shipment_cities.dart';
 import 'package:aramex/feature/dashboard/resources/shipment_api_provider.dart';
 import 'package:aramex/feature/home/model/shipment_filter_data.dart';
 import 'package:aramex/feature/shipping/model/shipment.dart';
-import 'package:dio/dio.dart';
 
 class ShipmentRepository {
   ApiProvider apiProvider;
@@ -127,6 +127,24 @@ class ShipmentRepository {
         shipmentFilterData: shipmentFilterData,
       );
       final _item = CustomerDetails.fromJson(json: _res["data"]["results"]);
+      return DataResponse.success(_item);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<CustomerReturnedDetails>> fetchCustomerReturnedDetails({
+    required String phoneNumber,
+    ShipmentFilterData? shipmentFilterData,
+  }) async {
+    try {
+      final _res = await shipmentApiProvider.fetchCustomerReturnedDetails(
+        phoneNumber: phoneNumber,
+        shipmentFilterData: shipmentFilterData,
+      );
+      final _item = CustomerReturnedDetails.fromJson(_res["data"]["results"]);
       return DataResponse.success(_item);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
