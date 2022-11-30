@@ -6,6 +6,7 @@ class SharedPref {
   static const _userKey = "AppUser";
   static const _firstTimeAppOpen = 'firstTimeAppOpen';
   static const _appToken = 'appToken';
+  static const _searchList = 'searchList';
 
   static Future setFirstTimeAppOpen(bool status) async {
     final _instance = await SharedPreferences.getInstance();
@@ -54,5 +55,25 @@ class SharedPref {
   static Future deleteToken() async {
     final _instance = await SharedPreferences.getInstance();
     await _instance.remove(_appToken);
+  }
+
+  static Future<List<String>> getSearchItem() async {
+    final _instance = await SharedPreferences.getInstance();
+    final res = _instance.getStringList(_searchList);
+    return res ?? [];
+  }
+
+  static Future<void> addSearchItem(String item) async {
+    final _instance = await SharedPreferences.getInstance();
+    final List<String> _previousList =
+        _instance.getStringList(_searchList) ?? [];
+    final _temps =
+        [item, ..._previousList].where((e) => e.isNotEmpty).toSet().toList();
+    final _ = await _instance.setStringList(_searchList, _temps);
+  }
+
+  static Future<void> clearSearchList() async {
+    final _instance = await SharedPreferences.getInstance();
+    final _ = await _instance.remove(_searchList);
   }
 }

@@ -146,7 +146,7 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
                                 shipmentFilterData: _shipmentFilterData.value,
                                 onChanged: (value) {
                                   _shipmentFilterData.value = value;
-                                },
+                                }, 
                               );
                             },
                           ),

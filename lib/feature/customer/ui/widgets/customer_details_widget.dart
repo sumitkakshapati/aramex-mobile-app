@@ -20,7 +20,11 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CustomerDetailsWidgets extends StatelessWidget {
-  const CustomerDetailsWidgets({Key? key}) : super(key: key);
+  final String consigneeNumber;
+  const CustomerDetailsWidgets({
+    Key? key,
+    required this.consigneeNumber,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
