@@ -277,6 +277,11 @@ class ApiProvider {
       case 404:
         throw ResourceNotFoundException(
             getErrorMessage(res), response.statusCode);
+      case 409:
+        throw ResourceNotFoundException(
+          getErrorMessage(res),
+          response.statusCode,
+        );
       case 422:
         responseJson['error'] = getErrorMessage(res);
         throw BadRequestException(

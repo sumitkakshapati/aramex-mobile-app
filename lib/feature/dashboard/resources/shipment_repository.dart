@@ -1,7 +1,9 @@
 import 'package:aramex/common/constant/env.dart';
 import 'package:aramex/common/http/api_provider.dart';
+import 'package:aramex/common/http/custom_exception.dart';
 import 'package:aramex/common/http/response.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/customer/model/customer_details.dart';
 import 'package:aramex/feature/dashboard/model/homepage_data.dart';
 import 'package:aramex/feature/dashboard/model/shipment_cities.dart';
 import 'package:aramex/feature/dashboard/resources/shipment_api_provider.dart';
@@ -46,7 +48,7 @@ class ShipmentRepository {
       );
       final _data = HomepageData.fromJson(json: _res["data"]["results"]);
       return DataResponse.success(_data);
-    } on DioError catch (e) {
+    } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {
       return DataResponse.error(e.toString());
@@ -81,7 +83,7 @@ class ShipmentRepository {
       _totalShipmentCount = _res["data"]["total"];
       _allShipments.addAll(_items);
       return DataResponse.success(_allShipments);
-    } on DioError catch (e) {
+    } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {
       return DataResponse.error(e.toString());
@@ -92,7 +94,7 @@ class ShipmentRepository {
     try {
       final _res = await shipmentApiProvider.shipmentsById(id);
       return DataResponse.success(Shipment.fromJson(_res["data"]["results"]));
-    } on DioError catch (e) {
+    } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {
       return DataResponse.error(e.toString());
@@ -108,7 +110,25 @@ class ShipmentRepository {
       final _item = ShipmentCities.fromJson(_res["data"]["results"]);
       _shipmentCities = _item;
       return DataResponse.success(_shipmentCities);
-    } on DioError catch (e) {
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<CustomerDetails>> fetchCustomerDetails({
+    required String phoneNumber,
+    ShipmentFilterData? shipmentFilterData,
+  }) async {
+    try {
+      final _res = await shipmentApiProvider.fetchCustomerDetails(
+        phoneNumber: phoneNumber,
+        shipmentFilterData: shipmentFilterData,
+      );
+      final _item = CustomerDetails.fromJson(json: _res["data"]["results"]);
+      return DataResponse.success(_item);
+    } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {
       return DataResponse.error(e.toString());

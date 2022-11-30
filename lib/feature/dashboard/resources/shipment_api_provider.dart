@@ -132,4 +132,18 @@ class ShipmentApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> fetchCustomerDetails({
+    required String phoneNumber,
+    ShipmentFilterData? shipmentFilterData,
+  }) async {
+    final _body = {
+      "mobile_number": phoneNumber,
+    };
+    return await apiProvider.post(
+      '$baseUrl/customer-details/',
+      _body,
+      token: userRepository.token,
+    );
+  }
 }
