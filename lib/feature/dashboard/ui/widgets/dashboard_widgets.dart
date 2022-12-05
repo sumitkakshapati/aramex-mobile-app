@@ -1,16 +1,31 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:aramex/feature/home/ui/screens/homepage_screens.dart';
 import 'package:aramex/feature/profile/ui/screens/profile_screens.dart';
 import 'package:aramex/feature/search/ui/screens/search_page.dart';
 import 'package:aramex/feature/shipping/ui/screens/shipping_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
-class DashboardWidgets extends StatelessWidget {
-  DashboardWidgets({Key? key}) : super(key: key);
+class DashboardWidgets extends StatefulWidget {
+  const DashboardWidgets({Key? key}) : super(key: key);
 
+  @override
+  State<DashboardWidgets> createState() => _DashboardWidgetsState();
+}
+
+class _DashboardWidgetsState extends State<DashboardWidgets> {
   final ValueNotifier<int> _currentIndex = ValueNotifier(0);
+
   final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    RepositoryProvider.of<UserRepository>(context).fetchProfile();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

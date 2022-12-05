@@ -1,6 +1,9 @@
 {
   "aramex": "Aramex",
   "version": "Version",
+  "goodMorning": "Good Morning",
+  "goodAfternoon": "Good Afternoon",
+  "goodEvening": "Good Evening",
   "auth": {
     "unableToLogin": "Unable to login",
     "loginToAramex": "Login to Aramex",

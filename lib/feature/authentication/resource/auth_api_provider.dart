@@ -35,7 +35,7 @@ class AuthApiProvider {
   }
 
   Future<dynamic> fetchProfile({required String token}) async {
-    return await apiProvider.get('$baseUrl/user/profile', token: token);
+    return await apiProvider.get('$baseUrl/auth/profile', token: token);
   }
 
   Future<dynamic> sendNotificationToken(

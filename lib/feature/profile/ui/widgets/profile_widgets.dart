@@ -7,7 +7,9 @@ import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
+import 'package:aramex/common/widget/image/custom_network_image.dart';
 import 'package:aramex/common/widget/image/rounded_image.dart';
+import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class ProfileWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     final _textTheme = _theme.textTheme;
+    final _userRepository = RepositoryProvider.of<UserRepository>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,95 +45,101 @@ class ProfileWidgets extends StatelessWidget {
               horizontal: CustomTheme.symmetricHozPadding),
           child: Column(
             children: [
-              CardWrapper(
-                topMargin: 28.hp,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        const CustomRoundedImage(
-                          height: 64,
-                          width: 64,
-                          image: Assets.personImage,
-                        ),
-                        SizedBox(width: 12.wp),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Sumit Kakshapati",
-                              style: _textTheme.headline4!.copyWith(
-                                fontWeight: FontWeight.bold,
+              ValueListenableBuilder<User?>(
+                  valueListenable: _userRepository.user,
+                  builder: (context, user, _) {
+                    return CardWrapper(
+                      topMargin: 28.hp,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              CustomCachedNetworkImage(
+                                url: user?.photo?.path ?? "",
+                                placeholder: Assets.user,
+                                fit: BoxFit.cover,
+                                height: 64,
+                                width: 64,
                               ),
+                              SizedBox(width: 12.wp),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    user?.fullname ?? "",
+                                    style: _textTheme.headline4!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(width: 4.wp),
+                                  Text(
+                                    user?.email ?? "",
+                                    style: _textTheme.headline6!.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 4.hp),
+                            child: const Divider(
+                              color: CustomTheme.gray,
                             ),
-                            SizedBox(width: 4.wp),
-                            Text(
-                              "me.summet@gmail.com",
-                              style: _textTheme.headline6!.copyWith(
-                                fontWeight: FontWeight.w400,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.accountNumber.tr(),
+                                      style: _textTheme.headline6!.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color: CustomTheme.gray,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4.hp),
+                                    Text(
+                                      user?.accountNumber ?? "",
+                                      style: _textTheme.headline6!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 4.hp),
-                      child: const Divider(
-                        color: CustomTheme.gray,
+                              SizedBox(width: 12.wp),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.totalShipping.tr(),
+                                      style: _textTheme.headline6!.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color: CustomTheme.gray,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4.hp),
+                                    Text(
+                                      user?.totalShipmentCount.toString() ?? "",
+                                      style: _textTheme.headline6!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                LocaleKeys.accountNumber.tr(),
-                                style: _textTheme.headline6!.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  color: CustomTheme.gray,
-                                ),
-                              ),
-                              SizedBox(height: 4.hp),
-                              Text(
-                                "1235 123456",
-                                style: _textTheme.headline6!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 12.wp),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                LocaleKeys.totalShipping.tr(),
-                                style: _textTheme.headline6!.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  color: CustomTheme.gray,
-                                ),
-                              ),
-                              SizedBox(height: 4.hp),
-                              Text(
-                                "75,000",
-                                style: _textTheme.headline6!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                bottomMargin: 28.hp,
-              ),
+                      bottomMargin: 28.hp,
+                    );
+                  }),
               CardWrapper(
                 verticalPadding: 0,
                 child: Column(

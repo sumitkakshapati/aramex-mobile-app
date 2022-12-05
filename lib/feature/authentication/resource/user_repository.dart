@@ -156,7 +156,7 @@ class UserRepository {
     try {
       final _res = await authApiProvider.fetchProfile(token: token);
       final _result = Map<String, dynamic>.from(_res);
-      _user.value = User.fromJson(_result['data']);
+      _user.value = User.fromJson(_result['data']['results']);
       SharedPref.setUser(_user.value!);
       return DataResponse.success(_user.value!);
     } on CustomException catch (e) {

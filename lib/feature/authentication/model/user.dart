@@ -1,5 +1,6 @@
+import 'package:aramex/common/model/media.dart';
+
 class User {
-  //"_id", "full_name", "email", "email_verified", "phone", "email_verified", "account_number", "address", "status"
   int id;
   String fullname;
   String email;
@@ -9,6 +10,8 @@ class User {
   String accountNumber;
   String address;
   String status;
+  int totalShipmentCount;
+  Media? photo;
 
   User({
     required this.id,
@@ -20,6 +23,8 @@ class User {
     required this.accountNumber,
     required this.address,
     required this.status,
+    required this.totalShipmentCount,
+    this.photo,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -33,6 +38,8 @@ class User {
       accountNumber: json['account_number'],
       address: json['address'],
       status: json['status'],
+      totalShipmentCount: json["total_shipment_count"] ?? 0,
+      photo: json["photo"] != null ? Media.fromJson(json["photo"]) : null,
     );
   }
 
@@ -47,7 +54,8 @@ class User {
     data['account_number'] = accountNumber;
     data['address'] = address;
     data['status'] = status;
-
+    data["total_shipment_count"] = totalShipmentCount;
+    data["photo"] = photo?.toJson();
     return data;
   }
 }

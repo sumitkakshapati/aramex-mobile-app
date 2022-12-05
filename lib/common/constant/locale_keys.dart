@@ -1,6 +1,9 @@
 class LocaleKeys {
   static const aramex = "aramex";
   static const version = "version";
+  static const goodMorning = "goodMorning";
+  static const goodAfternoon = "goodAfternoon";
+  static const goodEvening = "goodEvening";
 
   //Auth
   static const unableToLogin = "auth.unableToLogin";

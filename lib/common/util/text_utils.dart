@@ -1,3 +1,5 @@
+import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as mp;
 import 'package:flutter/services.dart';
@@ -58,6 +60,17 @@ class TextUtils {
     } else {
       return tp.size.width;
     }
+  }
+
+  static String get generateGreet {
+    final int hour = DateTime.now().hour;
+    if (hour < 12) {
+      return LocaleKeys.goodMorning.tr();
+    }
+    if (hour < 17) {
+      return LocaleKeys.goodAfternoon.tr();
+    }
+    return LocaleKeys.goodEvening.tr();
   }
 
   static List<TextInputFormatter> get textOnlyFormater =>
