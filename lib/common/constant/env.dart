@@ -26,8 +26,8 @@ class EnvValue {
   );
 
   static final Env production = Env(
-    baseUrl: 'https://newsapi.ayaanshtech.com.np/api',
-    imageUrl: 'https://newsapi.ayaanshtech.com.np/api',
+    baseUrl: 'http://13.234.231.199:8848/api',
+    imageUrl: 'http://13.234.231.199:8848/api',
     appEnvironment: AppEnvironment.Production,
   );
 }

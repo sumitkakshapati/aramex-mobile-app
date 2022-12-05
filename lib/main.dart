@@ -13,7 +13,7 @@ Future<void> main() async {
 
   runZonedGuarded(() {
     runApp(
-      LocalWrapper(child: AppProd(env: EnvValue.development)),
+      LocalWrapper(child: AppProd(env: EnvValue.production)),
     );
   }, (e, s) {
     Log.e(e);
