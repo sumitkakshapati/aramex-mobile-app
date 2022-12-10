@@ -5,6 +5,7 @@ import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/common_error_widget.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
+import 'package:aramex/common/widget/common_no_data_widget.dart';
 import 'package:aramex/feature/account_payment/cubit/user_wallet_list_cubit.dart';
 import 'package:aramex/feature/account_payment/model/user_wallet.dart';
 import 'package:aramex/feature/account_payment/ui/screens/add_wallet_details_screens.dart';
@@ -93,6 +94,12 @@ class WalletTabWidgets extends StatelessWidget {
                   },
                   childCount: state.data.length,
                 ),
+              );
+            } else if (state is CommonNoDataState) {
+              return SliverFillRemaining(
+                hasScrollBody: false,
+                child: CommonNoDataWidget(
+                    message: LocaleKeys.noSavedWalletFound.tr()),
               );
             } else {
               return const SliverToBoxAdapter();

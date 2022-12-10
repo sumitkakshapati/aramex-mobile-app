@@ -5,6 +5,7 @@ import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/common_error_widget.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
+import 'package:aramex/common/widget/common_no_data_widget.dart';
 import 'package:aramex/feature/account_payment/ui/screens/add_bank_details_screens.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/show_account_actions_bottomsheet.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_account_list_cubit.dart';
@@ -93,6 +94,11 @@ class BankTabWidgets extends StatelessWidget {
                   },
                   childCount: state.data.length,
                 ),
+              );
+            } else if (state is CommonNoDataState) {
+              return SliverFillRemaining(
+                hasScrollBody: false,
+                child: CommonNoDataWidget(message: LocaleKeys.noSavedBankFound.tr()),
               );
             } else {
               return const SliverToBoxAdapter();

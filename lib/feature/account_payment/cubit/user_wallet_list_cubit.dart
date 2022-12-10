@@ -47,18 +47,24 @@ class UserWalletListCubit extends Cubit<CommonState> {
 
   _updateState() {
     emit(CommonLoadingState());
-    emit(
-      CommonDataFetchedState<UserWallet>(
-        data: accountRepository.userWallets,
-      ),
-    );
+    if (accountRepository.userWallets.isNotEmpty) {
+      emit(
+        CommonDataFetchedState<UserWallet>(data: accountRepository.userWallets),
+      );
+    } else {
+      emit(CommonNoDataState());
+    }
   }
 
   fetchUserWallet() async {
     emit(CommonLoadingState());
     final _res = await accountRepository.fetchUserWallets();
     if (_res.status == Status.Success && _res.data != null) {
-      emit(CommonDataFetchedState<UserWallet>(data: _res.data!));
+      if (_res.data!.isNotEmpty) {
+        emit(CommonDataFetchedState<UserWallet>(data: _res.data!));
+      } else {
+        emit(CommonNoDataState());
+      }
     } else {
       emit(CommonErrorState(message: _res.message ?? "Unable to fetch wallet"));
     }

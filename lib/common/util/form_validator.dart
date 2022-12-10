@@ -88,6 +88,18 @@ class FormValidator {
     }
   }
 
+  static String? validateAmountField(String? val, String fieldName) {
+    if (val == null) {
+      return LocaleKeys.fieldCannotBeEmpty.tr(args: [fieldName]);
+    } else if (val.isEmpty) {
+      return LocaleKeys.fieldCannotBeEmpty.tr(args: [fieldName]);
+    } else if ((double.tryParse(val) ?? 0) > 0) {
+      return null;
+    } else {
+      return LocaleKeys.mustBeGreaterThan0.tr(args: [fieldName]);
+    }
+  }
+
   static String? validateDateOfBirth(String? val) {
     if (val == null || val == "") {
       return "Date of birth field cannot be empty";

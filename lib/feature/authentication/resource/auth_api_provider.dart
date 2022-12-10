@@ -58,7 +58,7 @@ class AuthApiProvider {
   }
 
   Future<dynamic> resendOTPViaEmail({required String email}) async {
-    final Map<String, dynamic> body = {
+    final Map<String, dynamic> body = { 
       "email": email,
     };
     return await apiProvider.post(

@@ -154,7 +154,9 @@
     "totalShipping": "Total Shipping",
     "bank": "Bank",
     "bankBranch": "Bank Branch",
-    "wallets": "Wallets"
+    "wallets": "Wallets",
+    "noSavedBankFound": "No Saved Bank Found",
+    "noSavedWalletFound": "No Saved Wallet Found"
   },
   "validationMessage": {
     "pleaseEnterValidField": "Please eneter valid {}",
@@ -162,7 +164,8 @@
     "invalidPasswordMessage": "Make sure your {} is atleast 6 letters long.",
     "doesnotMatch": "{} doesnot match",
     "enterValidPhoneNumber": "Please enter valid phone number",
-    "otpMustBeNDigitLong": "OTP must be {} digit long"
+    "otpMustBeNDigitLong": "OTP must be {} digit long",
+    "mustBeGreaterThan0": "{} must be greater than 0"
   },
   "homepage": {
     "shipmentMode": "Shipping Mode",

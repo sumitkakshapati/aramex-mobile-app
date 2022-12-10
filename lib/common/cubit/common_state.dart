@@ -23,3 +23,5 @@ class CommonErrorState extends CommonState {
   final int? statusCode;
   CommonErrorState({required this.message, this.statusCode});
 }
+
+class CommonNoDataState extends CommonState {}

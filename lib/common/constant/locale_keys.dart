@@ -156,6 +156,8 @@ class LocaleKeys {
   static const bank = "account.bank";
   static const bankBranch = "account.bankBranch";
   static const wallets = "account.wallets";
+  static const noSavedBankFound = "account.noSavedBankFound";
+  static const noSavedWalletFound = "account.noSavedWalletFound";
 
   //Validation Message
   static const pleaseEnterValidField =
@@ -167,6 +169,7 @@ class LocaleKeys {
   static const enterValidPhoneNumber =
       "validationMessage.enterValidPhoneNumber";
   static const otpMustBeNDigitLong = "validationMessage.otpMustBeNDigitLong";
+  static const mustBeGreaterThan0 = "validationMessage.mustBeGreaterThan0";
 
   //Homepage
 

@@ -45,18 +45,25 @@ class BankAccountListCubit extends Cubit<CommonState> {
 
   _updateState() {
     emit(CommonLoadingState());
-    emit(
-      CommonDataFetchedState<BankAccount>(
-        data: accountRepository.banksAccounts,
-      ),
-    );
+    if (accountRepository.banksAccounts.isNotEmpty) {
+      emit(
+        CommonDataFetchedState<BankAccount>(
+            data: accountRepository.banksAccounts),
+      );
+    } else {
+      emit(CommonNoDataState());
+    }
   }
 
   fetchAccountList() async {
     emit(CommonLoadingState());
     final _res = await accountRepository.fetchBankAccountList();
     if (_res.status == Status.Success && _res.data != null) {
-      emit(CommonDataFetchedState<BankAccount>(data: _res.data!));
+      if (_res.data!.isEmpty) {
+        emit(CommonNoDataState());
+      } else {
+        emit(CommonDataFetchedState<BankAccount>(data: _res.data!));
+      }
     } else {
       emit(CommonErrorState(message: _res.message ?? "Unable to fetch data"));
     }
