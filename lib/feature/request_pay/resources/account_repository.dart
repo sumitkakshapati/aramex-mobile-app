@@ -40,6 +40,10 @@ class AccountRepository {
 
   List<Wallet> get wallets => _wallets;
 
+  final List<UserWallet> _userWallets = [];
+
+  List<UserWallet> get userWallets => _userWallets;
+
   Future<DataResponse<List<Bank>>> fetchBanks() async {
     try {
       final _res = await accountApiProvider.fetchBank();
@@ -95,9 +99,6 @@ class AccountRepository {
 
   Future<DataResponse<List<BankAccount>>> fetchBankAccountList() async {
     try {
-      if (_banksAccounts.isNotEmpty) {
-        return DataResponse.success(_banksAccounts);
-      }
       final _res = await accountApiProvider.fetchBankAccount();
       final _items = List.from(_res["data"]?["results"] ?? [])
           .map((e) => BankAccount.fromJson(e))
@@ -118,6 +119,8 @@ class AccountRepository {
       final _items = List.from(_res["data"]?["results"] ?? [])
           .map((e) => UserWallet.fromJson(e))
           .toList();
+      _userWallets.clear();
+      _userWallets.addAll(_items);
       return DataResponse.success(_items);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
@@ -153,7 +156,7 @@ class AccountRepository {
         username: username,
       );
       final _items = UserWallet.fromJson(_res["data"]?["results"]);
-      // _banksAccounts.add(_items);
+      _userWallets.add(_items);
       return DataResponse.success(_items);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
