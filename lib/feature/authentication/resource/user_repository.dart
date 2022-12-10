@@ -193,4 +193,22 @@ class UserRepository {
       return DataResponse.error(e.toString());
     }
   }
+
+  Future<DataResponse<bool>> changePassword({
+    required String newPassword,
+    required String oldPassword,
+  }) async {
+    try {
+      final _ = await authApiProvider.changePassword(
+        newPassword: newPassword,
+        oldPassword: oldPassword,
+        token: _token,
+      );
+      return DataResponse.success(true);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message, e.statusCode);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
 }

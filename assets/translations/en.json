@@ -159,7 +159,7 @@
   "validationMessage": {
     "pleaseEnterValidField": "Please eneter valid {}",
     "fieldCannotBeEmpty": "{} field cannot be empty",
-    "invalidPasswordMessage": "Make sure your {} contains atleast 1 upper case letter, special character as well as 8 letters long.",
+    "invalidPasswordMessage": "Make sure your {} is atleast 6 letters long.",
     "doesnotMatch": "{} doesnot match",
     "enterValidPhoneNumber": "Please enter valid phone number",
     "otpMustBeNDigitLong": "OTP must be {} digit long"

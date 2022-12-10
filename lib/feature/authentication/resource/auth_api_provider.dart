@@ -66,4 +66,19 @@ class AuthApiProvider {
       body,
     );
   }
+
+  Future<dynamic> changePassword(
+      {required String oldPassword,
+      required String newPassword,
+      required String token}) async {
+    final Map<String, dynamic> body = {
+      'old_password': oldPassword,
+      'new_password': newPassword,
+    };
+    return await apiProvider.post(
+      '$baseUrl/auth/me/change-password',
+      body,
+      token: token,
+    );
+  }
 }
