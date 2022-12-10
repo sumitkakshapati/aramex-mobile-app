@@ -30,6 +30,10 @@ class AccountRepository {
 
   List<Bank> get banks => _banks;
 
+  final List<BankAccount> _banksAccounts = [];
+
+  List<BankAccount> get banksAccounts => _banksAccounts;
+
   Future<DataResponse<List<Bank>>> fetchBanks() async {
     try {
       final _res = await accountApiProvider.fetchBank();
@@ -74,7 +78,27 @@ class AccountRepository {
         branchId: branchId,
       );
       final _items = BankAccount.fromJson(_res["data"]?["results"]);
+      _banksAccounts.add(_items);
       return DataResponse.success(_items);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<List<BankAccount>>> fetchBankAccountList() async {
+    try {
+      if (_banksAccounts.isNotEmpty) {
+        return DataResponse.success(_banksAccounts);
+      }
+      final _res = await accountApiProvider.fetchBankAccount();
+      final _items = List.from(_res["data"]?["results"] ?? [])
+          .map((e) => BankAccount.fromJson(e))
+          .toList();
+      _banksAccounts.clear();
+      _banksAccounts.addAll(_items);
+      return DataResponse.success(_banksAccounts);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {

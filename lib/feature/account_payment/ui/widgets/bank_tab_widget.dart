@@ -1,11 +1,17 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
+import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
+import 'package:aramex/common/widget/common_error_widget.dart';
+import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/feature/account_payment/ui/screens/add_bank_details_screens.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/show_account_actions_bottomsheet.dart';
+import 'package:aramex/feature/request_pay/cubit/bank_account_list_cubit.dart';
+import 'package:aramex/feature/request_pay/model/bank_account.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BankTabWidgets extends StatelessWidget {
   const BankTabWidgets({Key? key}) : super(key: key);
@@ -20,46 +26,66 @@ class BankTabWidgets extends StatelessWidget {
         SliverOverlapInjector(
           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+        const SliverToBoxAdapter(),
+        BlocBuilder<BankAccountListCubit, CommonState>(
+          builder: (context, state) {
+            if (state is CommonLoadingState) {
+              return const SliverFillRemaining(
+                child: CommonLoadingWidget(),
+                hasScrollBody: false,
+              );
+            } else if (state is CommonErrorState) {
+              return SliverFillRemaining(
+                child: CommonErrorWidget(
+                  message: state.message,
                 ),
-                margin: const EdgeInsets.only(
-                  left: CustomTheme.symmetricHozPadding,
-                  right: CustomTheme.symmetricHozPadding,
-                  bottom: 16,
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: CustomListTile(
-                  title: "SunRise Bank",
-                  description: "1234 **** **** ****",
-                  descriptionFontWeight: FontWeight.w400,
-                  descriptionFontSize: 14,
-                  titleFontSize: 16,
-                  suffixIcon: Icons.more_vert,
-                  suffixColor: CustomTheme.gray,
-                  titleFontWeight: FontWeight.bold,
-                  image:
-                      "https://play-lh.googleusercontent.com/bSFfTcSuDPC9EjVA5BrFpCKw38QtRT6fvBU6C5yvQ_imwY8MgUf2ZW2kJOsiwLKi4hc",
-                  onPressed: () {
-                    showAccountActionsBottomSheet(
-                      context: context,
-                      onEditDetails: () {
-                        NavigationService.push(
-                          target: const AddBankDetailsScreens(),
-                        );
-                      },
+                hasScrollBody: false,
+              );
+            } else if (state is CommonDataFetchedState<BankAccount>) {
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      margin: const EdgeInsets.only(
+                        left: CustomTheme.symmetricHozPadding,
+                        right: CustomTheme.symmetricHozPadding,
+                        bottom: 16,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: CustomListTile(
+                        title: state.data[index].bank?.name ?? "",
+                        description: state.data[index].accountNumber,
+                        descriptionFontWeight: FontWeight.w400,
+                        descriptionFontSize: 14,
+                        titleFontSize: 16,
+                        suffixIcon: Icons.more_vert,
+                        suffixColor: CustomTheme.gray,
+                        titleFontWeight: FontWeight.bold,
+                        image: state.data[index].bank?.image?.path ?? '',
+                        onPressed: () {
+                          showAccountActionsBottomSheet(
+                            context: context,
+                            onEditDetails: () {
+                              NavigationService.push(
+                                target: const AddBankDetailsScreens(),
+                              );
+                            },
+                          );
+                        },
+                      ),
                     );
                   },
+                  childCount: state.data.length,
                 ),
               );
-            },
-            childCount: 1,
-          ),
+            } else {
+              return const SliverToBoxAdapter();
+            }
+          },
         ),
         SliverToBoxAdapter(
           child: Container(

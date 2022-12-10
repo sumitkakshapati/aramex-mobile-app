@@ -41,4 +41,9 @@ class AccountApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> fetchBankAccount() async {
+    final _url = '$baseUrl/bank-account/feeds/';
+    return apiProvider.get(_url, token: userRepository.token);
+  }
 }
