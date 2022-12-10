@@ -3,6 +3,7 @@ import 'package:aramex/common/http/api_provider.dart';
 import 'package:aramex/common/http/custom_exception.dart';
 import 'package:aramex/common/http/response.dart';
 import 'package:aramex/feature/account_payment/model/user_wallet.dart';
+import 'package:aramex/feature/account_payment/model/wallet.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:aramex/feature/request_pay/model/bank.dart';
 import 'package:aramex/feature/request_pay/model/bank_account.dart';
@@ -34,6 +35,10 @@ class AccountRepository {
   final List<BankAccount> _banksAccounts = [];
 
   List<BankAccount> get banksAccounts => _banksAccounts;
+
+  final List<Wallet> _wallets = [];
+
+  List<Wallet> get wallets => _wallets;
 
   Future<DataResponse<List<Bank>>> fetchBanks() async {
     try {
@@ -113,6 +118,42 @@ class AccountRepository {
       final _items = List.from(_res["data"]?["results"] ?? [])
           .map((e) => UserWallet.fromJson(e))
           .toList();
+      return DataResponse.success(_items);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<List<Wallet>>> fetchWallets() async {
+    try {
+      if (_wallets.isNotEmpty) {
+        return DataResponse.success(_wallets);
+      }
+      final _res = await accountApiProvider.fetchWallets();
+      final _items = List.from(_res["data"]?["results"] ?? [])
+          .map((e) => Wallet.fromJson(e))
+          .toList();
+      _wallets.clear();
+      _wallets.addAll(_items);
+      return DataResponse.success(_wallets);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<UserWallet>> saveWallet(
+      {required int walletId, required String username}) async {
+    try {
+      final _res = await accountApiProvider.saveUserWallets(
+        walletId: walletId,
+        username: username,
+      );
+      final _items = UserWallet.fromJson(_res["data"]?["results"]);
+      // _banksAccounts.add(_items);
       return DataResponse.success(_items);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);

@@ -51,4 +51,23 @@ class AccountApiProvider {
     final _url = '$baseUrl/user-wallet';
     return apiProvider.get(_url, token: userRepository.token);
   }
+
+  Future<dynamic> fetchWallets() async {
+    final _url = '$baseUrl/wallet/feeds';
+    return apiProvider.get(_url, token: userRepository.token);
+  }
+
+  Future<dynamic> saveUserWallets(
+      {required String username, required int walletId}) async {
+    final _url = '$baseUrl/user-wallet';
+    final _data = {
+      "username": username,
+      "wallet_id": walletId,
+    };
+    return apiProvider.post(
+      _url,
+      _data,
+      token: userRepository.token,
+    );
+  }
 }
