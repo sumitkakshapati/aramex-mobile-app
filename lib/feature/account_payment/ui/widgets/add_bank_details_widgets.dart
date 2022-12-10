@@ -13,6 +13,7 @@ import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_branch_list_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_list_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/save_bank_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/update_bank_account_cubit.dart';
 import 'package:aramex/feature/request_pay/model/bank.dart';
 import 'package:aramex/feature/request_pay/model/bank_account.dart';
 import 'package:aramex/feature/request_pay/model/bank_branch.dart';
@@ -22,7 +23,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 class AddBankDetailsWidgets extends StatefulWidget {
-  const AddBankDetailsWidgets({Key? key}) : super(key: key);
+  final BankAccount? bankAccount;
+  const AddBankDetailsWidgets({Key? key, this.bankAccount}) : super(key: key);
 
   @override
   State<AddBankDetailsWidgets> createState() => _AddBankDetailsWidgetsState();
@@ -48,6 +50,15 @@ class _AddBankDetailsWidgetsState extends State<AddBankDetailsWidgets> {
   void initState() {
     super.initState();
     context.read<BankListCubit>().fetchBankList();
+    if (widget.bankAccount != null) {
+      _bankController.text = widget.bankAccount?.bank?.name ?? "";
+      _selectedBank = widget.bankAccount?.bank?.id;
+      _bankBranchController.text =
+          widget.bankAccount?.bankBranch?.location ?? "";
+      _selectedBranch = widget.bankAccount?.bankBranch?.id;
+      _accountHolderNameController.text = widget.bankAccount?.accountName ?? "";
+      _accountNumberController.text = widget.bankAccount?.accountNumber ?? "";
+    }
   }
 
   @override
@@ -91,6 +102,32 @@ class _AddBankDetailsWidgetsState extends State<AddBankDetailsWidgets> {
                   SnackBarUtils.showSuccessBar(
                     context: context,
                     message: "Bank saved successfully",
+                  );
+                  NavigationService.pop();
+                } else if (state is CommonErrorState) {
+                  SnackBarUtils.showErrorBar(
+                    context: context,
+                    message: state.message,
+                  );
+                }
+              },
+            ),
+            BlocListener<UpdateBankAccountCubit, CommonState>(
+              listener: (context, state) {
+                if (state is CommonLoadingState) {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                } else {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                }
+
+                if (state is CommonDataSuccessState<BankAccount>) {
+                  SnackBarUtils.showSuccessBar(
+                    context: context,
+                    message: "Bank updated successfully",
                   );
                   NavigationService.pop();
                 } else if (state is CommonErrorState) {
@@ -239,18 +276,39 @@ class _AddBankDetailsWidgetsState extends State<AddBankDetailsWidgets> {
                                 SizedBox(width: 20.wp),
                                 Expanded(
                                   child: CustomRoundedButtom(
-                                    title: "Save Account",
+                                    title:
+                                        "${widget.bankAccount != null ? "Update" : "Save"} Account",
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {
-                                        context.read<SaveBankCubit>().saveBank(
-                                              bankId: _selectedBank!,
-                                              branchId: _selectedBranch!,
-                                              accountName:
-                                                  _accountHolderNameController
-                                                      .text,
-                                              accountNumber:
-                                                  _accountNumberController.text,
-                                            );
+                                        if (widget.bankAccount != null) {
+                                          context
+                                              .read<UpdateBankAccountCubit>()
+                                              .updateBankAccount(
+                                                bankAccountId:
+                                                    widget.bankAccount!.id,
+                                                bankId: _selectedBank!,
+                                                branchId: _selectedBranch!,
+                                                accountName:
+                                                    _accountHolderNameController
+                                                        .text,
+                                                accountNumber:
+                                                    _accountNumberController
+                                                        .text,
+                                              );
+                                        } else {
+                                          context
+                                              .read<SaveBankCubit>()
+                                              .saveBank(
+                                                bankId: _selectedBank!,
+                                                branchId: _selectedBranch!,
+                                                accountName:
+                                                    _accountHolderNameController
+                                                        .text,
+                                                accountNumber:
+                                                    _accountNumberController
+                                                        .text,
+                                              );
+                                        }
                                       }
                                     },
                                   ),

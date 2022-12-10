@@ -73,7 +73,9 @@ class BankTabWidgets extends StatelessWidget {
                             onEditDetails: () {
                               NavigationService.pop();
                               NavigationService.push(
-                                target: const AddBankDetailsScreens(),
+                                target: AddBankDetailsScreens(
+                                  bankAccount: state.data[index],
+                                ),
                               );
                             },
                             onDeleteAccount: () {

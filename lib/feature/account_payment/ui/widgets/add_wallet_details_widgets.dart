@@ -13,6 +13,7 @@ import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:aramex/feature/account_payment/model/user_wallet.dart';
 import 'package:aramex/feature/account_payment/model/wallet.dart';
 import 'package:aramex/feature/request_pay/cubit/save_wallet_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/update_wallet_account_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/wallet_list_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 class AddWalletDetailsWidgets extends StatefulWidget {
-  const AddWalletDetailsWidgets({Key? key}) : super(key: key);
+  final UserWallet? userWallet;
+  const AddWalletDetailsWidgets({Key? key, this.userWallet}) : super(key: key);
 
   @override
   State<AddWalletDetailsWidgets> createState() =>
@@ -38,6 +40,11 @@ class _AddWalletDetailsWidgetsState extends State<AddWalletDetailsWidgets> {
   @override
   void initState() {
     context.read<WalletListCubit>().fetchWallets();
+    if (widget.userWallet != null) {
+      _walletController.text = widget.userWallet?.wallet.name ?? "";
+      _usernameController.text = widget.userWallet?.username ?? "";
+      _selectedWalletId = widget.userWallet?.wallet.id;
+    }
     super.initState();
   }
 
@@ -75,6 +82,32 @@ class _AddWalletDetailsWidgetsState extends State<AddWalletDetailsWidgets> {
                   SnackBarUtils.showSuccessBar(
                     context: context,
                     message: "Wallet saved successfully",
+                  );
+                  NavigationService.pop();
+                } else if (state is CommonErrorState) {
+                  SnackBarUtils.showErrorBar(
+                    context: context,
+                    message: state.message,
+                  );
+                }
+              },
+            ),
+            BlocListener<UpdateWalletAccountCubit, CommonState>(
+              listener: (context, state) {
+                if (state is CommonLoadingState) {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                } else {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                }
+
+                if (state is CommonDataSuccessState<UserWallet>) {
+                  SnackBarUtils.showSuccessBar(
+                    context: context,
+                    message: "Wallet updated successfully",
                   );
                   NavigationService.pop();
                 } else if (state is CommonErrorState) {
@@ -179,16 +212,29 @@ class _AddWalletDetailsWidgetsState extends State<AddWalletDetailsWidgets> {
                                 SizedBox(width: 20.wp),
                                 Expanded(
                                   child: CustomRoundedButtom(
-                                    title: "Save Account",
+                                    title:
+                                        "${widget.userWallet != null ? "Update" : "Save"} Account",
                                     onPressed: () {
                                       if (_formkey.currentState!.validate()) {
-                                        context
-                                            .read<SaveWalletCubit>()
-                                            .saveWallet(
-                                              username:
-                                                  _usernameController.text,
-                                              walletId: _selectedWalletId!,
-                                            );
+                                        if (widget.userWallet != null) {
+                                          context
+                                              .read<UpdateWalletAccountCubit>()
+                                              .updateWalletAccount(
+                                                userWalletId:
+                                                    widget.userWallet!.id,
+                                                username:
+                                                    _usernameController.text,
+                                                walletId: _selectedWalletId!,
+                                              );
+                                        } else {
+                                          context
+                                              .read<SaveWalletCubit>()
+                                              .saveWallet(
+                                                username:
+                                                    _usernameController.text,
+                                                walletId: _selectedWalletId!,
+                                              );
+                                        }
                                       }
                                     },
                                   ),

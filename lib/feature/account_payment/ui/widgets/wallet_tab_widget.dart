@@ -73,7 +73,9 @@ class WalletTabWidgets extends StatelessWidget {
                             onEditDetails: () {
                               NavigationService.pop();
                               NavigationService.push(
-                                target: const AddWalletDetailsScreens(),
+                                target: AddWalletDetailsScreens(
+                                  userWallet: state.data[index],
+                                ),
                               );
                             },
                             onDeleteAccount: () {

@@ -190,4 +190,60 @@ class AccountRepository {
       return DataResponse.error(e.toString());
     }
   }
+
+  Future<DataResponse<UserWallet>> updateUserWallet({
+    required int userWalletId,
+    required int walletId,
+    required String username,
+  }) async {
+    try {
+      final _res = await accountApiProvider.updateUserWallets(
+        userWalletId: userWalletId,
+        walletId: walletId,
+        username: username,
+      );
+      final _items = UserWallet.fromJson(_res["data"]?["results"]);
+      final _index = _userWallets.indexWhere((e) => e.id == userWalletId);
+      if (_index == -1) {
+        _userWallets.add(_items);
+      } else {
+        _userWallets[_index] = _items;
+      }
+      return DataResponse.success(_items);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<BankAccount>> updateBankAccount({
+    required int bankAccountId,
+    required int bankId,
+    required int branchId,
+    required String accountName,
+    required String accountNumber,
+  }) async {
+    try {
+      final _res = await accountApiProvider.updateBankAccount(
+        bankAccountId: bankAccountId,
+        bankId: bankId,
+        accountName: accountName,
+        accountNumber: accountNumber,
+        branchId: branchId,
+      );
+      final _items = BankAccount.fromJson(_res["data"]?["results"]);
+      final _index = _banksAccounts.indexWhere((e) => e.id == bankAccountId);
+      if (_index == -1) {
+        _banksAccounts.add(_items);
+      } else {
+        _banksAccounts[_index] = _items;
+      }
+      return DataResponse.success(_items);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
 }
