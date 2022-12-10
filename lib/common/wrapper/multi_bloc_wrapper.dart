@@ -5,6 +5,8 @@ import 'package:aramex/feature/dashboard/cubit/shipment_cities_cubit.dart';
 import 'package:aramex/feature/dashboard/resources/shipment_repository.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_branch_list_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_list_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/delete_bank_account_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/delete_wallet_account_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/save_bank_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/save_wallet_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/wallet_list_cubit.dart';
@@ -57,6 +59,18 @@ class MultiBlocWrapper extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => WalletListCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => DeleteBankAccountCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => DeleteWalletAccountCubit(
             accountRepository:
                 RepositoryProvider.of<AccountRepository>(context),
           ),

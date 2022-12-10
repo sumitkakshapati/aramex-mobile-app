@@ -70,4 +70,14 @@ class AccountApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> deleteBanksAccount(int bankAccountId) async {
+    final _url = '$baseUrl/bank-account/$bankAccountId';
+    return apiProvider.delete(_url, token: userRepository.token);
+  }
+
+  Future<dynamic> deleteWalletsAccount(int userWalletId) async {
+    final _url = '$baseUrl/user-wallet/$userWalletId';
+    return apiProvider.delete(_url, token: userRepository.token);
+  }
 }

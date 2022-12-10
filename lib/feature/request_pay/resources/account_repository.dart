@@ -164,4 +164,30 @@ class AccountRepository {
       return DataResponse.error(e.toString());
     }
   }
+
+  Future<DataResponse<bool>> deleteBankAccount(
+      {required int bankAccountId}) async {
+    try {
+      final _ = await accountApiProvider.deleteBanksAccount(bankAccountId);
+      _banksAccounts.removeWhere((e) => e.id == bankAccountId);
+      return DataResponse.success(true);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<bool>> deleteWalletAccount(
+      {required int walletAccountId}) async {
+    try {
+      final _ = await accountApiProvider.deleteWalletsAccount(walletAccountId);
+      _userWallets.removeWhere((e) => e.id == walletAccountId);
+      return DataResponse.success(true);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
 }

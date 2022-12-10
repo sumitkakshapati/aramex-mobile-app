@@ -1,6 +1,8 @@
 import 'package:aramex/feature/account_payment/cubit/user_wallet_list_cubit.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/account_payment_widgets.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_account_list_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/delete_bank_account_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/delete_wallet_account_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/save_bank_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/save_wallet_cubit.dart';
 import 'package:aramex/feature/request_pay/resources/account_repository.dart';
@@ -19,6 +21,8 @@ class AccountPaymentScreens extends StatelessWidget {
             accountRepository:
                 RepositoryProvider.of<AccountRepository>(context),
             saveBankCubit: BlocProvider.of<SaveBankCubit>(context),
+            deleteBankAccountCubit:
+                BlocProvider.of<DeleteBankAccountCubit>(context),
           ),
         ),
         BlocProvider(
@@ -26,6 +30,8 @@ class AccountPaymentScreens extends StatelessWidget {
             accountRepository:
                 RepositoryProvider.of<AccountRepository>(context),
             saveWalletCubit: BlocProvider.of<SaveWalletCubit>(context),
+            deleteWalletAccountCubit:
+                BlocProvider.of<DeleteWalletAccountCubit>(context),
           ),
         ),
       ],

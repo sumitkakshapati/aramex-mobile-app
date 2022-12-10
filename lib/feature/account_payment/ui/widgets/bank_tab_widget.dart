@@ -8,6 +8,7 @@ import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/feature/account_payment/ui/screens/add_bank_details_screens.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/show_account_actions_bottomsheet.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_account_list_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/delete_bank_account_cubit.dart';
 import 'package:aramex/feature/request_pay/model/bank_account.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -70,9 +71,18 @@ class BankTabWidgets extends StatelessWidget {
                           showAccountActionsBottomSheet(
                             context: context,
                             onEditDetails: () {
+                              NavigationService.pop();
                               NavigationService.push(
                                 target: const AddBankDetailsScreens(),
                               );
+                            },
+                            onDeleteAccount: () {
+                              context
+                                  .read<DeleteBankAccountCubit>()
+                                  .deleteAccount(
+                                    bankAccountId: state.data[index].id,
+                                  );
+                              NavigationService.pop();
                             },
                           );
                         },

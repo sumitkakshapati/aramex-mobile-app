@@ -9,6 +9,7 @@ import 'package:aramex/feature/account_payment/cubit/user_wallet_list_cubit.dart
 import 'package:aramex/feature/account_payment/model/user_wallet.dart';
 import 'package:aramex/feature/account_payment/ui/screens/add_wallet_details_screens.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/show_account_actions_bottomsheet.dart';
+import 'package:aramex/feature/request_pay/cubit/delete_wallet_account_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,9 +71,18 @@ class WalletTabWidgets extends StatelessWidget {
                           showAccountActionsBottomSheet(
                             context: context,
                             onEditDetails: () {
+                              NavigationService.pop();
                               NavigationService.push(
                                 target: const AddWalletDetailsScreens(),
                               );
+                            },
+                            onDeleteAccount: () {
+                              context
+                                  .read<DeleteWalletAccountCubit>()
+                                  .deleteAccount(
+                                    walletAccountId: state.data[index].id,
+                                  );
+                              NavigationService.pop();
                             },
                           );
                         },

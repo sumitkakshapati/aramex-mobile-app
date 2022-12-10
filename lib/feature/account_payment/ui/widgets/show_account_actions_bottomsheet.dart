@@ -7,8 +7,11 @@ import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-showAccountActionsBottomSheet(
-    {required BuildContext context, required VoidCallback onEditDetails}) {
+showAccountActionsBottomSheet({
+  required BuildContext context,
+  required VoidCallback onEditDetails,
+  required VoidCallback onDeleteAccount,
+}) {
   showModalBottomSheet(
     context: context,
     shape: RoundedRectangleBorder(
@@ -17,6 +20,7 @@ showAccountActionsBottomSheet(
     builder: (context) {
       return _AccountActionsBottomsheet(
         onEditDetails: onEditDetails,
+        onDeleteAccount: onDeleteAccount,
       );
     },
   );
@@ -24,8 +28,12 @@ showAccountActionsBottomSheet(
 
 class _AccountActionsBottomsheet extends StatelessWidget {
   final VoidCallback onEditDetails;
-  const _AccountActionsBottomsheet({Key? key, required this.onEditDetails})
-      : super(key: key);
+  final VoidCallback onDeleteAccount;
+  const _AccountActionsBottomsheet({
+    Key? key,
+    required this.onEditDetails,
+    required this.onDeleteAccount,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +81,7 @@ class _AccountActionsBottomsheet extends StatelessWidget {
               color: CustomTheme.lightTextColor,
             ),
             showBorder: false,
-            onPressed: () {
-              NavigationService.pop();
-            },
+            onPressed: onDeleteAccount,
           ),
           SafeArea(child: Container()),
         ],
