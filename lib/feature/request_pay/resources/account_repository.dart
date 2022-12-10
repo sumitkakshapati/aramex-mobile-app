@@ -2,6 +2,7 @@ import 'package:aramex/common/constant/env.dart';
 import 'package:aramex/common/http/api_provider.dart';
 import 'package:aramex/common/http/custom_exception.dart';
 import 'package:aramex/common/http/response.dart';
+import 'package:aramex/feature/account_payment/model/user_wallet.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:aramex/feature/request_pay/model/bank.dart';
 import 'package:aramex/feature/request_pay/model/bank_account.dart';
@@ -99,6 +100,20 @@ class AccountRepository {
       _banksAccounts.clear();
       _banksAccounts.addAll(_items);
       return DataResponse.success(_banksAccounts);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<List<UserWallet>>> fetchUserWallets() async {
+    try {
+      final _res = await accountApiProvider.fetchUserWallets();
+      final _items = List.from(_res["data"]?["results"] ?? [])
+          .map((e) => UserWallet.fromJson(e))
+          .toList();
+      return DataResponse.success(_items);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {

@@ -1,3 +1,4 @@
+import 'package:aramex/feature/account_payment/cubit/user_wallet_list_cubit.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/account_payment_widgets.dart';
 import 'package:aramex/feature/request_pay/cubit/bank_account_list_cubit.dart';
 import 'package:aramex/feature/request_pay/resources/account_repository.dart';
@@ -9,10 +10,21 @@ class AccountPaymentScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BankAccountListCubit(
-        accountRepository: RepositoryProvider.of<AccountRepository>(context),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BankAccountListCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => UserWalletListCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+          ),
+        ),
+      ],
       child: const AccountPaymentWidgets(),
     );
   }

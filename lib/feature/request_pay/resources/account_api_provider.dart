@@ -46,4 +46,9 @@ class AccountApiProvider {
     final _url = '$baseUrl/bank-account/feeds/';
     return apiProvider.get(_url, token: userRepository.token);
   }
+
+  Future<dynamic> fetchUserWallets() async {
+    final _url = '$baseUrl/user-wallet';
+    return apiProvider.get(_url, token: userRepository.token);
+  }
 }

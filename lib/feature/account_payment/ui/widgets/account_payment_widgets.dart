@@ -2,6 +2,7 @@ import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/tab/custom_tab_bar.dart';
+import 'package:aramex/feature/account_payment/cubit/user_wallet_list_cubit.dart';
 import 'package:aramex/feature/account_payment/ui/screens/add_bank_details_screens.dart';
 import 'package:aramex/feature/account_payment/ui/screens/add_wallet_details_screens.dart';
 import 'package:aramex/feature/account_payment/ui/widgets/bank_tab_widget.dart';
@@ -26,6 +27,7 @@ class _AccountPaymentWidgetsState extends State<AccountPaymentWidgets>
   void initState() {
     tabController = TabController(length: 2, vsync: this);
     context.read<BankAccountListCubit>().fetchAccountList();
+    context.read<UserWalletListCubit>().fetchUserWallet();
     super.initState();
   }
 
