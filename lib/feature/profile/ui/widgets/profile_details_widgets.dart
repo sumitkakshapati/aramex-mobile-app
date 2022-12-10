@@ -6,7 +6,6 @@ import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/custom_divider.dart';
 import 'package:aramex/common/widget/image/custom_network_image.dart';
-import 'package:aramex/common/widget/image/rounded_image.dart';
 import 'package:aramex/common/widget/vertical_key_value.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';

@@ -8,7 +8,6 @@ import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/image/custom_network_image.dart';
-import 'package:aramex/common/widget/image/rounded_image.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:easy_localization/easy_localization.dart';

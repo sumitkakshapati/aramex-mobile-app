@@ -81,6 +81,7 @@
     "editRequests": "Edit Requests",
     "receivingType": "Receiving Type",
     "selectBank": "Select Bank",
+    "selectBankBranch": "Select Bank Branch",
     "accountHolderName": "Account Holder's Name",
     "cancel": "Cancel",
     "saveUpdate": "Save Update",
@@ -152,6 +153,7 @@
     "logout": "Logout",
     "totalShipping": "Total Shipping",
     "bank": "Bank",
+    "bankBranch": "Bank Branch",
     "wallets": "Wallets"
   },
   "validationMessage": {

@@ -83,6 +83,7 @@ class LocaleKeys {
   static const editRequests = "paymentHistory.editRequests";
   static const receivingType = "paymentHistory.receivingType";
   static const selectBank = "paymentHistory.selectBank";
+  static const selectBankBranch = "paymentHistory.selectBankBranch";
   static const accountHolderName = "paymentHistory.accountHolderName";
   static const cancel = "paymentHistory.cancel";
   static const saveUpdate = "paymentHistory.saveUpdate";
@@ -153,6 +154,7 @@ class LocaleKeys {
   static const logout = "account.logout";
   static const totalShipping = "account.totalShipping";
   static const bank = "account.bank";
+  static const bankBranch = "account.bankBranch";
   static const wallets = "account.wallets";
 
   //Validation Message
