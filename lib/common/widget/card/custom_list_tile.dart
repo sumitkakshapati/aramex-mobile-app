@@ -1,4 +1,5 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/widget/image/custom_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -69,8 +70,9 @@ class CustomListTile extends StatelessWidget {
           children: [
             if (leading != null) leading!,
             if (image.isNotEmpty)
-              Image.network(
-                image,
+              CustomCachedNetworkImage(
+                url: image,
+                fit: BoxFit.cover,
                 height: 40,
                 width: 40,
               ),

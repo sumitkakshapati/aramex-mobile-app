@@ -171,9 +171,9 @@ class _WalletTransferRequestPayWidgetState
                                                     : null,
                                             suffixColor: _theme.primaryColor,
                                             titleFontWeight: FontWeight.bold,
-                                            // image: state.data[index].wallet
-                                            //         .media?.path ??
-                                            //     "",
+                                            image: state.data[index].wallet
+                                                    .media?.path ??
+                                                "",
                                             onPressed: () {
                                               setState(() {
                                                 if (_selectedUserWallet?.id ==
