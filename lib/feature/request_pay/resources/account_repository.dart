@@ -5,9 +5,13 @@ import 'package:aramex/common/http/response.dart';
 import 'package:aramex/feature/account_payment/model/user_wallet.dart';
 import 'package:aramex/feature/account_payment/model/wallet.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/payment_history/model/payment_request.dart';
+import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
 import 'package:aramex/feature/request_pay/model/bank.dart';
 import 'package:aramex/feature/request_pay/model/bank_account.dart';
 import 'package:aramex/feature/request_pay/model/bank_branch.dart';
+import 'package:aramex/feature/request_pay/model/bank_transter_data.dart';
+import 'package:aramex/feature/request_pay/model/wallet_transfer_data.dart';
 import 'package:aramex/feature/request_pay/resources/account_api_provider.dart';
 
 class AccountRepository {
@@ -43,6 +47,10 @@ class AccountRepository {
   final List<UserWallet> _userWallets = [];
 
   List<UserWallet> get userWallets => _userWallets;
+
+  final List<PaymentRequest> _paymentRequests = [];
+
+  List<PaymentRequest> get paymentRequests => _paymentRequests;
 
   Future<DataResponse<List<Bank>>> fetchBanks() async {
     try {
@@ -239,6 +247,28 @@ class AccountRepository {
       } else {
         _banksAccounts[_index] = _items;
       }
+      return DataResponse.success(_items);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<PaymentRequest>> requestPayment({
+    required double amount,
+    required PaymentRequestOption option,
+    required BankTransferData? bankTransferData,
+    required WalletTransferData? walletTransferData,
+  }) async {
+    try {
+      final _res = await accountApiProvider.requestPayment(
+        amount: amount,
+        bankTransferData: bankTransferData,
+        option: option,
+        walletTransferData: walletTransferData,
+      );
+      final _items = PaymentRequest.fromJson(_res["data"]?["results"]);
       return DataResponse.success(_items);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);

@@ -1,5 +1,6 @@
 import 'package:aramex/feature/request_pay/cubit/bank_account_list_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/delete_bank_account_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/save_bank_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/update_bank_account_cubit.dart';
 import 'package:aramex/feature/request_pay/resources/account_repository.dart';
@@ -16,15 +17,26 @@ class BankTransferRequestPayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BankAccountListCubit(
-        accountRepository: RepositoryProvider.of<AccountRepository>(context),
-        saveBankCubit: BlocProvider.of<SaveBankCubit>(context),
-        deleteBankAccountCubit:
-            BlocProvider.of<DeleteBankAccountCubit>(context),
-        updateBankAccountCubit:
-            BlocProvider.of<UpdateBankAccountCubit>(context),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BankAccountListCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+            saveBankCubit: BlocProvider.of<SaveBankCubit>(context),
+            deleteBankAccountCubit:
+                BlocProvider.of<DeleteBankAccountCubit>(context),
+            updateBankAccountCubit:
+                BlocProvider.of<UpdateBankAccountCubit>(context),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => PaymentRequestCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+          ),
+        ),
+      ],
       child: BankTransferRequestPayWidget(requestedAmount: requestedAmount),
     );
   }

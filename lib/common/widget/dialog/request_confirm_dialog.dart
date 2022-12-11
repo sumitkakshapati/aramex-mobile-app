@@ -96,7 +96,7 @@ class _RequestConfirmWidget extends StatelessWidget {
                   CustomRoundedButtom(
                     title: LocaleKeys.done.tr(),
                     onPressed: () {
-                      NavigationService.pop();
+                      NavigationService.popUntilFirstPage();
                     },
                   ),
                 ],
@@ -110,7 +110,7 @@ class _RequestConfirmWidget extends StatelessWidget {
                     backgroundColor: CustomTheme.lightestGray,
                     iconColor: CustomTheme.darkGray,
                     onPressed: () {
-                      NavigationService.pop();
+                      NavigationService.popUntilFirstPage();
                     },
                   ),
                 ),

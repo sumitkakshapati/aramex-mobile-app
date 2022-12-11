@@ -1,5 +1,8 @@
 import 'package:aramex/common/http/api_provider.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
+import 'package:aramex/feature/request_pay/model/bank_transter_data.dart';
+import 'package:aramex/feature/request_pay/model/wallet_transfer_data.dart';
 
 class AccountApiProvider {
   final ApiProvider apiProvider;
@@ -113,6 +116,33 @@ class AccountApiProvider {
       "branch_id": branchId,
     };
     return apiProvider.put(
+      _url,
+      _data,
+      token: userRepository.token,
+    );
+  }
+
+  Future<dynamic> requestPayment({
+    required double amount,
+    required PaymentRequestOption option,
+    required BankTransferData? bankTransferData,
+    required WalletTransferData? walletTransferData,
+  }) async {
+    final _url = '$baseUrl/payment-request';
+    final Map<String, dynamic> _data = {
+      "amount": amount,
+      "payment_option": option.value,
+    };
+
+    if (option == PaymentRequestOption.BankTransfer) {
+      _data["bank"] = bankTransferData?.toJson();
+    }
+
+    if (option == PaymentRequestOption.WalletTransfer) {
+      _data["wallet"] = walletTransferData?.toJson();
+    }
+
+    return apiProvider.post(
       _url,
       _data,
       token: userRepository.token,
