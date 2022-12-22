@@ -131,7 +131,7 @@ class _CustomerDetailsWidgetsState extends State<CustomerDetailsWidgets> {
                                     return CustomDropdownButton(
                                       title: currentDateDuration != null
                                           ? currentDateDuration.value
-                                          : "Select Duration",
+                                          : LocaleKeys.selectDuration.tr(),
                                       onPressed: () {
                                         showOptionsBottomSheet(
                                           label: LocaleKeys.timePeriod.tr(),

@@ -177,6 +177,7 @@
     "nextPaymentCycle": "Next Payment Cycle",
     "timePeriod": "Time Period",
     "from": "From",
-    "to": "To"
+    "to": "To",
+    "selectDuration": "Select Duration"
   }
 }

@@ -183,4 +183,5 @@ class LocaleKeys {
   static const timePeriod = "homepage.timePeriod";
   static const from = "homepage.from";
   static const to = "homepage.to";
+  static const selectDuration = "homepage.selectDuration";
 }
