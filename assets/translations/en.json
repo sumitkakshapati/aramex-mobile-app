@@ -59,7 +59,7 @@
     "cash": "Cash",
     "bankTransfer": "Bank Transfer",
     "walletTransfer": "Wallet Transfer",
-    "youCanRequestPaymentUpToNinCashinHandOptions": "You can request payment upto {} in cash in hand option.",
+    "youCanRequestPaymentUpToNinCashinHandOptionsAndNinWalletOptions": "You can request payment upto Rs.{} in cash in hand option and Rs.{} in wallet option.",
     "requestConfirmed": "Request Confirmed",
     "yourPaymentRequestWillBe": "Your payment request will",
     "reviewed": "reviewed",

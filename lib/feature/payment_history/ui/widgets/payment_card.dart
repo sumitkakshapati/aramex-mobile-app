@@ -1,16 +1,21 @@
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/util/size_utils.dart';
+import 'package:aramex/common/util/text_utils.dart';
 import 'package:aramex/common/widget/vertical_key_value.dart';
+import 'package:aramex/feature/payment_history/model/payment_request.dart';
 import 'package:aramex/feature/payment_history/ui/widgets/payment_actions_bottomsheet.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 class PaymentCard extends StatelessWidget {
   final double horizontalMargin;
   final double bottomMargin;
+  final PaymentRequest paymentRequest;
   const PaymentCard({
     Key? key,
     this.horizontalMargin = 0,
     this.bottomMargin = 16,
+    required this.paymentRequest,
   }) : super(key: key);
 
   @override
@@ -38,7 +43,7 @@ class PaymentCard extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(top: 16.hp),
                   child: Text(
-                    "#REQ86547",
+                    paymentRequest.paymentRequestId,
                     style: _textTheme.headline3!.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
@@ -66,17 +71,20 @@ class PaymentCard extends StatelessWidget {
           SizedBox(height: 8.hp),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: VerticalKeyValue(
                   title: "Request Amount",
-                  value: "Rs. 75,000",
+                  value: "Rs. ${paymentRequest.amount}",
                 ),
               ),
               SizedBox(width: 12.wp),
-              const Expanded(
+              Expanded(
                 child: VerticalKeyValue(
                   title: "Completed Date",
-                  value: "12 JULY, 2022",
+                  value: paymentRequest.completedAt != null
+                      ? Jiffy(paymentRequest.completedAt!)
+                          .format("dd MMMM,yyyy")
+                      : "N/A",
                 ),
               ),
               const SizedBox(width: CustomTheme.symmetricHozPadding),
@@ -91,18 +99,18 @@ class PaymentCard extends StatelessWidget {
           ),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: VerticalKeyValue(
                   title: "Status",
-                  value: "Requested",
+                  value: paymentRequest.paymentStatus.name.capitalize(),
                   valueColor: CustomTheme.purple,
                 ),
               ),
               SizedBox(width: 12.wp),
-              const Expanded(
+              Expanded(
                 child: VerticalKeyValue(
                   title: "Payment Type",
-                  value: "Wallet Transfer",
+                  value: paymentRequest.option.formatedName.capitalize(),
                 ),
               ),
               const SizedBox(width: CustomTheme.symmetricHozPadding),

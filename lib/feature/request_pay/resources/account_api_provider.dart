@@ -148,4 +148,15 @@ class AccountApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> fetchAllRequestPayment({int page = 1}) async {
+    final _url = '$baseUrl/payment-request/feeds';
+    final Map<String, dynamic> _param = {"page": page};
+
+    return apiProvider.get(
+      _url,
+      queryParams: _param,
+      token: userRepository.token,
+    );
+  }
 }

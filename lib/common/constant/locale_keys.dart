@@ -60,8 +60,8 @@ class LocaleKeys {
   static const cash = "requestPay.cash";
   static const bankTransfer = "requestPay.bankTransfer";
   static const walletTransfer = "requestPay.walletTransfer";
-  static const youCanRequestPaymentUpToNinCashinHandOptions =
-      "requestPay.youCanRequestPaymentUpToNinCashinHandOptions";
+  static const youCanRequestPaymentUpToNinCashinHandOptionsAndNinWalletOptions =
+      "requestPay.youCanRequestPaymentUpToNinCashinHandOptionsAndNinWalletOptions";
   static const requestConfirmed = "requestPay.requestConfirmed";
   static const yourPaymentRequestWillBe = "requestPay.yourPaymentRequestWillBe";
   static const reviewed = "requestPay.reviewed";

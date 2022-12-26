@@ -14,6 +14,7 @@ import 'package:aramex/feature/request_pay/cubit/payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
 import 'package:aramex/feature/request_pay/ui/screens/bank_transfer_request_pay_screens.dart';
 import 'package:aramex/feature/request_pay/ui/screens/wallet_transfer_request_pay_screens.dart';
+import 'package:aramex/feature/splash/resource/startup_repository.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     final _textTheme = _theme.textTheme;
+    final _configRepository = RepositoryProvider.of<StartUpRepository>(context);
 
     return LoadingOverlay(
       isLoading: _isLoading,
@@ -123,7 +125,8 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                                     style: _textTheme.headline6,
                                   ),
                                   TextSpan(
-                                    text: " 3/3",
+                                    text:
+                                        " 3/${_configRepository.config.value.maxPaymentRequest}",
                                     style: _textTheme.headline6!.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -167,15 +170,26 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                             showNextIcon: true,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                context
-                                    .read<PaymentRequestCubit>()
-                                    .requestPayment(
-                                      amount: double.parse(
-                                          _requestedAmountController.text),
-                                      option: PaymentRequestOption.Cash,
-                                      bankTransferData: null,
-                                      walletTransferData: null,
-                                    );
+                                if (double.parse(
+                                        _requestedAmountController.text) <=
+                                    _configRepository
+                                        .config.value.maxCashWithdrawLimit) {
+                                  context
+                                      .read<PaymentRequestCubit>()
+                                      .requestPayment(
+                                        amount: double.parse(
+                                            _requestedAmountController.text),
+                                        option: PaymentRequestOption.Cash,
+                                        bankTransferData: null,
+                                        walletTransferData: null,
+                                      );
+                                } else {
+                                  SnackBarUtils.showErrorBar(
+                                    context: context,
+                                    message:
+                                        "You can request up to Rs. ${_configRepository.config.value.maxCashWithdrawLimit} from cash option",
+                                  );
+                                }
                               }
                             },
                           ),
@@ -204,13 +218,24 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                             showNextIcon: true,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                NavigationService.push(
-                                  target: WalletTransferRequestPayScreen(
-                                    requestedAmount: double.parse(
-                                      _requestedAmountController.text,
+                                if (double.parse(
+                                        _requestedAmountController.text) <=
+                                    _configRepository
+                                        .config.value.maxWalletWithdrawLimit) {
+                                  NavigationService.push(
+                                    target: WalletTransferRequestPayScreen(
+                                      requestedAmount: double.parse(
+                                        _requestedAmountController.text,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                } else {
+                                  SnackBarUtils.showErrorBar(
+                                    context: context,
+                                    message:
+                                        "You can request up to Rs. ${_configRepository.config.value.maxWalletWithdrawLimit} from wallet option.",
+                                  );
+                                }
                               }
                             },
                           ),
@@ -226,8 +251,11 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                         children: [
                           TextSpan(
                             text: LocaleKeys
-                                .youCanRequestPaymentUpToNinCashinHandOptions
-                                .tr(args: ["10,000.00"]),
+                                .youCanRequestPaymentUpToNinCashinHandOptionsAndNinWalletOptions
+                                .tr(args: [
+                              "${_configRepository.config.value.maxCashWithdrawLimit}",
+                              "${_configRepository.config.value.maxWalletWithdrawLimit}"
+                            ]),
                             style: _textTheme.headline6!,
                           )
                         ],

@@ -13,6 +13,7 @@ class PaymentRequest {
   final PaymentWallet? wallet;
   final DateTime? completedAt;
   final PaymentStatus paymentStatus;
+  final String paymentRequestId;
 
   PaymentRequest({
     required this.id,
@@ -23,6 +24,7 @@ class PaymentRequest {
     required this.wallet,
     required this.completedAt,
     required this.paymentStatus,
+    required this.paymentRequestId,
   });
 
   factory PaymentRequest.fromJson(Map<String, dynamic> json) {
@@ -37,6 +39,7 @@ class PaymentRequest {
           : null,
       completedAt: DateTime.tryParse(json["completed_at"]?.toString() ?? ""),
       paymentStatus: PaymentStatus.fromString(json["status"]),
+      paymentRequestId: json["payment_request_id"],
     );
   }
 }

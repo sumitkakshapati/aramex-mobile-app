@@ -45,7 +45,7 @@ class HomePageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        user?.fullname ?? "",
+                        user?.fullname.capitalize() ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: _textTheme.headline5!.copyWith(

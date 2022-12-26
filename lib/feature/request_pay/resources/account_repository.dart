@@ -52,6 +52,10 @@ class AccountRepository {
 
   List<PaymentRequest> get paymentRequests => _paymentRequests;
 
+  int _paymentRequestPage = 1;
+  
+  int _paymentRequestTotalCount = -1;
+
   Future<DataResponse<List<Bank>>> fetchBanks() async {
     try {
       final _res = await accountApiProvider.fetchBank();
@@ -270,6 +274,31 @@ class AccountRepository {
       );
       final _items = PaymentRequest.fromJson(_res["data"]?["results"]);
       return DataResponse.success(_items);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<List<PaymentRequest>>> fetchAllRequestPayment(
+      {bool isLoadMore = false}) async {
+    try {
+      if (isLoadMore) {
+        _paymentRequestPage++;
+      } else {
+        _paymentRequests.clear();
+        _paymentRequestPage = 1;
+        _paymentRequestTotalCount = -1;
+      }
+      final _res = await accountApiProvider.fetchAllRequestPayment(
+          page: _paymentRequestPage);
+      final _items = List.from(_res["data"]["results"])
+          .map((e) => PaymentRequest.fromJson(e))
+          .toList();
+      _paymentRequestTotalCount = _res["data"]["total"];
+      _paymentRequests.addAll(_items);
+      return DataResponse.success(_paymentRequests);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {

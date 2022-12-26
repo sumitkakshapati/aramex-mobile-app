@@ -14,10 +14,7 @@ class StartUpApiProvider {
   final String baseUrl;
 
   fetchConfig() async {
-    final url = "$baseUrl";
-    return await apiProvider.get(
-      url,
-      token: userRepository.token,
-    );
+    final url = "$baseUrl/config/json";
+    return await apiProvider.get(url);
   }
 }
