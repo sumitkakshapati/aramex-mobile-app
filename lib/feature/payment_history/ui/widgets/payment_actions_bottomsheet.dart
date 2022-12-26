@@ -48,32 +48,32 @@ class _PaymentActionsBottomsheet extends StatelessWidget {
               )
             ],
           ),
-          CustomListTile(
-            title: LocaleKeys.editDetails.tr(),
-            bottomPadding: 16,
-            topPadding: 16,
-            leading: const Icon(
-              Icons.edit,
-              size: 18,
-              color: CustomTheme.lightTextColor,
-            ),
-            onPressed: () {
-              NavigationService.push(target: const EditPaymentRequestScreens());
-            },
-          ),
-          CustomListTile(
-            title: LocaleKeys.downloadReports.tr(),
-            bottomPadding: 16,
-            topPadding: 16,
-            leading: const Icon(
-              Icons.picture_as_pdf,
-              size: 18,
-              color: CustomTheme.lightTextColor,
-            ),
-            onPressed: () {
-              NavigationService.pop();
-            },
-          ),
+          // CustomListTile(
+          //   title: LocaleKeys.editDetails.tr(),
+          //   bottomPadding: 16,
+          //   topPadding: 16,
+          //   leading: const Icon(
+          //     Icons.edit,
+          //     size: 18,
+          //     color: CustomTheme.lightTextColor,
+          //   ),
+          //   onPressed: () {
+          //     NavigationService.push(target: const EditPaymentRequestScreens());
+          //   },
+          // ),
+          // CustomListTile(
+          //   title: LocaleKeys.downloadReports.tr(),
+          //   bottomPadding: 16,
+          //   topPadding: 16,
+          //   leading: const Icon(
+          //     Icons.picture_as_pdf,
+          //     size: 18,
+          //     color: CustomTheme.lightTextColor,
+          //   ),
+          //   onPressed: () {
+          //     NavigationService.pop();
+          //   },
+          // ),
           CustomListTile(
             title: LocaleKeys.cancelRequests.tr(),
             bottomPadding: 16,

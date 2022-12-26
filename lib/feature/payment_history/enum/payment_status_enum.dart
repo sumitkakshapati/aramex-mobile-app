@@ -2,7 +2,8 @@ enum PaymentStatus {
   Pending("pending"),
   Processing("processing"),
   Completed("completed"),
-  Rejected("rejected");
+  Rejected("rejected"),
+  Cancelled("cancelled");
 
   final String value;
 
@@ -15,6 +16,8 @@ enum PaymentStatus {
       return PaymentStatus.Processing;
     } else if (value == "completed") {
       return PaymentStatus.Completed;
+    } else if (value == "cancelled") {
+      return PaymentStatus.Cancelled;
     } else {
       return PaymentStatus.Rejected;
     }
