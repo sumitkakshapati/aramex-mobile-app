@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:aramex/common/http/api_provider.dart';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart' as parse;
 
 class AuthApiProvider {
   final ApiProvider apiProvider;
@@ -16,7 +20,7 @@ class AuthApiProvider {
   }
 
   Future<dynamic> register({
-    required String accountNumber,
+    required File? profilePic,
     required String fullName,
     required String email,
     required String phoneNumber,
@@ -27,11 +31,24 @@ class AuthApiProvider {
       "full_name": fullName,
       "email": email,
       "phone": phoneNumber,
-      "account_number": accountNumber,
+      "profile_pic": profilePic,
       "password": password,
       "address": address,
     };
-    return await apiProvider.post('$baseUrl/auth/register', body);
+
+    if (profilePic != null) {
+      final String fileName = profilePic.path.split('/').last;
+      body["profile_pic"] = await MultipartFile.fromFile(
+        profilePic.path,
+        filename: fileName,
+        contentType: parse.MediaType('image', profilePic.path.split('.').last),
+      );
+    }
+
+    return await apiProvider.post(
+      '$baseUrl/auth/register',
+      FormData.fromMap(body),
+    );
   }
 
   Future<dynamic> fetchProfile({required String token}) async {
@@ -48,17 +65,24 @@ class AuthApiProvider {
     );
   }
 
-  Future<dynamic> verifyUsingEmail(
-      {required String email, required String otpCode}) async {
+  Future<dynamic> linkAccount({
+    required String accountNumber,
+    required String pinCode,
+    required String token,
+  }) async {
     final Map<String, dynamic> body = {
-      "email": email,
-      "token": otpCode,
+      "account_number": accountNumber,
+      "pin": pinCode,
     };
-    return await apiProvider.post('$baseUrl/auth/verify-email', body);
+    return await apiProvider.post(
+      '$baseUrl/auth/link-account',
+      body,
+      token: token,
+    );
   }
 
   Future<dynamic> resendOTPViaEmail({required String email}) async {
-    final Map<String, dynamic> body = { 
+    final Map<String, dynamic> body = {
       "email": email,
     };
     return await apiProvider.post(

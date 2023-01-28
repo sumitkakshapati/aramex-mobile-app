@@ -3,15 +3,17 @@ import 'package:aramex/common/http/response.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EmailVerificationCubit extends Cubit<CommonState> {
+class LinkAccountCubit extends Cubit<CommonState> {
   final UserRepository userRepository;
-  EmailVerificationCubit({required this.userRepository})
+  LinkAccountCubit({required this.userRepository})
       : super(CommonInitialState());
 
-  verifyUsingEmail(String email, String otpCode) async {
+  linkAccount(String accountNumber, String verificationCode) async {
     emit(CommonLoadingState());
-    final _res =
-        await userRepository.verifyUsingEmail(email: email, otpCode: otpCode);
+    final _res = await userRepository.linkAccount(
+      accountNumber: accountNumber,
+      pinCode: verificationCode,
+    );
     if (_res.status == Status.Success) {
       emit(CommonDataSuccessState());
     } else {

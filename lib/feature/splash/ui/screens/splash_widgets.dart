@@ -37,9 +37,15 @@ class _SplashWidgetState extends State<SplashWidget> {
       listener: (context, state) {
         if (state is StartupSuccess) {
           if (state.isLogged) {
-            NavigationService.pushNamedAndRemoveUntil(
-              routeName: Routes.dashboard,
-            );
+            if (state.isAccountLinked) {
+              NavigationService.pushNamedAndRemoveUntil(
+                routeName: Routes.dashboard,
+              );
+            } else {
+              NavigationService.pushNamedAndRemoveUntil(
+                routeName: Routes.linkAccount,
+              );
+            }
           } else {
             NavigationService.pushNamedAndRemoveUntil(routeName: Routes.login);
           }

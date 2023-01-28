@@ -35,7 +35,7 @@ class User {
       isEmailVerified: json['email_verified'] ?? false,
       phone: json['phone'],
       isPhoneVerified: json['phone_verified'] ?? false,
-      accountNumber: json['account_number'],
+      accountNumber: json['account_number'] ?? "",
       address: json['address'],
       status: json['status'],
       totalShipmentCount: json["total_shipment_count"] ?? 0,

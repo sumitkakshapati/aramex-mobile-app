@@ -10,6 +10,7 @@ import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/image/custom_network_image.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/authentication/ui/widgets/logout_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -205,10 +206,7 @@ class ProfileWidgets extends StatelessWidget {
                   title: LocaleKeys.logout.tr(),
                   titleColor: _theme.primaryColor,
                   onPressed: () {
-                    RepositoryProvider.of<UserRepository>(context).logout();
-                    NavigationService.pushNamedAndRemoveUntil(
-                      routeName: Routes.login,
-                    );
+                    showLogoutDialog(context);
                   },
                   leading: Icon(
                     Iconsax.logout,

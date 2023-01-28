@@ -8,4 +8,5 @@ class Routes {
   static const profileDetails = "/profileDetails";
   static const changePassword = "/changePassword";
   static const accountPayment = "/accountPayment";
+  static const linkAccount = "/linkAccount";
 }

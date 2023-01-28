@@ -6,4 +6,6 @@ class Assets {
   static const String fallbackImage = '$_baseUrl/fallback.png';
   static const String okBro = '$_baseUrl/okBro.png';
   static const String user = '$_baseUrl/user.png';
+  static const String gallerySVG = '$_baseUrl/gallery.svg';
+  static const String cameraSvg = '$_baseUrl/camera.svg';
 }

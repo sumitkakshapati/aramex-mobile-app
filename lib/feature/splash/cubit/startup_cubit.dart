@@ -22,6 +22,8 @@ class StartupCubit extends Cubit<StartupState> {
     emit(StartupSuccess(
       isFirstTime: isFirstTime,
       isLogged: userRepository.isLoggedIn.value,
+      isAccountLinked:
+          userRepository.user.value?.accountNumber.isNotEmpty ?? false,
     ));
   }
 }

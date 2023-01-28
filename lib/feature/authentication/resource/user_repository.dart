@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:aramex/common/constant/env.dart';
 import 'package:aramex/common/http/api_provider.dart';
@@ -103,7 +104,7 @@ class UserRepository {
   }
 
   Future<DataResponse<int?>> register({
-    required String accountNumber,
+    required File? profilePic,
     required String fullName,
     required String email,
     required String phoneNumber,
@@ -112,7 +113,7 @@ class UserRepository {
   }) async {
     try {
       final _res = await authApiProvider.register(
-        accountNumber: accountNumber,
+        profilePic: profilePic,
         fullName: fullName,
         email: email,
         phoneNumber: phoneNumber,
@@ -166,15 +167,21 @@ class UserRepository {
     }
   }
 
-  Future<DataResponse<bool>> verifyUsingEmail({
-    required String email,
-    required String otpCode,
+  Future<DataResponse<bool>> linkAccount({
+    required String accountNumber,
+    required String pinCode,
   }) async {
     try {
-      final _ = await authApiProvider.verifyUsingEmail(
-        email: email,
-        otpCode: otpCode,
+      final _res = await authApiProvider.linkAccount(
+        accountNumber: accountNumber,
+        pinCode: pinCode,
+        token: token,
       );
+      final _result = Map<String, dynamic>.from(_res);
+      _token = _result['data']['results']['token'];
+      await persistToken(_token);
+      _user.value = User.fromJson(_result['data']['results']['user']);
+      SharedPref.setUser(_user.value!);
       return DataResponse.success(true);
     } on CustomException catch (e) {
       return DataResponse.error(e.message, e.statusCode);

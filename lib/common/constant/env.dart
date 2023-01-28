@@ -20,14 +20,14 @@ class EnvValue {
   );
 
   static final Env staging = Env(
-    baseUrl: 'http://13.234.231.199:8848/api',
-    imageUrl: 'http://13.234.231.199:8848/api',
+    baseUrl: 'http://15.207.84.87:8848/api',
+    imageUrl: 'http://15.207.84.87:8848/api',
     appEnvironment: AppEnvironment.Stage,
   );
 
   static final Env production = Env(
-    baseUrl: 'http://13.234.231.199:8848/api',
-    imageUrl: 'http://13.234.231.199:8848/api',
+    baseUrl: 'http://15.207.84.87:8848/api',
+    imageUrl: 'http://15.207.84.87:8848/api',
     appEnvironment: AppEnvironment.Production,
   );
 }

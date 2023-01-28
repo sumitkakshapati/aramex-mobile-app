@@ -14,9 +14,11 @@ class StartupLoading extends StartupState {}
 class StartupSuccess extends StartupState {
   final bool isFirstTime;
   final bool isLogged;
+  final bool isAccountLinked;
 
   const StartupSuccess({
     required this.isFirstTime,
     required this.isLogged,
+    required this.isAccountLinked,
   });
 }

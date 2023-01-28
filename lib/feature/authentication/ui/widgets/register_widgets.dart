@@ -1,15 +1,17 @@
+import 'dart:io';
+
 import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/route/routes.dart';
 import 'package:aramex/common/util/form_validator.dart';
 import 'package:aramex/common/util/snackbar_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/button/rounded_button.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
 import 'package:aramex/feature/authentication/cubit/signup_cubit.dart';
-import 'package:aramex/feature/authentication/ui/screens/verification_screens.dart';
-import 'package:dotted_border/dotted_border.dart';
+import 'package:aramex/feature/authentication/ui/widgets/profile_image_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,8 +26,6 @@ class RegisterWidgets extends StatefulWidget {
 
 class _RegisterWidgetsState extends State<RegisterWidgets> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final TextEditingController _accountNumbercontroller =
-      TextEditingController();
   final TextEditingController _fullNamecontroller = TextEditingController();
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _phoneNumbercontroller = TextEditingController();
@@ -33,6 +33,7 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
   final TextEditingController _passwordcontroller = TextEditingController();
   final TextEditingController _confirmPasswordcontroller =
       TextEditingController();
+  File? _profilePicture;
 
   bool _isLoading = false;
 
@@ -73,13 +74,10 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
             if (state is CommonDataSuccessState) {
               SnackBarUtils.showSuccessBar(
                 context: context,
-                message: "Registered successfully",
+                message: "User Registered successfully",
               );
-              NavigationService.push(
-                target: VerificationScreens(
-                  email: _emailcontroller.text,
-                  expiryDuration: state.data ?? 0,
-                ),
+              NavigationService.pushNamedAndRemoveUntil(
+                routeName: Routes.login,
               );
             } else if (state is CommonErrorState) {
               SnackBarUtils.showErrorBar(
@@ -115,37 +113,11 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 48),
                       alignment: Alignment.center,
-                      child: DottedBorder(
-                        borderType: BorderType.Circle,
-                        strokeWidth: 1,
-                        dashPattern: const [6],
-                        color: CustomTheme.primaryColor,
-                        child: Container(
-                          margin: const EdgeInsets.all(4),
-                          padding: const EdgeInsets.all(42),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.image,
-                            color: CustomTheme.primaryColor,
-                            size: 30,
-                          ),
-                        ),
+                      child: ProfileImageWidget(
+                        onChanged: (value) {
+                          _profilePicture = value;
+                        },
                       ),
-                    ),
-                    CustomTextField(
-                      label: LocaleKeys.accountNumber.tr(),
-                      hintText: "12345678",
-                      controller: _accountNumbercontroller,
-                      isRequired: true,
-                      validator: (val) {
-                        return FormValidator.validateFieldNotEmpty(
-                          val,
-                          LocaleKeys.accountNumber.tr(),
-                        );
-                      },
                     ),
                     CustomTextField(
                       label: LocaleKeys.fullName.tr(),
@@ -222,12 +194,12 @@ class _RegisterWidgetsState extends State<RegisterWidgets> {
                       onPressed: () {
                         if (_formkey.currentState!.validate()) {
                           context.read<SignupCubit>().register(
-                                accountNumber: _accountNumbercontroller.text,
                                 fullName: _fullNamecontroller.text,
                                 email: _emailcontroller.text,
                                 phoneNumber: _phoneNumbercontroller.text,
                                 address: _addresscontroller.text,
                                 password: _passwordcontroller.text,
+                                profilePic: _profilePicture,
                               );
                         }
                       },

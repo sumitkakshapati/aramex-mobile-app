@@ -24,7 +24,8 @@ class LocaleKeys {
   static const address = "auth.address";
   static const confirmPassword = "auth.confirmPassword";
   static const verifyOTP = "auth.verifyOTP";
-  static const pleaseEnter4DigitOTP = "auth.pleaseEnter4DigitOTP";
+  static const pleaseEnterAccountNumberAnd4DigitCode =
+      "auth.pleaseEnterAccountNumberAnd4DigitCode";
   static const didntReceiveAnyCode = "auth.didntReceiveAnyCode";
   static const resend = "auth.resend";
   static const sec = "auth.sec";
@@ -32,6 +33,10 @@ class LocaleKeys {
   static const otp = "auth.otp";
   static const hrs = "auth.hrs";
   static const min = "auth.min";
+  static const linkAccount = "auth.linkAccount";
+  static const verificationCode = "auth.verificationCode";
+  static const logoutText = "auth.logoutText";
+  static const logoutSuccessfully = "auth.logoutSuccessfully";
 
   static const filter = "filter.filter";
   static const deliveryLocations = "filter.deliveryLocations";
@@ -55,7 +60,7 @@ class LocaleKeys {
       "requestPay.availableAmountToWithdraw";
   static const note = "requestPay.note";
   static const remainingRequestPay = "requestPay.remainingRequestPay";
-  static const requestAmountRs = "requestPay.requestAmountRs";
+  static const requestableAmountRs = "requestPay.requestableAmountRs";
   static const paymentOptions = "requestPay.paymentOptions";
   static const cash = "requestPay.cash";
   static const bankTransfer = "requestPay.bankTransfer";

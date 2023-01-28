@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/http/response.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
@@ -8,7 +10,7 @@ class SignupCubit extends Cubit<CommonState> {
   SignupCubit({required this.userRepository}) : super(CommonInitialState());
 
   register({
-    required String accountNumber,
+    required File? profilePic,
     required String fullName,
     required String email,
     required String phoneNumber,
@@ -17,7 +19,7 @@ class SignupCubit extends Cubit<CommonState> {
   }) async {
     emit(CommonLoadingState());
     final _res = await userRepository.register(
-      accountNumber: accountNumber,
+      profilePic: profilePic,
       fullName: fullName,
       email: email,
       phoneNumber: phoneNumber,
