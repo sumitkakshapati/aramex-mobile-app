@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePageWidgets extends StatefulWidget {
-  const HomePageWidgets({Key? key}) : super(key: key);
+  final VoidCallback onProfilepressed;
+  const HomePageWidgets({Key? key, required this.onProfilepressed})
+      : super(key: key);
 
   @override
   State<HomePageWidgets> createState() => _HomePageWidgetsState();
@@ -35,7 +37,7 @@ class _HomePageWidgetsState extends State<HomePageWidgets> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HomePageHeader(),
+              HomePageHeader(onProfilepressed: widget.onProfilepressed),
               const SizedBox(height: 28),
               BlocBuilder<HomepageCubit, CommonState>(
                 buildWhen: (previous, current) {

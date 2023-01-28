@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePageHeader extends StatelessWidget {
-  const HomePageHeader({Key? key}) : super(key: key);
+  final VoidCallback onProfilepressed;
+  const HomePageHeader({Key? key, required this.onProfilepressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +24,17 @@ class HomePageHeader extends StatelessWidget {
           builder: (context, user, _) {
             return Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: CustomCachedNetworkImage(
-                    url: user?.photo?.path ?? "",
-                    height: 50,
-                    width: 50,
-                    fit: BoxFit.cover,
-                    placeholder: Assets.user,
+                InkWell(
+                  onTap: onProfilepressed,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: CustomCachedNetworkImage(
+                      url: user?.photo?.path ?? "",
+                      height: 50,
+                      width: 50,
+                      fit: BoxFit.cover,
+                      placeholder: Assets.user,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),

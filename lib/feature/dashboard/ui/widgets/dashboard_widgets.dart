@@ -79,11 +79,16 @@ class _DashboardWidgetsState extends State<DashboardWidgets> {
         },
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
-        children: const [
-          HomepageScreens(),
-          SearchPage(),
-          ShippingPage(),
-          ProfileScreens()
+        children: [
+          HomepageScreens(
+            onProfilepressed: () {
+              _currentIndex.value = 3;
+              _pageController.jumpToPage(3);
+            },
+          ),
+          const SearchPage(),
+          const ShippingPage(),
+          const ProfileScreens()
         ],
       ),
     );
