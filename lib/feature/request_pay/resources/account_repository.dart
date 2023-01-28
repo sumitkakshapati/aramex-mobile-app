@@ -57,6 +57,8 @@ class AccountRepository {
 
   int _paymentRequestTotalCount = -1;
 
+  String? lastStatus;
+
   Future<DataResponse<List<Bank>>> fetchBanks() async {
     try {
       final _res = await accountApiProvider.fetchBank();
@@ -285,17 +287,25 @@ class AccountRepository {
   }
 
   Future<DataResponse<List<PaymentRequest>>> fetchAllRequestPayment(
-      {bool isLoadMore = false}) async {
+      {bool isLoadMore = false, String? status}) async {
     try {
-      if (isLoadMore) {
+      if (_paymentRequestTotalCount == _paymentRequests.length &&
+          isLoadMore &&
+          status == lastStatus) {
+        return DataResponse.success(_paymentRequests);
+      }
+      if (isLoadMore && status == lastStatus) {
         _paymentRequestPage++;
       } else {
         _paymentRequests.clear();
         _paymentRequestPage = 1;
         _paymentRequestTotalCount = -1;
+        lastStatus = status;
       }
       final _res = await accountApiProvider.fetchAllRequestPayment(
-          page: _paymentRequestPage);
+        page: _paymentRequestPage,
+        status: status,
+      );
       final _items = List.from(_res["data"]["results"])
           .map((e) => PaymentRequest.fromJson(e))
           .toList();

@@ -152,9 +152,13 @@ class AccountApiProvider {
     );
   }
 
-  Future<dynamic> fetchAllRequestPayment({int page = 1}) async {
+  Future<dynamic> fetchAllRequestPayment({int page = 1, String? status}) async {
     final _url = '$baseUrl/payment-request/feeds';
     final Map<String, dynamic> _param = {"page": page};
+
+    if (status != null) {
+      _param["status"] = status;
+    }
 
     return apiProvider.get(
       _url,
