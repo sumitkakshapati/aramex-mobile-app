@@ -1,3 +1,4 @@
+import 'package:aramex/feature/request_pay/cubit/fetch_payment_info_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/resources/account_repository.dart';
 import 'package:aramex/feature/request_pay/ui/widgets/request_pay_widget.dart';
@@ -9,10 +10,21 @@ class RequestPayScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PaymentRequestCubit(
-        accountRepository: RepositoryProvider.of<AccountRepository>(context),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PaymentRequestCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => FetchPaymentInfoCubit(
+            accountRepository:
+                RepositoryProvider.of<AccountRepository>(context),
+          ),
+        ),
+      ],
       child: const RequestPayWidgets(),
     );
   }

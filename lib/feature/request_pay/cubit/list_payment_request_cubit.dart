@@ -10,6 +10,7 @@ class ListPaymentRequestCubit extends Cubit<CommonState> {
       : super(CommonInitialState());
 
   fetchData() async {
+    emit(CommonLoadingState());
     final _res = await accountRepository.fetchAllRequestPayment();
     if (_res.status == Status.Success && _res.data != null) {
       emit(

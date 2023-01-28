@@ -11,6 +11,7 @@ import 'package:aramex/feature/request_pay/model/bank.dart';
 import 'package:aramex/feature/request_pay/model/bank_account.dart';
 import 'package:aramex/feature/request_pay/model/bank_branch.dart';
 import 'package:aramex/feature/request_pay/model/bank_transter_data.dart';
+import 'package:aramex/feature/request_pay/model/payment_request_info.dart';
 import 'package:aramex/feature/request_pay/model/wallet_transfer_data.dart';
 import 'package:aramex/feature/request_pay/resources/account_api_provider.dart';
 
@@ -53,7 +54,7 @@ class AccountRepository {
   List<PaymentRequest> get paymentRequests => _paymentRequests;
 
   int _paymentRequestPage = 1;
-  
+
   int _paymentRequestTotalCount = -1;
 
   Future<DataResponse<List<Bank>>> fetchBanks() async {
@@ -299,6 +300,18 @@ class AccountRepository {
       _paymentRequestTotalCount = _res["data"]["total"];
       _paymentRequests.addAll(_items);
       return DataResponse.success(_paymentRequests);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<PaymentRequestInfo>> requestPaymentInfo() async {
+    try {
+      final _res = await accountApiProvider.requestPaymentInfo();
+      final _info = PaymentRequestInfo.fromJson(_res["data"]["results"]);
+      return DataResponse.success(_info);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {

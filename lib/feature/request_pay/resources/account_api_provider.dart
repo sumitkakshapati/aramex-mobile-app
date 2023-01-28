@@ -159,4 +159,13 @@ class AccountApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> requestPaymentInfo() async {
+    final _url = '$baseUrl/payment-request/info';
+
+    return apiProvider.get(
+      _url,
+      token: userRepository.token,
+    );
+  }
 }

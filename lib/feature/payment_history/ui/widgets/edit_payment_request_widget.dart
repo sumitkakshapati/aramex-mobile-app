@@ -78,7 +78,7 @@ class _EditPaymentRequestWidgetsState extends State<EditPaymentRequestWidgets> {
                       ),
                       SizedBox(height: 32.hp),
                       CustomTextField(
-                        label: LocaleKeys.requestAmountRs.tr(),
+                        label: LocaleKeys.requestableAmountRs.tr(),
                         hintText: "eg. 10000",
                         bottomPadding: 32.hp,
                       ),
