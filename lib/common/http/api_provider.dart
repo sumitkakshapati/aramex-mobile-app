@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/util/device_utils.dart';
 import 'package:aramex/common/util/log.dart';
+import 'package:aramex/common/util/snackbar_utils.dart';
+import 'package:aramex/common/util/token_expire_handler.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http_parser/http_parser.dart' as parse;
@@ -32,10 +36,12 @@ class ApiProvider {
       BaseOptions(receiveDataWhenStatusError: true),
     );
     try {
+      final _userAgent = await DeviceUtils.userAgent;
       final Map<String, String> header = {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'origin': '*'
+        'origin': '*',
+        'user-agent': _userAgent,
       };
 
       if (token.isNotEmpty) {
@@ -61,10 +67,12 @@ class ApiProvider {
     );
     dynamic responseJson;
     try {
+      final _userAgent = await DeviceUtils.userAgent;
       final Map<String, String> header = {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'origin': '*'
+        'origin': '*',
+        'user-agent': _userAgent,
       };
       if (token.isNotEmpty) {
         header['Authorization'] = 'Bearer ' + token;
@@ -85,10 +93,12 @@ class ApiProvider {
     );
     dynamic responseJson;
     try {
+      final _userAgent = await DeviceUtils.userAgent;
       final Map<String, String> header = {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'origin': '*'
+        'origin': '*',
+        'user-agent': _userAgent,
       };
       if (token.isNotEmpty) {
         header['Authorization'] = 'Bearer ' + token;
@@ -109,10 +119,12 @@ class ApiProvider {
     dynamic responseJson;
 
     try {
+      final _userAgent = await DeviceUtils.userAgent;
       final Map<String, String> header = {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'origin': '*'
+        'origin': '*',
+        'user-agent': _userAgent,
       };
       if (token.isNotEmpty) {
         header['Authorization'] = 'Bearer ' + token;
@@ -138,12 +150,13 @@ class ApiProvider {
     );
     dynamic responseJson;
     try {
+      final _userAgent = await DeviceUtils.userAgent;
       final Map<String, String> header = {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'origin': '*'
+        'origin': '*',
+        'user-agent': _userAgent,
       };
-      debugPrint('TOKEN ' + token);
       if (token.isNotEmpty) {
         header['Authorization'] = 'Bearer ' + token;
       }
@@ -162,9 +175,11 @@ class ApiProvider {
       BaseOptions(receiveDataWhenStatusError: true),
     );
     try {
+      final _userAgent = await DeviceUtils.userAgent;
       final Map<String, String> header = {
         'accept': 'application/json',
-        'origin': '*'
+        'origin': '*',
+        'user-agent': _userAgent,
       };
       if (token.isNotEmpty) {
         header['Authorization'] = 'Bearer ' + token;
@@ -230,6 +245,9 @@ class ApiProvider {
   }
 
   _handleErrorResponse(DioError e) async {
+    if (e.response?.statusCode == 401) {
+      TokenExpireHandler().handleExpire();
+    }
     if (e.toString().toLowerCase().contains("socketexception")) {
       throw NoInternetException('No Internet connection');
     } else {
