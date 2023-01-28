@@ -2,6 +2,7 @@ import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/util/text_utils.dart';
 import 'package:aramex/common/widget/vertical_key_value.dart';
+import 'package:aramex/feature/payment_history/enum/payment_status_enum.dart';
 import 'package:aramex/feature/payment_history/model/payment_request.dart';
 import 'package:aramex/feature/payment_history/ui/widgets/payment_actions_bottomsheet.dart';
 import 'package:flutter/material.dart';
@@ -51,21 +52,23 @@ class PaymentCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 20.wp),
-              InkWell(
-                onTap: () {
-                  showPaymentActionsBottomSheet(
-                    context: context,
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 8.hp),
-                  padding: EdgeInsets.symmetric(vertical: 8.hp, horizontal: 16),
-                  child: const Icon(
-                    Icons.more_vert_rounded,
-                    color: CustomTheme.gray,
+              if (paymentRequest.paymentStatus == PaymentStatus.Pending)
+                InkWell(
+                  onTap: () {
+                    showPaymentActionsBottomSheet(
+                      context: context,
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 8.hp),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.hp, horizontal: 16),
+                    child: const Icon(
+                      Icons.more_vert_rounded,
+                      color: CustomTheme.gray,
+                    ),
                   ),
-                ),
-              )
+                )
             ],
           ),
           SizedBox(height: 8.hp),
