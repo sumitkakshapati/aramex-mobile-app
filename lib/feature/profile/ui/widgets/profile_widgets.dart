@@ -27,17 +27,14 @@ class ProfileWidgets extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: _theme.scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          Center(
-            child: CustomIconButton(
-              icon: Icons.notifications,
-              onPressed: () {},
-            ),
+        title: Text(
+          "My Profile",
+          style: _textTheme.headline3!.copyWith(
+            fontWeight: FontWeight.w700,
           ),
-          SizedBox(width: 16.wp),
-        ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -49,7 +46,7 @@ class ProfileWidgets extends StatelessWidget {
                   valueListenable: _userRepository.user,
                   builder: (context, user, _) {
                     return CardWrapper(
-                      topMargin: 28.hp,
+                      topMargin: 20.hp,
                       child: Column(
                         children: [
                           Row(

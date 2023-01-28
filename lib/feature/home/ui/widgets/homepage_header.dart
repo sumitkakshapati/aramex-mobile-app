@@ -55,11 +55,11 @@ class HomePageHeader extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 12),
-                CustomIconButton(
-                  icon: Iconsax.notification,
-                  onPressed: () {},
-                ),
+                // const SizedBox(width: 12),
+                // CustomIconButton(
+                //   icon: Iconsax.notification,
+                //   onPressed: () {},
+                // ),
               ],
             );
           }),
