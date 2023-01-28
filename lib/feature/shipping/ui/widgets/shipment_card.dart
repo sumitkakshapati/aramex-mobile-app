@@ -76,7 +76,7 @@ class ShipmentCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Text(
-                  shipment.status.value,
+                  shipment.status.name,
                   style: _textTheme.headline6!.copyWith(
                     fontWeight: FontWeight.w500,
                     color: shipmentStatusColor,

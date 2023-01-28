@@ -29,13 +29,13 @@ class ShipmentDetailsWidgets extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: LocaleKeys.shipmentDetails.tr(),
-        actions: [
-          CustomIconButton(
-            icon: Icons.picture_as_pdf,
-            onPressed: () {},
-            iconColor: CustomTheme.primaryColor,
-          ),
-        ],
+        // actions: [
+        // CustomIconButton(
+        //   icon: Icons.picture_as_pdf,
+        //   onPressed: () {},
+        //   iconColor: CustomTheme.primaryColor,
+        // ),
+        // ],
       ),
       body: BlocBuilder<ShipmentDetailsCubit, CommonState>(
         builder: (context, state) {
@@ -121,10 +121,6 @@ class ShipmentDetailsWidgets extends StatelessWidget {
                             title: LocaleKeys.chargingWeight.tr(),
                             value: _shipment.chargingWeight.toString(),
                           ),
-                          HorizontalKeyValue(
-                            title: LocaleKeys.codValue.tr(),
-                            value: _shipment.codValue.toString(),
-                          ),
                           if (_shipment.codLiableBranch.isNotEmpty)
                             HorizontalKeyValue(
                               title: LocaleKeys.codLiableBranch.tr(),
@@ -132,12 +128,14 @@ class ShipmentDetailsWidgets extends StatelessWidget {
                             ),
                           HorizontalKeyValue(
                             title: LocaleKeys.codPaid.tr(),
-                            value: "60 (Dummy)",
+                            value: _shipment.codValue.toString(),
                           ),
-                          HorizontalKeyValue(
-                            title: LocaleKeys.codPaidDate.tr(),
-                            value: "09/09/2022 (Dummy)",
-                          ),
+                          if (_shipment.codPaidDate != null)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.codPaidDate.tr(),
+                              value: Jiffy(_shipment.codPaidDate!)
+                                  .format("dd MMMM, yyyy"),
+                            ),
                         ],
                       ),
                     ),
@@ -154,7 +152,7 @@ class ShipmentDetailsWidgets extends StatelessWidget {
                         children: [
                           HorizontalKeyValue(
                             title: LocaleKeys.status.tr(),
-                            value: _shipment.status.value,
+                            value: _shipment.status.name,
                           ),
                           if (_shipment.returnStatusDate != null)
                             HorizontalKeyValue(

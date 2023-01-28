@@ -29,6 +29,8 @@ class Shipment {
   double vat;
   double grandAmount;
   ShipmentStatus status;
+  DateTime? codPaidDate;
+  bool codPaid;
 
   Shipment({
     required this.id,
@@ -59,6 +61,8 @@ class Shipment {
     required this.vat,
     required this.grandAmount,
     required this.status,
+    required this.codPaid,
+    this.codPaidDate,
   });
 
   factory Shipment.fromJson(Map<String, dynamic> json) {
@@ -95,6 +99,8 @@ class Shipment {
       vat: double.tryParse(json['vat']?.toString() ?? "") ?? 0,
       grandAmount: double.tryParse(json['grand_amount']?.toString() ?? "") ?? 0,
       status: ShipmentStatus.fromStatus(status: json['shipment_status']),
+      codPaid: json["paid_status"] ?? false,
+      codPaidDate: DateTime.tryParse(json["cod_paid_date"] ?? ""),
     );
   }
 
