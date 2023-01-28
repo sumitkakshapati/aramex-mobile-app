@@ -25,6 +25,7 @@ import 'package:aramex/feature/request_pay/cubit/payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/wallet_list_cubit.dart';
 import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
 import 'package:aramex/feature/request_pay/model/wallet_transfer_data.dart';
+import 'package:aramex/feature/request_pay/ui/widgets/confirm_payment_request.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -338,32 +339,52 @@ class _WalletTransferRequestPayWidgetState
                               title: LocaleKeys.confirmRequest.tr(),
                               onPressed: () {
                                 if (_selectedUserWallet != null) {
-                                  context
-                                      .read<PaymentRequestCubit>()
-                                      .requestPayment(
-                                        amount: widget.requestedAmount,
-                                        option:
-                                            PaymentRequestOption.WalletTransfer,
-                                        bankTransferData: null,
-                                        walletTransferData:
-                                            WalletTransferData.fromUserWallet(
-                                                _selectedUserWallet!),
-                                      );
+                                  showConfirmationDialog(
+                                    context: context,
+                                    onPressed: () {
+                                      NavigationService.pop();
+                                      context
+                                          .read<PaymentRequestCubit>()
+                                          .requestPayment(
+                                            amount: widget.requestedAmount,
+                                            option: PaymentRequestOption
+                                                .WalletTransfer,
+                                            bankTransferData: null,
+                                            saveAccount: false,
+                                            walletTransferData:
+                                                WalletTransferData
+                                                    .fromUserWallet(
+                                                        _selectedUserWallet!),
+                                          );
+                                    },
+                                    amount: widget.requestedAmount.toString(),
+                                    method: LocaleKeys.wallets.tr(),
+                                  );
                                 } else if (showAddWalletOptions) {
                                   if (_formkey.currentState!.validate()) {
-                                    context
-                                        .read<PaymentRequestCubit>()
-                                        .requestPayment(
-                                          amount: widget.requestedAmount,
-                                          option: PaymentRequestOption
-                                              .WalletTransfer,
-                                          walletTransferData:
-                                              WalletTransferData(
-                                            username: _usernameController.text,
-                                            walletId: _selectedWalletId!,
-                                          ),
-                                          bankTransferData: null,
-                                        );
+                                    showConfirmationDialog(
+                                      context: context,
+                                      onPressed: () {
+                                        context
+                                            .read<PaymentRequestCubit>()
+                                            .requestPayment(
+                                              amount: widget.requestedAmount,
+                                              option: PaymentRequestOption
+                                                  .WalletTransfer,
+                                              walletTransferData:
+                                                  WalletTransferData(
+                                                username:
+                                                    _usernameController.text,
+                                                walletId: _selectedWalletId!,
+                                              ),
+                                              bankTransferData: null,
+                                              saveAccount:
+                                                  _saveForFutureTransaction,
+                                            );
+                                      },
+                                      amount: widget.requestedAmount.toString(),
+                                      method: LocaleKeys.wallets.tr(),
+                                    );
                                   }
                                 } else {
                                   SnackBarUtils.showSuccessBar(

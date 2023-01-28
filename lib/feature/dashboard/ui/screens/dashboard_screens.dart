@@ -13,7 +13,7 @@ class DashboardScreens extends StatelessWidget {
       create: (context) => HomepageCubit(
         shipmentRepository: RepositoryProvider.of<ShipmentRepository>(context)
       ),
-      child: DashboardWidgets(),
+      child: const DashboardWidgets(),
     );
   }
 }

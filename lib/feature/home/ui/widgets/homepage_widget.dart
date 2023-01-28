@@ -47,7 +47,11 @@ class _HomePageWidgetsState extends State<HomePageWidgets> {
                 },
                 builder: (context, state) {
                   if (state is CommonLoadingState) {
-                    return const CommonLoadingWidget();
+                    return Container(
+                      height: MediaQuery.of(context).size.height - 220,
+                      alignment: Alignment.center,
+                      child: const CommonLoadingWidget(),
+                    );
                   } else if (state is CommonDataSuccessState<HomepageData>) {
                     return HomepageShipmentWidget(homepageData: state.data!);
                   } else if (state is CommonErrorState) {

@@ -125,6 +125,7 @@ class AccountApiProvider {
   Future<dynamic> requestPayment({
     required double amount,
     required PaymentRequestOption option,
+    required bool saveAccount,
     required BankTransferData? bankTransferData,
     required WalletTransferData? walletTransferData,
   }) async {
@@ -136,10 +137,12 @@ class AccountApiProvider {
 
     if (option == PaymentRequestOption.BankTransfer) {
       _data["bank"] = bankTransferData?.toJson();
+      _data["save_account"] = saveAccount;
     }
 
     if (option == PaymentRequestOption.WalletTransfer) {
       _data["wallet"] = walletTransferData?.toJson();
+      _data["save_account"] = saveAccount;
     }
 
     return apiProvider.post(

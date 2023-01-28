@@ -14,15 +14,18 @@ class PaymentRequestCubit extends Cubit<CommonState> {
   requestPayment({
     required double amount,
     required PaymentRequestOption option,
+    required bool saveAccount,
     required BankTransferData? bankTransferData,
     required WalletTransferData? walletTransferData,
   }) async {
     emit(CommonLoadingState());
     final _res = await accountRepository.requestPayment(
-        amount: amount,
-        option: option,
-        bankTransferData: bankTransferData,
-        walletTransferData: walletTransferData);
+      amount: amount,
+      option: option,
+      saveAccount: saveAccount,
+      bankTransferData: bankTransferData,
+      walletTransferData: walletTransferData,
+    );
     if (_res.status == Status.Success && _res.data != null) {
       emit(CommonDataSuccessState(data: _res.data));
     } else {

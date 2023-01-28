@@ -55,6 +55,7 @@
   },
   "requestPay": {
     "requestPay": "Request Pay",
+    "paymentRequest": "Payment Request",
     "availableAmountToWithdraw": "Available amount to withdraw.",
     "note": "Note",
     "remainingRequestPay": "Remaining request pay",
@@ -70,7 +71,9 @@
     "byOurTeamAndDeliveriedWithIn": "be by out team and delivered with in",
     "twentyFourHours": "24 hours",
     "ofRequestedTimeFrame": "of requested time frame",
-    "done": "Done"
+    "done": "Done",
+    "doYouWantToRequestForNAmountInN": "Do you want to request for Rs. {} in {}",
+    "confirm": "Confirm"
   },
   "paymentHistory": {
     "paymentHistory": "Payment History",

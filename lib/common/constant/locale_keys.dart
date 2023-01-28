@@ -56,6 +56,7 @@ class LocaleKeys {
   static const appleFilter = "filter.appleFilter";
 
   static const requestPay = "requestPay.requestPay";
+  static const paymentRequest = "requestPay.paymentRequest";
   static const availableAmountToWithdraw =
       "requestPay.availableAmountToWithdraw";
   static const note = "requestPay.note";
@@ -75,6 +76,8 @@ class LocaleKeys {
   static const twentyFourHours = "requestPay.twentyFourHours";
   static const ofRequestedTimeFrame = "requestPay.ofRequestedTimeFrame";
   static const done = "requestPay.done";
+  static const doYouWantToRequestForNAmountInN = "requestPay.doYouWantToRequestForNAmountInN";
+  static const confirm = "requestPay.confirm";
 
   static const paymentHistory = "paymentHistory.paymentHistory";
   static const requestAmount = "paymentHistory.requestAmount";

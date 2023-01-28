@@ -263,6 +263,7 @@ class AccountRepository {
   Future<DataResponse<PaymentRequest>> requestPayment({
     required double amount,
     required PaymentRequestOption option,
+    required bool saveAccount,
     required BankTransferData? bankTransferData,
     required WalletTransferData? walletTransferData,
   }) async {
@@ -272,6 +273,7 @@ class AccountRepository {
         bankTransferData: bankTransferData,
         option: option,
         walletTransferData: walletTransferData,
+        saveAccount: saveAccount,
       );
       final _items = PaymentRequest.fromJson(_res["data"]?["results"]);
       return DataResponse.success(_items);

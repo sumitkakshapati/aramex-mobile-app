@@ -18,6 +18,7 @@ import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
 import 'package:aramex/feature/request_pay/model/payment_request_info.dart';
 import 'package:aramex/feature/request_pay/ui/screens/bank_transfer_request_pay_screens.dart';
 import 'package:aramex/feature/request_pay/ui/screens/wallet_transfer_request_pay_screens.dart';
+import 'package:aramex/feature/request_pay/ui/widgets/confirm_payment_request.dart';
 import 'package:aramex/feature/splash/resource/startup_repository.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -177,7 +178,8 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                                 LocaleKeys.requestableAmountRs.tr(),
                               );
                             },
-                            controller: _requestedAmountController,
+                            controller: _requestedAmountController
+                              ..text = "100",
                           ),
                           Text(
                             LocaleKeys.paymentOptions.tr(),
@@ -203,16 +205,27 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                                                   .text) <=
                                           _configRepository.config.value
                                               .maxCashWithdrawLimit) {
-                                        context
-                                            .read<PaymentRequestCubit>()
-                                            .requestPayment(
-                                              amount: double.parse(
-                                                  _requestedAmountController
-                                                      .text),
-                                              option: PaymentRequestOption.Cash,
-                                              bankTransferData: null,
-                                              walletTransferData: null,
-                                            );
+                                        showConfirmationDialog(
+                                          context: context,
+                                          amount:
+                                              _requestedAmountController.text,
+                                          method: LocaleKeys.cash.tr(),
+                                          onPressed: () {
+                                            NavigationService.pop();
+                                            context
+                                                .read<PaymentRequestCubit>()
+                                                .requestPayment(
+                                                  amount: double.parse(
+                                                      _requestedAmountController
+                                                          .text),
+                                                  option:
+                                                      PaymentRequestOption.Cash,
+                                                  saveAccount: false,
+                                                  bankTransferData: null,
+                                                  walletTransferData: null,
+                                                );
+                                          },
+                                        );
                                       } else {
                                         SnackBarUtils.showErrorBar(
                                           context: context,
