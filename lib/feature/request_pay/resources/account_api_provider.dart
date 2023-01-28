@@ -175,4 +175,13 @@ class AccountApiProvider {
       token: userRepository.token,
     );
   }
+
+  Future<dynamic> cancelPaymentRequest({required int paymentRequestId}) async {
+    final _url = '$baseUrl/payment-request/$paymentRequestId/cancel';
+
+    return apiProvider.get(
+      _url,
+      token: userRepository.token,
+    );
+  }
 }

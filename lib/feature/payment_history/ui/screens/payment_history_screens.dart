@@ -1,5 +1,6 @@
+import 'package:aramex/feature/payment_history/cubit/cancel_payment_request_cubit.dart';
+import 'package:aramex/feature/payment_history/cubit/list_payment_request_cubit.dart';
 import 'package:aramex/feature/payment_history/ui/widgets/payment_history_widgets.dart';
-import 'package:aramex/feature/request_pay/cubit/list_payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/resources/account_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,8 @@ class PaymentHistoryScreens extends StatelessWidget {
     return BlocProvider(
       create: (context) => ListPaymentRequestCubit(
         accountRepository: RepositoryProvider.of<AccountRepository>(context),
+        cancelPaymentRequestCubit:
+            BlocProvider.of<CancelPaymentRequestCubit>(context),
       ),
       child: const PaymentHistoryWidgets(),
     );

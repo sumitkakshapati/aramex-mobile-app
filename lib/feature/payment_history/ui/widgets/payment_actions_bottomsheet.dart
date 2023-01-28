@@ -7,20 +7,25 @@ import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-showPaymentActionsBottomSheet({required BuildContext context}) {
+showPaymentActionsBottomSheet(
+    {required BuildContext context, required VoidCallback onCancelled}) {
   showModalBottomSheet(
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
     ),
     builder: (context) {
-      return const _PaymentActionsBottomsheet();
+      return _PaymentActionsBottomsheet(onCancelled: onCancelled);
     },
   );
 }
 
 class _PaymentActionsBottomsheet extends StatelessWidget {
-  const _PaymentActionsBottomsheet({Key? key}) : super(key: key);
+  final VoidCallback onCancelled;
+  const _PaymentActionsBottomsheet({
+    Key? key,
+    required this.onCancelled,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +64,7 @@ class _PaymentActionsBottomsheet extends StatelessWidget {
             showBorder: false,
             onPressed: () {
               NavigationService.pop();
+              onCancelled();
             },
           ),
           SafeArea(child: Container()),

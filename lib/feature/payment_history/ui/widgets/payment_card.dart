@@ -2,10 +2,12 @@ import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/util/text_utils.dart';
 import 'package:aramex/common/widget/vertical_key_value.dart';
+import 'package:aramex/feature/payment_history/cubit/cancel_payment_request_cubit.dart';
 import 'package:aramex/feature/payment_history/enum/payment_status_enum.dart';
 import 'package:aramex/feature/payment_history/model/payment_request.dart';
 import 'package:aramex/feature/payment_history/ui/widgets/payment_actions_bottomsheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jiffy/jiffy.dart';
 
 class PaymentCard extends StatelessWidget {
@@ -57,6 +59,11 @@ class PaymentCard extends StatelessWidget {
                   onTap: () {
                     showPaymentActionsBottomSheet(
                       context: context,
+                      onCancelled: () {
+                        context
+                            .read<CancelPaymentRequestCubit>()
+                            .cancelRequest(paymentRequest.id);
+                      },
                     );
                   },
                   child: Container(

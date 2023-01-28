@@ -1,5 +1,6 @@
+import 'package:aramex/feature/payment_history/cubit/cancel_payment_request_cubit.dart';
+import 'package:aramex/feature/payment_history/cubit/pending_payment_history_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/fetch_payment_info_cubit.dart';
-import 'package:aramex/feature/request_pay/cubit/list_payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/resources/account_repository.dart';
 import 'package:aramex/feature/request_pay/ui/widgets/request_pay_widget.dart';
@@ -26,9 +27,11 @@ class RequestPayScreens extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => ListPaymentRequestCubit(
+          create: (context) => PendingPaymentHistoryCubit(
             accountRepository:
                 RepositoryProvider.of<AccountRepository>(context),
+            cancelPaymentRequestCubit:
+                BlocProvider.of<CancelPaymentRequestCubit>(context),
           ),
         ),
       ],

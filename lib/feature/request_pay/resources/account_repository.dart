@@ -5,6 +5,7 @@ import 'package:aramex/common/http/response.dart';
 import 'package:aramex/feature/account_payment/model/user_wallet.dart';
 import 'package:aramex/feature/account_payment/model/wallet.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
+import 'package:aramex/feature/payment_history/enum/payment_status_enum.dart';
 import 'package:aramex/feature/payment_history/model/payment_request.dart';
 import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
 import 'package:aramex/feature/request_pay/model/bank.dart';
@@ -319,11 +320,44 @@ class AccountRepository {
     }
   }
 
+  Future<DataResponse<List<PaymentRequest>>>
+      fetchAllPendingRequestPayment() async {
+    try {
+      final _res = await accountApiProvider.fetchAllRequestPayment(
+        page: _paymentRequestPage,
+        status: PaymentStatus.Pending.value,
+      );
+      final _items = List.from(_res["data"]["results"])
+          .map((e) => PaymentRequest.fromJson(e))
+          .toList();
+      return DataResponse.success(_items);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
   Future<DataResponse<PaymentRequestInfo>> requestPaymentInfo() async {
     try {
       final _res = await accountApiProvider.requestPaymentInfo();
       final _info = PaymentRequestInfo.fromJson(_res["data"]["results"]);
       return DataResponse.success(_info);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<bool>> cancelPaymentRequest(
+      {required int paymentId}) async {
+    try {
+      final _ = await accountApiProvider.cancelPaymentRequest(
+        paymentRequestId: paymentId,
+      );
+      _paymentRequests.removeWhere((e) => e.id == paymentId);
+      return DataResponse.success(true);
     } on CustomException catch (e) {
       return DataResponse.error(e.message);
     } catch (e) {

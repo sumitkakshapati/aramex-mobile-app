@@ -13,13 +13,12 @@ import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/dialog/request_confirm_dialog.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
-import 'package:aramex/feature/payment_history/enum/payment_status_enum.dart';
+import 'package:aramex/feature/payment_history/cubit/cancel_payment_request_cubit.dart';
+import 'package:aramex/feature/payment_history/cubit/pending_payment_history_cubit.dart';
 import 'package:aramex/feature/payment_history/model/payment_request.dart';
 import 'package:aramex/feature/payment_history/ui/widgets/payment_card.dart';
 import 'package:aramex/feature/request_pay/cubit/fetch_payment_info_cubit.dart';
-import 'package:aramex/feature/request_pay/cubit/list_payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/payment_request_cubit.dart';
-import 'package:aramex/feature/request_pay/cubit/payment_request_event.dart';
 import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
 import 'package:aramex/feature/request_pay/model/payment_request_info.dart';
 import 'package:aramex/feature/request_pay/ui/screens/bank_transfer_request_pay_screens.dart';
@@ -55,9 +54,7 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
   @override
   void initState() {
     context.read<FetchPaymentInfoCubit>().fetchPaymentInfo();
-    context.read<ListPaymentRequestCubit>().add(
-          FetchPaymentRequestEvent(status: PaymentStatus.Pending.value),
-        );
+    context.read<PendingPaymentHistoryCubit>().fetchCancelledRequest();
     super.initState();
   }
 
@@ -73,23 +70,36 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
         appBar: CustomAppBar(
           title: LocaleKeys.requestPay.tr(),
         ),
-        body: BlocListener<PaymentRequestCubit, CommonState>(
-          listener: (context, state) {
-            if (state is CommonLoadingState) {
-              _updateLoadingStatus(true);
-            } else {
-              _updateLoadingStatus(false);
-            }
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<PaymentRequestCubit, CommonState>(
+              listener: (context, state) {
+                if (state is CommonLoadingState) {
+                  _updateLoadingStatus(true);
+                } else {
+                  _updateLoadingStatus(false);
+                }
 
-            if (state is CommonDataSuccessState) {
-              showRequestConfirmDialog(context: context);
-            } else if (state is CommonErrorState) {
-              SnackBarUtils.showErrorBar(
-                context: context,
-                message: state.message,
-              );
-            }
-          },
+                if (state is CommonDataSuccessState) {
+                  showRequestConfirmDialog(context: context);
+                } else if (state is CommonErrorState) {
+                  SnackBarUtils.showErrorBar(
+                    context: context,
+                    message: state.message,
+                  );
+                }
+              },
+            ),
+            BlocListener<CancelPaymentRequestCubit, CommonState>(
+              listener: (context, state) {
+                if (state is CommonLoadingState) {
+                  _updateLoadingStatus(true);
+                } else {
+                  _updateLoadingStatus(false);
+                }
+              },
+            ),
+          ],
           child: BlocConsumer<FetchPaymentInfoCubit, CommonState>(
             listener: (context, state) {
               if (state is CommonDataSuccessState<PaymentRequestInfo>) {
@@ -139,7 +149,7 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                                   ),
                                   SizedBox(height: 12.hp),
                                   Text(
-                                    "${state.data?.availableCOD}",
+                                    "Rs. ${state.data?.availableCOD}",
                                     style: _textTheme.headline3!.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -314,12 +324,15 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                               ],
                             ),
                           ),
-                          BlocBuilder<ListPaymentRequestCubit, CommonState>(
+                          BlocBuilder<PendingPaymentHistoryCubit, CommonState>(
                             builder: (context, state) {
                               if (state is CommonLoadingState) {
                                 return const CommonLoadingWidget();
                               } else if (state
                                   is CommonDataFetchedState<PaymentRequest>) {
+                                if (state.data.isEmpty) {
+                                  return Container();
+                                }
                                 return Column(
                                   children: [
                                     Container(
