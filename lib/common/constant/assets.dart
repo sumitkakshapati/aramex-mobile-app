@@ -10,4 +10,5 @@ class Assets {
   static const String cameraSvg = '$_baseUrl/camera.svg';
   static const String empty = '$_baseUrl/empty.png';
   static const String search = '$_baseUrl/search.png';
+  static const String payments = '$_baseUrl/payments.png';
 }

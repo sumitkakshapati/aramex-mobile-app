@@ -1,10 +1,13 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/constant/assets.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/route/routes.dart';
+import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/common_error_widget.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
+import 'package:aramex/common/widget/common_no_data_widget.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/feature/payment_history/cubit/cancel_payment_request_cubit.dart';
 import 'package:aramex/feature/payment_history/cubit/list_payment_request_cubit.dart';
@@ -79,29 +82,42 @@ class _PaymentHistoryWidgetsState extends State<PaymentHistoryWidgets> {
                 } else if (state is CommonErrorState) {
                   return CommonErrorWidget(message: state.message);
                 } else if (state is CommonDataFetchedState<PaymentRequest>) {
-                  return NotificationListener<ScrollNotification>(
-                    onNotification: (notification) {
-                      if (notification.metrics.pixels >=
-                              (notification.metrics.maxScrollExtent / 2) &&
-                          _scrollController.position.userScrollDirection ==
-                              ScrollDirection.reverse) {
-                        context
-                            .read<ListPaymentRequestCubit>()
-                            .add(LoadMorePaymentRequestEvent());
-                      }
-                      return false;
-                    },
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemBuilder: (context, index) {
-                        return PaymentCard(
-                          horizontalMargin: CustomTheme.symmetricHozPadding,
-                          paymentRequest: state.data[index],
-                        );
+                  if (state.data.isNotEmpty) {
+                    return NotificationListener<ScrollNotification>(
+                      onNotification: (notification) {
+                        if (notification.metrics.pixels >=
+                                (notification.metrics.maxScrollExtent / 2) &&
+                            _scrollController.position.userScrollDirection ==
+                                ScrollDirection.reverse) {
+                          context
+                              .read<ListPaymentRequestCubit>()
+                              .add(LoadMorePaymentRequestEvent());
+                        }
+                        return false;
                       },
-                      itemCount: state.data.length,
-                    ),
-                  );
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        itemBuilder: (context, index) {
+                          return PaymentCard(
+                            horizontalMargin: CustomTheme.symmetricHozPadding,
+                            paymentRequest: state.data[index],
+                          );
+                        },
+                        itemCount: state.data.length,
+                      ),
+                    );
+                  } else {
+                    return Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.only(
+                          bottom: AppBar().preferredSize.height),
+                      child: CommonNoDataWidget(
+                        message: "You have not made any payment request yet!!",
+                        image: Assets.payments,
+                        height: 200.hp,
+                      ),
+                    );
+                  }
                 } else {
                   return Container();
                 }
