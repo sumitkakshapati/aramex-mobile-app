@@ -322,6 +322,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 ],
               ),
               DonutChartWidget(
+                showTotalData: true,
                 chartItem: [
                   ChartData(
                     title: LocaleKeys.inTransit.tr(),

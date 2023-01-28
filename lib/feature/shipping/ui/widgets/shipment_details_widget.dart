@@ -3,7 +3,6 @@ import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/util/number_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
-import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/common_error_widget.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
@@ -29,13 +28,6 @@ class ShipmentDetailsWidgets extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: LocaleKeys.shipmentDetails.tr(),
-        // actions: [
-        // CustomIconButton(
-        //   icon: Icons.picture_as_pdf,
-        //   onPressed: () {},
-        //   iconColor: CustomTheme.primaryColor,
-        // ),
-        // ],
       ),
       body: BlocBuilder<ShipmentDetailsCubit, CommonState>(
         builder: (context, state) {

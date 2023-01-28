@@ -178,6 +178,7 @@ class _CustomerDetailsWidgetsState extends State<CustomerDetailsWidgets> {
                           ),
                           DonutChartWidget<ShipmentStatus>(
                             showActualValue: false,
+                            showTotalData: false,
                             onChartPressed: (status) {
                               if (status == ShipmentStatus.Returned) {
                                 NavigationService.push(
