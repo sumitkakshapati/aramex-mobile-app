@@ -178,8 +178,7 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                                 LocaleKeys.requestableAmountRs.tr(),
                               );
                             },
-                            controller: _requestedAmountController
-                              ..text = "100",
+                            controller: _requestedAmountController,
                           ),
                           Text(
                             LocaleKeys.paymentOptions.tr(),
