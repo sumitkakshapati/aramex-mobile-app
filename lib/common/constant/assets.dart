@@ -8,4 +8,6 @@ class Assets {
   static const String user = '$_baseUrl/user.png';
   static const String gallerySVG = '$_baseUrl/gallery.svg';
   static const String cameraSvg = '$_baseUrl/camera.svg';
+  static const String empty = '$_baseUrl/empty.png';
+  static const String search = '$_baseUrl/search.png';
 }

@@ -1,11 +1,13 @@
 import 'package:animations/animations.dart';
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/constant/assets.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card/custom_chip.dart';
 import 'package:aramex/common/widget/common_error_widget.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
+import 'package:aramex/common/widget/common_no_data_widget.dart';
 import 'package:aramex/common/widget/text_field/search_textfield.dart';
 import 'package:aramex/feature/dashboard/resources/shipment_repository.dart';
 import 'package:aramex/feature/home/model/shipment_filter_data.dart';
@@ -146,7 +148,7 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
                                 shipmentFilterData: _shipmentFilterData.value,
                                 onChanged: (value) {
                                   _shipmentFilterData.value = value;
-                                }, 
+                                },
                               );
                             },
                           ),
@@ -188,16 +190,16 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
                 ),
               ),
             ),
-            BlocBuilder<AllShipmentBloc, CommonState>(
-              buildWhen: (previous, current) {
-                if (current is CommonDummyLoadingState) {
-                  return false;
+            BlocSelector<AllShipmentBloc, CommonState, int>(
+              selector: (state) {
+                if (state is CommonDataFetchedState<Shipment>) {
+                  return state.data.length;
                 } else {
-                  return true;
+                  return 0;
                 }
               },
               builder: (context, state) {
-                if (state is CommonDataFetchedState) {
+                if (state > 0) {
                   return SliverToBoxAdapter(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -227,7 +229,8 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
               },
               builder: (context, state) {
                 if (state is CommonLoadingState) {
-                  return const SliverToBoxAdapter(
+                  return const SliverFillRemaining(
+                    hasScrollBody: false,
                     child: CommonLoadingWidget(),
                   );
                 } else if (state is CommonErrorState) {
@@ -235,19 +238,41 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
                     child: CommonErrorWidget(message: state.message),
                   );
                 } else if (state is CommonDataFetchedState<Shipment>) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return ShipmentCard(
-                          horizontalMargin: CustomTheme.symmetricHozPadding,
-                          shipment: state.data[index],
-                        );
-                      },
-                      childCount: state.data.length,
+                  if (state.data.isNotEmpty) {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return ShipmentCard(
+                            horizontalMargin: CustomTheme.symmetricHozPadding,
+                            shipment: state.data[index],
+                          );
+                        },
+                        childCount: state.data.length,
+                      ),
+                    );
+                  } else {
+                    return SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Container(
+                        color: Colors.white,
+                        child: const CommonNoDataWidget(
+                          message: "No Shipment Available",
+                          image: Assets.empty,
+                        ),
+                      ),
+                    );
+                  }
+                } else {
+                  return SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Container(
+                      color: Colors.white,
+                      child: const CommonNoDataWidget(
+                        message: "No Shipment Available",
+                        image: Assets.empty,
+                      ),
                     ),
                   );
-                } else {
-                  return SliverToBoxAdapter(child: Container());
                 }
               },
             ),

@@ -1,8 +1,10 @@
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/constant/assets.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
+import 'package:aramex/common/widget/common_no_data_widget.dart';
 import 'package:aramex/common/widget/text_field/search_textfield.dart';
 import 'package:aramex/feature/customer/ui/screens/customer_details_screens.dart';
 import 'package:aramex/feature/search/cubit/recent_search_cubit.dart';
@@ -139,23 +141,25 @@ class _SearchWidgetsState extends State<SearchWidgets> {
                       ),
                     );
                   } else {
-                    return SliverFillRemaining(
+                    return const SliverFillRemaining(
                       hasScrollBody: false,
                       child: Center(
-                        child: Text(
-                          "You have not searched anything yet.",
-                          style: _textTheme.headline5,
+                        child: CommonNoDataWidget(
+                          message: "You have not searched anything yet.",
+                          image: Assets.search,
+                          height: 200,
                         ),
                       ),
                     );
                   }
                 } else {
-                  return SliverFillRemaining(
+                  return const SliverFillRemaining(
                     hasScrollBody: false,
                     child: Center(
-                      child: Text(
-                        "You have not searched anything yet.",
-                        style: _textTheme.headline5,
+                      child: CommonNoDataWidget(
+                        message: "You have not searched anything yet.",
+                        image: Assets.search,
+                        height: 200,
                       ),
                     ),
                   );
