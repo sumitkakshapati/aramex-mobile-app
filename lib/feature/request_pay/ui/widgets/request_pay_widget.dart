@@ -2,6 +2,7 @@ import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
+import 'package:aramex/common/route/routes.dart';
 import 'package:aramex/common/util/form_validator.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/util/snackbar_utils.dart';
@@ -12,8 +13,13 @@ import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/dialog/request_confirm_dialog.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
+import 'package:aramex/feature/payment_history/enum/payment_status_enum.dart';
+import 'package:aramex/feature/payment_history/model/payment_request.dart';
+import 'package:aramex/feature/payment_history/ui/widgets/payment_card.dart';
 import 'package:aramex/feature/request_pay/cubit/fetch_payment_info_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/list_payment_request_cubit.dart';
 import 'package:aramex/feature/request_pay/cubit/payment_request_cubit.dart';
+import 'package:aramex/feature/request_pay/cubit/payment_request_event.dart';
 import 'package:aramex/feature/request_pay/enum/payment_request_enum.dart';
 import 'package:aramex/feature/request_pay/model/payment_request_info.dart';
 import 'package:aramex/feature/request_pay/ui/screens/bank_transfer_request_pay_screens.dart';
@@ -49,6 +55,9 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
   @override
   void initState() {
     context.read<FetchPaymentInfoCubit>().fetchPaymentInfo();
+    context.read<ListPaymentRequestCubit>().add(
+          FetchPaymentRequestEvent(status: PaymentStatus.Pending.value),
+        );
     super.initState();
   }
 
@@ -106,7 +115,7 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 40.hp),
+                          SizedBox(height: 20.hp),
                           DottedBorder(
                             color: CustomTheme.skyBlue,
                             borderType: BorderType.RRect,
@@ -304,6 +313,73 @@ class _RequestPayWidgetsState extends State<RequestPayWidgets> {
                                 )
                               ],
                             ),
+                          ),
+                          BlocBuilder<ListPaymentRequestCubit, CommonState>(
+                            builder: (context, state) {
+                              if (state is CommonLoadingState) {
+                                return const CommonLoadingWidget();
+                              } else if (state
+                                  is CommonDataFetchedState<PaymentRequest>) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          top: 20.hp, bottom: 10.hp),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            LocaleKeys.recentRequests.tr(),
+                                            style:
+                                                _textTheme.headline3!.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          InkWell(
+                                            onTap: () {
+                                              NavigationService.pushNamed(
+                                                routeName:
+                                                    Routes.paymentHistory,
+                                              );
+                                            },
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            child: Container(
+                                              child: Text(
+                                                LocaleKeys.seeAll.tr(),
+                                                style: _textTheme.headline5!
+                                                    .copyWith(
+                                                  fontWeight: FontWeight.w700,
+                                                  color: _theme.primaryColor,
+                                                ),
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: 12.hp,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemBuilder: (context, index) {
+                                        return PaymentCard(
+                                          paymentRequest: state.data[index],
+                                        );
+                                      },
+                                      itemCount: state.data.length,
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
                           )
                         ],
                       ),

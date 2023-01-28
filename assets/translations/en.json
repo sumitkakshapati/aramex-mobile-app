@@ -77,6 +77,8 @@
   },
   "paymentHistory": {
     "paymentHistory": "Payment History",
+    "recentRequests": "Recent Requests",
+    "seeAll": "See All",
     "requestAmount": "Request Amount",
     "requestDate": "Request Date",
     "status": "Status",
