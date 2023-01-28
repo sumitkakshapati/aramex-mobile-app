@@ -6,7 +6,6 @@ import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({Key? key}) : super(key: key);

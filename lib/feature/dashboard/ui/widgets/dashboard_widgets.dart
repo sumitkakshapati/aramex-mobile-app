@@ -51,11 +51,7 @@ class _DashboardWidgetsState extends State<DashboardWidgets> {
               showUnselectedLabels: true,
               onTap: (index) {
                 _currentIndex.value = index;
-                _pageController.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeIn,
-                );
+                _pageController.jumpToPage(index);
               },
               items: const [
                 BottomNavigationBarItem(
@@ -81,6 +77,7 @@ class _DashboardWidgetsState extends State<DashboardWidgets> {
         onPageChanged: (index) {
           _currentIndex.value = index;
         },
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: const [
           HomepageScreens(),
