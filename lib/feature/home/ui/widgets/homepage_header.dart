@@ -1,6 +1,5 @@
 import 'package:aramex/common/constant/assets.dart';
 import 'package:aramex/common/util/text_utils.dart';
-import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/image/custom_network_image.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/user_repository.dart';

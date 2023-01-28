@@ -2,7 +2,6 @@ import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/route/routes.dart';
-import 'package:aramex/common/util/device_utils.dart';
 import 'package:aramex/common/util/form_validator.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/util/snackbar_utils.dart';

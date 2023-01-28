@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/util/device_utils.dart';
 import 'package:aramex/common/util/log.dart';
-import 'package:aramex/common/util/snackbar_utils.dart';
 import 'package:aramex/common/util/token_expire_handler.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';

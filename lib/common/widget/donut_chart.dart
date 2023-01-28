@@ -9,12 +9,14 @@ class DonutChartWidget<T> extends StatelessWidget {
   final bool showPercentage;
   final bool showActualValue;
   final ValueChanged<T>? onChartPressed;
+  final bool showTotalData;
   const DonutChartWidget({
     Key? key,
     required this.chartItem,
     this.showActualValue = true,
     this.showPercentage = true,
     this.onChartPressed,
+    required this.showTotalData,
   }) : super(key: key);
 
   @override
@@ -31,25 +33,26 @@ class DonutChartWidget<T> extends StatelessWidget {
             width: 300.wp,
             child: SfCircularChart(
               annotations: <CircularChartAnnotation>[
-                CircularChartAnnotation(
-                  widget: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Total Shipments",
-                        style: _textTheme.headline6,
-                        children: [
-                          TextSpan(
-                            text: "\n$_totalValue",
-                            style: _textTheme.headline6!.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
+                if (showTotalData)
+                  CircularChartAnnotation(
+                    widget: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Total Shipments",
+                          style: _textTheme.headline6,
+                          children: [
+                            TextSpan(
+                              text: "\n$_totalValue",
+                              style: _textTheme.headline6!.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
               series: <CircularSeries>[
                 DoughnutSeries<ChartData, String>(

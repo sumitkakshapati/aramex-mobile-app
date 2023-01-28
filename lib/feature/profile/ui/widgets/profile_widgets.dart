@@ -4,7 +4,6 @@ import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/route/routes.dart';
 import 'package:aramex/common/util/size_utils.dart';
-import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/card/custom_list_tile.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/image/custom_network_image.dart';
