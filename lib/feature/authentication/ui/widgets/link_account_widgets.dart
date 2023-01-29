@@ -3,10 +3,12 @@ import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/route/routes.dart';
+import 'package:aramex/common/util/form_validator.dart';
 import 'package:aramex/common/util/snackbar_utils.dart';
 import 'package:aramex/common/widget/button/custom_icon_button.dart';
 import 'package:aramex/common/widget/button/rounded_button.dart';
 import 'package:aramex/common/widget/text_field/custom_textfield.dart';
+import 'package:aramex/common/widget/text_field/pin_textfield.dart';
 import 'package:aramex/feature/authentication/cubit/link_account_cubit.dart';
 import 'package:aramex/feature/authentication/ui/widgets/logout_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -28,6 +30,7 @@ class _LinkAccounttsState extends State<LinkAccountWidgets> {
       TextEditingController();
   final TextEditingController _accountNumberController =
       TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _updateLoadingState(bool status) {
     setState(() {
@@ -86,85 +89,68 @@ class _LinkAccounttsState extends State<LinkAccountWidgets> {
             padding: const EdgeInsets.symmetric(
               horizontal: CustomTheme.symmetricHozPadding,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 54, bottom: 8),
-                  child: Text(
-                    LocaleKeys.linkAccount.tr(),
-                    style: _textTheme.headline1!.copyWith(
-                      fontWeight: FontWeight.bold,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 54, bottom: 8),
+                    child: Text(
+                      LocaleKeys.linkAccount.tr(),
+                      style: _textTheme.headline1!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  LocaleKeys.pleaseEnterAccountNumberAnd4DigitCode.tr(),
-                  style: _textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.w400,
+                  Text(
+                    LocaleKeys.pleaseEnterAccountNumberAnd4DigitCode.tr(),
+                    style: _textTheme.headline6!.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 48),
-                CustomTextField(
-                  label: LocaleKeys.accountNumber.tr(),
-                  hintText: "XXXXXXXXXX",
-                  controller: _accountNumberController,
-                ),
-                Text(
-                  LocaleKeys.verificationCode.tr(),
-                  style: _textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                PinCodeTextField(
-                  length: 4,
-                  appContext: context,
-                  controller: _verificationCodeController,
-                  animationType: AnimationType.fade,
-                  cursorColor: CustomTheme.primaryColor,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  pinTheme: PinTheme(
-                    shape: PinCodeFieldShape.box,
-                    borderRadius: BorderRadius.circular(12),
-                    fieldHeight: 58,
-                    fieldWidth: 58,
-                    fieldOuterPadding: const EdgeInsets.only(right: 24),
-                    activeFillColor: Colors.white,
-                    activeColor: CustomTheme.primaryColor,
-                    inactiveColor: Colors.white,
-                    inactiveFillColor: Colors.white,
-                    selectedFillColor: Colors.white,
-                    selectedColor: CustomTheme.primaryColor,
-                  ),
-                  enableActiveFill: true,
-                  onChanged: (value) {},
-                ),
-                const SizedBox(height: 24),
-                const Spacer(),
-                CustomRoundedButtom(
-                  title: LocaleKeys.linkAccount.tr(),
-                  onPressed: () {
-                    if (_accountNumberController.text.isNotEmpty &&
-                        _verificationCodeController.text.length == 4) {
-                      context.read<LinkAccountCubit>().linkAccount(
-                            _accountNumberController.text,
-                            _verificationCodeController.text,
-                          );
-                    } else {
-                      SnackBarUtils.showErrorBar(
-                        context: context,
-                        message: "Please fill all the data",
+                  const SizedBox(height: 48),
+                  CustomTextField(
+                    label: LocaleKeys.accountNumber.tr(),
+                    hintText: "XXXXXXXXXX",
+                    controller: _accountNumberController,
+                    validator: (value) {
+                      return FormValidator.validateFieldNotEmpty(
+                        value,
+                        LocaleKeys.accountNumber.tr(),
                       );
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).viewPadding.bottom > 0
-                      ? MediaQuery.of(context).viewPadding.bottom + 10
-                      : 20,
-                )
-              ],
+                    },
+                  ),
+                  Text(
+                    LocaleKeys.verificationCode.tr(),
+                    style: _textTheme.headline6!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  CustomPinTextField(
+                    controller: _verificationCodeController,
+                  ),
+                  const SizedBox(height: 24),
+                  const Spacer(),
+                  CustomRoundedButtom(
+                    title: LocaleKeys.linkAccount.tr(),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<LinkAccountCubit>().linkAccount(
+                              _accountNumberController.text,
+                              _verificationCodeController.text,
+                            );
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).viewPadding.bottom > 0
+                        ? MediaQuery.of(context).viewPadding.bottom + 10
+                        : 20,
+                  )
+                ],
+              ),
             ),
           ),
         ),
