@@ -37,6 +37,11 @@ class LocaleKeys {
   static const verificationCode = "auth.verificationCode";
   static const logoutText = "auth.logoutText";
   static const logoutSuccessfully = "auth.logoutSuccessfully";
+  static const sendEmail = "auth.sendEmail";
+  static const pleaseEnteryourEmailAddressToResetYourPassword = "auth.pleaseEnteryourEmailAddressToResetYourPassword";
+  static const setPassword = "auth.setPassword";
+  static const pleaseEnterNewPassword = "auth.pleaseEnterNewPassword";
+  static const savePassword = "auth.savePassword";
 
   static const filter = "filter.filter";
   static const deliveryLocations = "filter.deliveryLocations";

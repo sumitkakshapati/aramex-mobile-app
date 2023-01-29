@@ -33,7 +33,12 @@
     "linkAccount": "Link Account",
     "verificationCode": "Verification Code",
     "logoutText": "Are you sure you want to logout?",
-    "logoutSuccessfully": "Logout Successfully!!"
+    "logoutSuccessfully": "Logout Successfully!!",
+    "sendEmail": "Send Email",
+    "pleaseEnteryourEmailAddressToResetYourPassword": "Please enter your email address to reset your password",
+    "setPassword": "Set Password",
+    "pleaseEnterNewPassword": "Please enter your new password",
+    "savePassword": "Save Password"
   },
   "filter": {
     "filter": "Filter",

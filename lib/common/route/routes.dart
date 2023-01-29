@@ -9,4 +9,6 @@ class Routes {
   static const changePassword = "/changePassword";
   static const accountPayment = "/accountPayment";
   static const linkAccount = "/linkAccount";
+  static const forgotPassword = "/forgotPassword";
+  static const setForgotPassword = "/setForgotPassword";
 }

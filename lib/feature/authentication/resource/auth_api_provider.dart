@@ -105,4 +105,24 @@ class AuthApiProvider {
       token: token,
     );
   }
+
+  Future<dynamic> sendForgotPasswordOtp({required String email}) async {
+    final Map<String, dynamic> body = {
+      'email': email,
+    };
+    return await apiProvider.post('$baseUrl/auth/send-forget-password', body);
+  }
+
+  Future<dynamic> setForgotPassword({
+    required String email,
+    required String newPassword,
+    required String token,
+  }) async {
+    final Map<String, dynamic> body = {
+      "email": email,
+      "token": token,
+      "new_password": newPassword,
+    };
+    return await apiProvider.post('$baseUrl/auth/set-forget-password', body);
+  }
 }

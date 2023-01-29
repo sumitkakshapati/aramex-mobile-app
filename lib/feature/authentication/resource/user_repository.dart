@@ -218,4 +218,36 @@ class UserRepository {
       return DataResponse.error(e.toString());
     }
   }
+
+  Future<DataResponse<bool>> sendForgotPasswordEmail({
+    required String email,
+  }) async {
+    try {
+      final _ = await authApiProvider.sendForgotPasswordOtp(email: email);
+      return DataResponse.success(true);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message, e.statusCode);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
+
+  Future<DataResponse<bool>> setForgotPassword({
+    required String email,
+    required String token,
+    required String password,
+  }) async {
+    try {
+      final _ = await authApiProvider.setForgotPassword(
+        newPassword: password,
+        email: email,
+        token: token,
+      );
+      return DataResponse.success(true);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message, e.statusCode);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
 }

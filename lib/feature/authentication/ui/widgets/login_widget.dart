@@ -128,10 +128,17 @@ class _LoginWidgetsState extends State<LoginWidgets> {
                     ),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        "${LocaleKeys.forgotPassword.tr()}?",
-                        style: _textTheme.headline6!.copyWith(
-                          fontWeight: FontWeight.w400,
+                      child: InkWell(
+                        onTap: () {
+                          NavigationService.pushNamed(
+                            routeName: Routes.forgotPassword,
+                          );
+                        },
+                        child: Text(
+                          "${LocaleKeys.forgotPassword.tr()}?",
+                          style: _textTheme.headline6!.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),
