@@ -8,7 +8,6 @@ import 'package:aramex/common/http/response.dart';
 import 'package:aramex/common/shared_pref/shared_pref.dart';
 import 'package:aramex/feature/authentication/model/user.dart';
 import 'package:aramex/feature/authentication/resource/auth_api_provider.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
 class UserRepository {
@@ -128,12 +127,12 @@ class UserRepository {
     }
   }
 
-  Future<void> _getAndUpdateNotificationToken() async {
-    final String? firebabseToken = await FirebaseMessaging.instance.getToken();
-    if (firebabseToken != null) {
-      updateNotificationToken(notificationToken: firebabseToken);
-    }
-  }
+  // Future<void> _getAndUpdateNotificationToken() async {
+  //   final String? firebabseToken = await FirebaseMessaging.instance.getToken();
+  //   if (firebabseToken != null) {
+  //     updateNotificationToken(notificationToken: firebabseToken);
+  //   }
+  // }
 
   Future<DataResponse<bool>> updateNotificationToken(
       {required String notificationToken}) async {
