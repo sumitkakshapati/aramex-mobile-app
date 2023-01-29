@@ -15,7 +15,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_overlay/loading_overlay.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 class LinkAccountWidgets extends StatefulWidget {
   const LinkAccountWidgets({Key? key}) : super(key: key);
