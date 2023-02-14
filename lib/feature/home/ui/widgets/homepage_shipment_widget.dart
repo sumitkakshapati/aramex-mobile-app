@@ -325,7 +325,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 showTotalData: true,
                 chartItem: [
                   ChartData(
-                    title: LocaleKeys.inTransit.tr(),
+                    title: LocaleKeys.onTransit.tr(),
                     value: widget
                         .homepageData.shipmentSummary.shipmentCounts.inTransit
                         .toInt(),
@@ -373,7 +373,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                       color: CustomTheme.green,
                     ),
                     CODCard(
-                      title: "${LocaleKeys.inTransit.tr()}:",
+                      title: "${LocaleKeys.onTransit.tr()}:",
                       amount:
                           widget.homepageData.shipmentSummary.amounts.inTransit,
                       color: CustomTheme.skyBlue,

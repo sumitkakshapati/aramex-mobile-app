@@ -115,7 +115,7 @@
     "clickOnChartForMoreInformation": "Click on chart for more information.",
     "averageShippingSummary": "Average Shipping Summary",
     "totalCollected": "Total Collected",
-    "inTransit": "In Transit",
+    "onTransit": "On Transit",
     "returned": "Returned",
     "delivered": "Delivered",
     "returnedShipping": "Returned Shippings"

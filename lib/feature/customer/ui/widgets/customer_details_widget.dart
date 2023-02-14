@@ -272,7 +272,7 @@ class _CustomerDetailsWidgetsState extends State<CustomerDetailsWidgets> {
                                     color: CustomTheme.green,
                                   ),
                                   CODCard(
-                                    title: LocaleKeys.inTransit.tr(),
+                                    title: LocaleKeys.onTransit.tr(),
                                     amount:
                                         state.data!.shipmentAmount.inTransit,
                                     color: CustomTheme.skyBlue,

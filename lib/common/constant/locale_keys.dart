@@ -120,7 +120,7 @@ class LocaleKeys {
       "customer.clickOnChartForMoreInformation";
   static const averageShippingSummary = "customer.averageShippingSummary";
   static const totalCollected = "customer.totalCollected";
-  static const inTransit = "customer.inTransit";
+  static const onTransit = "customer.onTransit";
   static const returned = "customer.returned";
   static const delivered = "customer.delivered";
   static const returnedShipping = "customer.returnedShipping";
