@@ -146,7 +146,9 @@
     "vatAmountRs": "VAT Amount (Rs.)",
     "grandTotalRs": "Grand Total(Rs.)",
     "amount": "Amount",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "deliveryDate": "Delivery Date",
+    "pickupDate": "Pickup Date"
   },
   "profile": {
     "profileDetails": "Profile Details",

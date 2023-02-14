@@ -151,6 +151,8 @@ class LocaleKeys {
   static const grandTotalRs = "shipment.grandTotalRs";
   static const amount = "shipment.amount";
   static const viewDetails = "shipment.viewDetails";
+  static const deliveryDate = "shipment.deliveryDate";
+  static const pickupDate = "shipment.pickupDate";
 
   static const profileDetails = "profile.profileDetails";
   static const changePassword = "profile.changePassword";

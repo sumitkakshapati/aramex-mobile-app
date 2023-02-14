@@ -72,11 +72,11 @@ class Shipment {
       productGroup: json['product_group'] ?? "",
       type: json['type'] ?? "",
       services: json['services'] ?? "",
-      pickupDate: DateTime.tryParse(json['pickupDate'] ?? ""),
+      pickupDate: DateTime.tryParse(json['pickup_date'] ?? ""),
       pcs: json['pcs'] ?? 0,
       chargingWeight:
           double.tryParse(json['charging_weight']?.toString() ?? "") ?? 0,
-      codValue: double.tryParse(json['codValue']?.toString() ?? "") ?? 0,
+      codValue: double.tryParse(json['cod_value']?.toString() ?? "") ?? 0,
       shipperNumber: json['shipper_number'] ?? "",
       shipperName: json['shipper_name'] ?? "",
       originCity: json['origin_city'] ?? "",
@@ -111,10 +111,10 @@ class Shipment {
     data['product_group'] = productGroup;
     data['type'] = type;
     data['services'] = services;
-    data['pickupDate'] = pickupDate;
+    data['pickup_date'] = pickupDate;
     data['pcs'] = pcs;
     data['charging_weight'] = chargingWeight;
-    data['codValue'] = codValue;
+    data['cod_value'] = codValue;
     data['shipper_number'] = shipperNumber;
     data['shipper_name'] = shipperName;
     data['origin_city'] = originCity;

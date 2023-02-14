@@ -146,6 +146,12 @@ class ShipmentDetailsWidgets extends StatelessWidget {
                             title: LocaleKeys.status.tr(),
                             value: _shipment.status.name,
                           ),
+                          if (_shipment.deliveryStatusDate != null)
+                            HorizontalKeyValue(
+                              title: LocaleKeys.deliveryDate.tr(),
+                              value: Jiffy(_shipment.deliveryStatusDate)
+                                  .format("dd MMMM, yyyy"),
+                            ),
                           if (_shipment.returnStatusDate != null)
                             HorizontalKeyValue(
                               title: LocaleKeys.returnDate.tr(),
