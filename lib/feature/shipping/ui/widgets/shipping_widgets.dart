@@ -35,7 +35,7 @@ class _ShippingWidgetsState extends State<ShippingWidgets> {
   final ValueNotifier<ShipmentFilterData> _shipmentFilterData =
       ValueNotifier(ShipmentFilterData.initial());
   final List<Map<String, dynamic>> _shipmentStatus = [
-    {"name": "All Shipping", "value": "all-shipment"},
+    {"name": "All Shipment", "value": "all-shipment"},
     {
       "name": ShipmentStatus.OnTransit.name,
       "value": ShipmentStatus.OnTransit.value
