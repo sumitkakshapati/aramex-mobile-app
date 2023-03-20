@@ -121,6 +121,7 @@ class LocaleKeys {
   static const averageShippingSummary = "customer.averageShippingSummary";
   static const totalCollected = "customer.totalCollected";
   static const onTransit = "customer.onTransit";
+  static const inTransit = "customer.inTransit";
   static const returned = "customer.returned";
   static const delivered = "customer.delivered";
   static const returnedShipping = "customer.returnedShipping";
@@ -196,6 +197,7 @@ class LocaleKeys {
   static const codShipment = "homepage.codShipment";
   static const prepaidShipment = "homepage.prepaidShipment";
   static const totalCodCollected = "homepage.totalCodCollected";
+  static const totalCod = "homepage.totalCod";
   static const totalCodPaid = "homepage.totalCodPaid";
   static const balanceAvailable = "homepage.balanceAvailable";
   static const nextPaymentCycle = "homepage.nextPaymentCycle";

@@ -116,6 +116,7 @@
     "averageShippingSummary": "Average Shipping Summary",
     "totalCollected": "Total Collected",
     "onTransit": "On Transit",
+    "inTransit": "In Transit",
     "returned": "Returned",
     "delivered": "Delivered",
     "returnedShipping": "Returned Shippings"
@@ -189,6 +190,7 @@
     "codShipment": "COD Shipment",
     "prepaidShipment": "Prepaid Shipment",
     "totalCodCollected": "Total COD Collected",
+    "totalCod": "Total COD",
     "totalCodPaid": "Total COD Paid",
     "balanceAvailable": "Balance Available",
     "nextPaymentCycle": "Next Payment Cycle",

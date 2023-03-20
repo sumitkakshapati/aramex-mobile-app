@@ -40,7 +40,7 @@ class HomepageShipmentWidget extends StatefulWidget {
 
 class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
   final ValueNotifier<DateDuration?> _currentDateDuration =
-      ValueNotifier(DateDuration.ThisWeek);
+      ValueNotifier(DateDuration.ThisMonth);
   final ValueNotifier<ShipmentFilterData> _shipmentFilterData =
       ValueNotifier(ShipmentFilterData.initial());
 
@@ -101,7 +101,8 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 icon: Aramex.codshipment,
                 title: LocaleKeys.totalShipment.tr(),
                 color: CustomTheme.skyBlue,
-                noOfShipment: widget.homepageData.shipmentMode.total.noOfShipment,
+                noOfShipment:
+                    widget.homepageData.shipmentMode.total.noOfShipment,
                 showCodValue: false,
                 bottomPadding: 16,
               ),
@@ -116,7 +117,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 color: CustomTheme.primaryColor,
                 noOfShipment: widget.homepageData.shipmentMode.cod.noOfShipment,
                 bottomPadding: 16,
-                 topPadding: 16,
+                topPadding: 16,
               ),
               const DottedLine(
                 direction: Axis.horizontal,
@@ -182,7 +183,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                         Text(
                           widget.homepageData.balanceAvailable.formatInRupee(),
                           style: _textTheme.headline3!.copyWith(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],
@@ -343,7 +344,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 showTotalData: true,
                 chartItem: [
                   ChartData(
-                    title: LocaleKeys.onTransit.tr(),
+                    title: LocaleKeys.inTransit.tr(),
                     value: widget
                         .homepageData.shipmentSummary.shipmentCounts.inTransit
                         .toInt(),
@@ -386,12 +387,12 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 childrenDelegate: SliverChildListDelegate(
                   [
                     CODCard(
-                      title: "${LocaleKeys.totalCodCollected.tr()}:",
+                      title: "${LocaleKeys.totalCod.tr()}:",
                       amount: widget.homepageData.shipmentSummary.amounts.total,
-                      color: CustomTheme.green,
+                      color: CustomTheme.sliver,
                     ),
                     CODCard(
-                      title: "${LocaleKeys.onTransit.tr()}:",
+                      title: "${LocaleKeys.inTransit.tr()}:",
                       amount:
                           widget.homepageData.shipmentSummary.amounts.inTransit,
                       color: CustomTheme.skyBlue,
@@ -400,7 +401,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                       title: "${LocaleKeys.delivered.tr()}:",
                       amount:
                           widget.homepageData.shipmentSummary.amounts.delivered,
-                      color: CustomTheme.purple,
+                      color: CustomTheme.green,
                     ),
                     CODCard(
                       title: "${LocaleKeys.returned.tr()}:",

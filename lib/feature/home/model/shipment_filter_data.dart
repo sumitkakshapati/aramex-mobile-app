@@ -29,7 +29,7 @@ class ShipmentFilterData extends Equatable {
   });
 
   factory ShipmentFilterData.initial() {
-    return const ShipmentFilterData(dateDuration: DateDuration.ThisWeek);
+    return const ShipmentFilterData(dateDuration: DateDuration.ThisMonth);
   }
 
   ShipmentFilterData copyWith({
