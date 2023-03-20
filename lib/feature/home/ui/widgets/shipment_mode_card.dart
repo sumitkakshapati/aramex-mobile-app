@@ -10,6 +10,7 @@ class ShipmentModeCard extends StatelessWidget {
   final Color color;
   final double topPadding;
   final double bottomPadding;
+  final bool showCodValue;
   const ShipmentModeCard({
     Key? key,
     required this.amount,
@@ -19,6 +20,7 @@ class ShipmentModeCard extends StatelessWidget {
     required this.title,
     this.bottomPadding = 0,
     this.topPadding = 0,
+    this.showCodValue = true,
   }) : super(key: key);
 
   @override
@@ -75,23 +77,24 @@ class ShipmentModeCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                RichText(
-                  text: TextSpan(
-                    text: "COD Value ",
-                    style: _textTheme.bodyText1!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: CustomTheme.gray,
+                if (showCodValue)
+                  RichText(
+                    text: TextSpan(
+                      text: "COD Value ",
+                      style: _textTheme.bodyText1!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: CustomTheme.gray,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "${amount.formatInRupee()}",
+                          style: _textTheme.bodyText1!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
                     ),
-                    children: [
-                      TextSpan(
-                        text: "${amount.formatInRupee()}",
-                        style: _textTheme.bodyText1!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                )
+                  )
               ],
             ),
           )

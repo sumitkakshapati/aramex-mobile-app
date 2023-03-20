@@ -185,6 +185,7 @@
   },
   "homepage": {
     "shipmentMode": "Shipping Mode",
+    "totalShipment": "Total Shipment",
     "codShipment": "COD Shipment",
     "prepaidShipment": "Prepaid Shipment",
     "totalCodCollected": "Total COD Collected",

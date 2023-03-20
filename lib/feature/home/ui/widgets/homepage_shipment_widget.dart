@@ -6,7 +6,6 @@ import 'package:aramex/common/icons/aramex_icons.dart';
 import 'package:aramex/common/model/chart_data.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
 import 'package:aramex/common/route/routes.dart';
-import 'package:aramex/common/util/date_utils.dart';
 import 'package:aramex/common/util/number_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/util/text_utils.dart';
@@ -100,10 +99,24 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
               ShipmentModeCard(
                 amount: widget.homepageData.shipmentMode.cod.codValue,
                 icon: Aramex.codshipment,
+                title: LocaleKeys.totalShipment.tr(),
+                color: CustomTheme.skyBlue,
+                noOfShipment: widget.homepageData.shipmentMode.total.noOfShipment,
+                showCodValue: false,
+                bottomPadding: 16,
+              ),
+              const DottedLine(
+                direction: Axis.horizontal,
+                dashColor: CustomTheme.gray,
+              ),
+              ShipmentModeCard(
+                amount: widget.homepageData.shipmentMode.cod.codValue,
+                icon: Aramex.codshipment,
                 title: LocaleKeys.codShipment.tr(),
                 color: CustomTheme.primaryColor,
                 noOfShipment: widget.homepageData.shipmentMode.cod.noOfShipment,
                 bottomPadding: 16,
+                 topPadding: 16,
               ),
               const DottedLine(
                 direction: Axis.horizontal,
@@ -115,6 +128,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 icon: Aramex.codshipment,
                 title: LocaleKeys.prepaidShipment.tr(),
                 color: CustomTheme.green,
+                showCodValue: false,
                 noOfShipment:
                     widget.homepageData.shipmentMode.prepaid.noOfShipment,
               ),

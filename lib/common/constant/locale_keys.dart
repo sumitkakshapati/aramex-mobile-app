@@ -192,6 +192,7 @@ class LocaleKeys {
   //Homepage
 
   static const shipmentMode = "homepage.shipmentMode";
+  static const totalShipment = "homepage.totalShipment";
   static const codShipment = "homepage.codShipment";
   static const prepaidShipment = "homepage.prepaidShipment";
   static const totalCodCollected = "homepage.totalCodCollected";
