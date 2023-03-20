@@ -180,6 +180,10 @@ class ShipmentApiProvider {
       _params["max_weight"] = shipmentFilterData?.fromKG;
     }
 
+    if (shipmentFilterData?.dateDuration != null) {
+      _params["duration"] = shipmentFilterData?.dateDuration.value;
+    }
+
     final _url = "$baseUrl/customer-details/";
 
     return await apiProvider.post(
@@ -231,6 +235,10 @@ class ShipmentApiProvider {
 
     if (shipmentFilterData?.toKG != null) {
       _params["max_weight"] = shipmentFilterData?.fromKG;
+    }
+
+    if (shipmentFilterData?.dateDuration != null) {
+      _params["duration"] = shipmentFilterData?.dateDuration.value;
     }
 
     final _url = "$baseUrl/customer-details/return";
