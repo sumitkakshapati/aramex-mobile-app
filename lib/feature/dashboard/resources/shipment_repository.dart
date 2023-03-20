@@ -152,4 +152,20 @@ class ShipmentRepository {
       return DataResponse.error(e.toString());
     }
   }
+
+  Future<DataResponse<CustomerReturnedDetails>> fetchHomepageReturnedDetails({
+    ShipmentFilterData? shipmentFilterData,
+  }) async {
+    try {
+      final _res = await shipmentApiProvider.fetchHomepageReturnedDetails(
+        shipmentFilterData: shipmentFilterData,
+      );
+      final _item = CustomerReturnedDetails.fromJson(_res["data"]["results"]);
+      return DataResponse.success(_item);
+    } on CustomException catch (e) {
+      return DataResponse.error(e.message);
+    } catch (e) {
+      return DataResponse.error(e.toString());
+    }
+  }
 }

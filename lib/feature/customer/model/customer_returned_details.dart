@@ -13,7 +13,7 @@ class CustomerReturnedDetails {
 
   factory CustomerReturnedDetails.fromJson(Map<String, dynamic> json) {
     return CustomerReturnedDetails(
-      consigneeNumber: json["consignee_tel"],
+      consigneeNumber: json["consignee_tel"] ?? "",
       totalShipment: json["total_shipments"],
       reasons: List.from(json["returned_reasons"] ?? [])
           .map((e) => ReturnedReason.fromJson(e))

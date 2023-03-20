@@ -12,8 +12,8 @@ import 'package:aramex/common/widget/common_error_widget.dart';
 import 'package:aramex/common/widget/common_loading_widget.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/options_bottomsheet.dart';
-import 'package:aramex/feature/customer/cubit/customer_return_details_cubit.dart';
 import 'package:aramex/feature/customer/model/customer_returned_details.dart';
+import 'package:aramex/feature/home/cubit/homepage_return_details_cubit.dart';
 import 'package:aramex/feature/home/model/shipment_filter_data.dart';
 import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,24 +22,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class CustomerReturnDetailsWidgets extends StatefulWidget {
-  final String phoneNumber;
+class HomepageReturnDetailsWidgets extends StatefulWidget {
   final ShipmentFilterData shipmentFilterData;
   final DateDuration? currentDateDuration;
-  const CustomerReturnDetailsWidgets({
+  const HomepageReturnDetailsWidgets({
     Key? key,
-    required this.phoneNumber,
     required this.shipmentFilterData,
     required this.currentDateDuration,
   }) : super(key: key);
 
   @override
-  State<CustomerReturnDetailsWidgets> createState() =>
-      _CustomerReturnDetailsWidgetsState();
+  State<HomepageReturnDetailsWidgets> createState() =>
+      _HomepageReturnDetailsWidgetsState();
 }
 
-class _CustomerReturnDetailsWidgetsState
-    extends State<CustomerReturnDetailsWidgets> {
+class _HomepageReturnDetailsWidgetsState
+    extends State<HomepageReturnDetailsWidgets> {
   final ValueNotifier<DateDuration?> _currentDateDuration = ValueNotifier(null);
   final ValueNotifier<ShipmentFilterData> _shipmentFilterData =
       ValueNotifier(ShipmentFilterData.initial());
@@ -72,8 +70,7 @@ class _CustomerReturnDetailsWidgetsState
   }
 
   _updateData() {
-    context.read<CustomerReturnedDetailsCubit>().fetchReturnedShipment(
-          number: widget.phoneNumber,
+    context.read<HomepageReturnedDetailsCubit>().fetchReturnedShipment(
           shipmentFilterData: _shipmentFilterData.value,
         );
   }
@@ -88,13 +85,13 @@ class _CustomerReturnDetailsWidgetsState
         title: LocaleKeys.returnedShipping.tr(),
       ),
       body: Container(
-        child: BlocBuilder<CustomerReturnedDetailsCubit, CommonState>(
+        child: BlocBuilder<HomepageReturnedDetailsCubit, CommonState>(
           builder: (context, state) {
             if (state is CommonLoadingState) {
               return const CommonLoadingWidget();
             } else if (state
                 is CommonDataSuccessState<CustomerReturnedDetails>) {
-              final _totalReasonsCount = state.data!.totalShipment;
+              final int _totalReasonsCount = state.data!.totalShipment;
 
               return SingleChildScrollView(
                 child: Container(
@@ -192,10 +189,10 @@ class _CustomerReturnDetailsWidgetsState
                                       return "${((datum.value / state.data!.totalShipment) * 100).round()}%";
                                     },
                                     color: _theme.primaryColor,
-                                    width: 0.6,
+                                    width: 0.8,
                                     dataLabelSettings: const DataLabelSettings(
                                         isVisible: true),
-                                    spacing: 0.1,
+                                    spacing: 0.2,
                                     borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(4),
                                     ),

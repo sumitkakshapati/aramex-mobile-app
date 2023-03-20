@@ -19,9 +19,11 @@ import 'package:aramex/common/widget/options_bottomsheet.dart';
 import 'package:aramex/feature/dashboard/cubit/homepage_cubit.dart';
 import 'package:aramex/feature/dashboard/model/homepage_data.dart';
 import 'package:aramex/feature/home/model/shipment_filter_data.dart';
+import 'package:aramex/feature/home/ui/screens/homepage_returned_details_screens.dart';
 import 'package:aramex/feature/home/ui/widgets/cod_card.dart';
 import 'package:aramex/feature/home/ui/widgets/filter_widget.dart';
 import 'package:aramex/feature/home/ui/widgets/shipment_mode_card.dart';
+import 'package:aramex/feature/shipping/enum/shipment_status.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -341,31 +343,43 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 ],
               ),
               DonutChartWidget(
-                showTotalData: true,
-                chartItem: [
-                  ChartData(
-                    title: LocaleKeys.inTransit.tr(),
-                    value: widget
-                        .homepageData.shipmentSummary.shipmentCounts.inTransit
-                        .toInt(),
-                    color: CustomTheme.skyBlue,
-                  ),
-                  ChartData(
-                    title: LocaleKeys.delivered.tr(),
-                    value: widget
-                        .homepageData.shipmentSummary.shipmentCounts.delivered
-                        .toInt(),
-                    color: CustomTheme.purple,
-                  ),
-                  ChartData(
-                    title: LocaleKeys.returned.tr(),
-                    value: widget
-                        .homepageData.shipmentSummary.shipmentCounts.returned
-                        .toInt(),
-                    color: CustomTheme.lightRed,
-                  ),
-                ],
-              ),
+                  showTotalData: true,
+                  chartItem: [
+                    ChartData(
+                      title: LocaleKeys.inTransit.tr(),
+                      value: widget
+                          .homepageData.shipmentSummary.shipmentCounts.inTransit
+                          .toInt(),
+                      color: CustomTheme.skyBlue,
+                      type: ShipmentStatus.OnTransit,
+                    ),
+                    ChartData(
+                      title: LocaleKeys.delivered.tr(),
+                      value: widget
+                          .homepageData.shipmentSummary.shipmentCounts.delivered
+                          .toInt(),
+                      color: CustomTheme.purple,
+                      type: ShipmentStatus.Delivered,
+                    ),
+                    ChartData(
+                      title: LocaleKeys.returned.tr(),
+                      value: widget
+                          .homepageData.shipmentSummary.shipmentCounts.returned
+                          .toInt(),
+                      color: CustomTheme.lightRed,
+                      type: ShipmentStatus.Returned,
+                    ),
+                  ],
+                  onChartPressed: (status) {
+                    if (status == ShipmentStatus.Returned) {
+                      NavigationService.push(
+                        target: HomepageReturnDetailsScreens(
+                          shipmentFilterData: _shipmentFilterData.value,
+                          currentDateDuration: _currentDateDuration.value,
+                        ),
+                      );
+                    }
+                  }),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 20.hp),
                 child: Divider(
