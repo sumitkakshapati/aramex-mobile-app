@@ -1,22 +1,23 @@
 enum DateDuration {
-  Week("7 Days"),
-  HalfMonth("15 Days"),
-  Month("1 Month"),
-  Year("365 Days");
+  ThisWeek("This Week", 'this_week'),
+  LastWeek("Last Week", 'last_week'),
+  ThisMonth("This Month", 'this_month'),
+  LastMonth("Last Month", 'last_month');
 
+  final String title;
   final String value;
-  const DateDuration(this.value);
+  const DateDuration(this.title, this.value);
 
   static DateDuration? fromString(String value) {
     switch (value.toLowerCase()) {
-      case "7 days":
-        return DateDuration.Week;
-      case "15 days":
-        return DateDuration.HalfMonth;
-      case "1 month":
-        return DateDuration.Month;
-      case "365 days":
-        return DateDuration.Year;
+      case "this week":
+        return DateDuration.ThisWeek;
+      case "last week":
+        return DateDuration.LastWeek;
+      case "this month":
+        return DateDuration.ThisMonth;
+      case "last month":
+        return DateDuration.LastMonth;
       default:
         return null;
     }

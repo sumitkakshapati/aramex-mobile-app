@@ -5,7 +5,6 @@ import 'package:aramex/common/cubit/common_state.dart';
 import 'package:aramex/common/enum/date_duration.dart';
 import 'package:aramex/common/model/chart_data.dart';
 import 'package:aramex/common/navigation/navigation_service.dart';
-import 'package:aramex/common/util/date_utils.dart';
 import 'package:aramex/common/util/size_utils.dart';
 import 'package:aramex/common/widget/button/custom_outline_icon_button.dart';
 import 'package:aramex/common/widget/button/dropdown_button.dart';
@@ -59,11 +58,11 @@ class _CustomerDetailsWidgetsState extends State<CustomerDetailsWidgets> {
 
   updateOnTimePeriod() {
     if (_currentDateDuration.value != null) {
-      final _currentDateRange =
-          DateTimeUtils.getDateRange(_currentDateDuration.value!);
       _shipmentFilterData.value = _shipmentFilterData.value.copyWith(
-        startDate: _currentDateRange.start,
-        endDate: _currentDateRange.end,
+        dateDuration: _currentDateDuration.value,
+        startDate: null,
+        endDate: null,
+        forceUpdateDurationDate: true,
       );
     }
   }
@@ -130,16 +129,16 @@ class _CustomerDetailsWidgetsState extends State<CustomerDetailsWidgets> {
                                   builder: (context, currentDateDuration, _) {
                                     return CustomDropdownButton(
                                       title: currentDateDuration != null
-                                          ? currentDateDuration.value
+                                          ? currentDateDuration.title
                                           : LocaleKeys.selectDuration.tr(),
                                       onPressed: () {
                                         showOptionsBottomSheet(
                                           label: LocaleKeys.timePeriod.tr(),
                                           options: [
-                                            DateDuration.Week.value,
-                                            DateDuration.HalfMonth.value,
-                                            DateDuration.Month.value,
-                                            DateDuration.Year.value
+                                            DateDuration.ThisWeek.title,
+                                            DateDuration.LastWeek.title,
+                                            DateDuration.ThisMonth.title,
+                                            DateDuration.LastMonth.title
                                           ],
                                           onChanged: (val) {
                                             _currentDateDuration.value =

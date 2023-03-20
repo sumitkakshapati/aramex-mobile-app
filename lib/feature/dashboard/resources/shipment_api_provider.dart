@@ -56,6 +56,10 @@ class ShipmentApiProvider {
       _params["status"] = shipmentFilterData?.status;
     }
 
+    if (shipmentFilterData?.dateDuration != null) {
+      _params["duration"] = shipmentFilterData!.dateDuration.value;
+    }
+
     return await apiProvider.get(
       '$baseUrl/shipments/home/feeds',
       queryParams: _params,

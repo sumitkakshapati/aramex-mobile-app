@@ -41,7 +41,7 @@ class HomepageShipmentWidget extends StatefulWidget {
 
 class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
   final ValueNotifier<DateDuration?> _currentDateDuration =
-      ValueNotifier(DateDuration.Week);
+      ValueNotifier(DateDuration.ThisWeek);
   final ValueNotifier<ShipmentFilterData> _shipmentFilterData =
       ValueNotifier(ShipmentFilterData.initial());
 
@@ -49,8 +49,8 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
   void initState() {
     super.initState();
     updateOnTimePeriod();
-    _currentDateDuration.addListener(updateOnTimePeriod);
     _shipmentFilterData.addListener(onUpdateShipmentMethod);
+    _currentDateDuration.addListener(updateOnTimePeriod);
   }
 
   onUpdateShipmentMethod() {
@@ -61,11 +61,11 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
 
   updateOnTimePeriod() {
     if (_currentDateDuration.value != null) {
-      final _currentDateRange =
-          DateTimeUtils.getDateRange(_currentDateDuration.value!);
       _shipmentFilterData.value = _shipmentFilterData.value.copyWith(
-        startDate: _currentDateRange.start,
-        endDate: _currentDateRange.end,
+        dateDuration: _currentDateDuration.value,
+        startDate: null,
+        endDate: null,
+        forceUpdateDurationDate: true,
       );
     }
   }
@@ -225,16 +225,16 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                     builder: (context, currentDateDuration, _) {
                       return CustomDropdownButton(
                         title: currentDateDuration != null
-                            ? currentDateDuration.value
+                            ? currentDateDuration.title
                             : "Select Duration",
                         onPressed: () {
                           showOptionsBottomSheet(
                             label: LocaleKeys.timePeriod.tr(),
                             options: [
-                              DateDuration.Week.value,
-                              DateDuration.HalfMonth.value,
-                              DateDuration.Month.value,
-                              DateDuration.Year.value
+                              DateDuration.ThisWeek.title,
+                              DateDuration.LastWeek.title,
+                              DateDuration.ThisMonth.title,
+                              DateDuration.LastMonth.title,
                             ],
                             onChanged: (val) {
                               _currentDateDuration.value =
@@ -248,50 +248,54 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                   ),
                   SizedBox(width: 16.wp),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (_shipmentFilterData.value.startDate != null)
-                          RichText(
-                            text: TextSpan(
-                              text: "${LocaleKeys.from.tr()}: ",
-                              style: _textTheme.bodyText1!.copyWith(
-                                color: CustomTheme.gray,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text:
-                                      Jiffy(_shipmentFilterData.value.startDate)
-                                          .format("dd MMM,yyyy"),
-                                  style: _textTheme.bodyText1!.copyWith(
-                                    fontWeight: FontWeight.bold,
+                    child: ValueListenableBuilder<ShipmentFilterData>(
+                        valueListenable: _shipmentFilterData,
+                        builder: (context, updatedShipmentData, _) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (updatedShipmentData.startDate != null)
+                                RichText(
+                                  text: TextSpan(
+                                    text: "${LocaleKeys.from.tr()}: ",
+                                    style: _textTheme.bodyText1!.copyWith(
+                                      color: CustomTheme.gray,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            Jiffy(updatedShipmentData.startDate)
+                                                .format("dd MMM,yyyy"),
+                                        style: _textTheme.bodyText1!.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                        if (_shipmentFilterData.value.startDate != null)
-                          SizedBox(height: 6.hp),
-                        if (_shipmentFilterData.value.endDate != null)
-                          RichText(
-                            text: TextSpan(
-                              text: "${LocaleKeys.to.tr()}:      ",
-                              style: _textTheme.bodyText1!.copyWith(
-                                color: CustomTheme.gray,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: Jiffy(_shipmentFilterData.value.endDate)
-                                      .format("dd MMM,yyyy"),
-                                  style: _textTheme.bodyText1!.copyWith(
-                                    fontWeight: FontWeight.bold,
+                                ),
+                              if (updatedShipmentData.startDate != null)
+                                SizedBox(height: 6.hp),
+                              if (updatedShipmentData.endDate != null)
+                                RichText(
+                                  text: TextSpan(
+                                    text: "${LocaleKeys.to.tr()}:      ",
+                                    style: _textTheme.bodyText1!.copyWith(
+                                      color: CustomTheme.gray,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: Jiffy(updatedShipmentData.endDate)
+                                            .format("dd MMM,yyyy"),
+                                        style: _textTheme.bodyText1!.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                      ],
-                    ),
+                                ),
+                            ],
+                          );
+                        }),
                   ),
                   SizedBox(width: 16.wp),
                   OpenContainer(

@@ -1,3 +1,4 @@
+import 'package:aramex/common/enum/date_duration.dart';
 import 'package:equatable/equatable.dart';
 
 class ShipmentFilterData extends Equatable {
@@ -11,6 +12,7 @@ class ShipmentFilterData extends Equatable {
   final double? toRs;
   final String? status;
   final String? shipmentId;
+  final DateDuration dateDuration;
 
   const ShipmentFilterData({
     this.originCity,
@@ -23,10 +25,11 @@ class ShipmentFilterData extends Equatable {
     this.toRs,
     this.status,
     this.shipmentId,
+    required this.dateDuration,
   });
 
   factory ShipmentFilterData.initial() {
-    return const ShipmentFilterData();
+    return const ShipmentFilterData(dateDuration: DateDuration.ThisWeek);
   }
 
   ShipmentFilterData copyWith({
@@ -40,18 +43,22 @@ class ShipmentFilterData extends Equatable {
     double? toRs,
     String? status,
     String? shipmentId,
+    DateDuration? dateDuration,
+    bool forceUpdateDurationDate = false,
   }) {
     return ShipmentFilterData(
       originCity: originCity ?? this.originCity,
       destinationCity: destinationCity ?? this.destinationCity,
-      startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
+      startDate:
+          forceUpdateDurationDate ? startDate : startDate ?? this.startDate,
+      endDate: forceUpdateDurationDate ? endDate : endDate ?? this.endDate,
       fromKG: fromKG ?? this.fromKG,
       toKG: toKG ?? this.toKG,
       fromRs: fromRs ?? this.fromRs,
       toRs: toRs ?? this.toRs,
       status: status ?? this.status,
       shipmentId: shipmentId ?? this.shipmentId,
+      dateDuration: dateDuration ?? this.dateDuration,
     );
   }
 
@@ -66,6 +73,7 @@ class ShipmentFilterData extends Equatable {
         fromRs,
         toRs,
         status,
-        shipmentId
+        shipmentId,
+        dateDuration,
       ];
 }
