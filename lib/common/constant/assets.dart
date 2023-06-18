@@ -11,4 +11,9 @@ class Assets {
   static const String empty = '$_baseUrl/empty.png';
   static const String search = '$_baseUrl/search.png';
   static const String payments = '$_baseUrl/payments.png';
+  static const String codShipment = '$_baseUrl/cod_shipment.png';
+  static const String prepaidShipment = '$_baseUrl/prepaid_shipment.png';
+  static const String totalCodCollected = '$_baseUrl/total_cod_collected.png';
+  static const String totalCodPaid = '$_baseUrl/total_cod_paid.png';
+  static const String totalShipment = '$_baseUrl/total_shipment.png';
 }

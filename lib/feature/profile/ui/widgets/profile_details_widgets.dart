@@ -2,6 +2,7 @@ import 'package:aramex/app/theme.dart';
 import 'package:aramex/common/constant/assets.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/util/size_utils.dart';
+import 'package:aramex/common/util/text_utils.dart';
 import 'package:aramex/common/widget/card_wrapper.dart';
 import 'package:aramex/common/widget/custom_app_bar.dart';
 import 'package:aramex/common/widget/custom_divider.dart';
@@ -55,7 +56,7 @@ class ProfileDetailsWidgets extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: VerticalKeyValue(
-                          title: user?.fullname ?? "",
+                          title: user?.fullname.capitalize() ?? "",
                           value: user?.email ?? "",
                           titleColor: CustomTheme.lightTextColor,
                           valueColor: CustomTheme.gray,
@@ -67,12 +68,12 @@ class ProfileDetailsWidgets extends StatelessWidget {
                       CustomDivider(verticalPadding: 16.hp),
                       VerticalKeyValue(
                         title: LocaleKeys.accountNumber.tr(),
-                        value: user?.accountNumber ?? "",
+                        value: user?.accountNumber.capitalize() ?? "",
                       ),
                       SizedBox(height: 12.hp),
                       VerticalKeyValue(
                         title: LocaleKeys.fullName.tr(),
-                        value: user?.fullname ?? "",
+                        value: user?.fullname.capitalize() ?? "",
                         verticalPadding: 12.hp,
                       ),
                       VerticalKeyValue(
@@ -88,7 +89,7 @@ class ProfileDetailsWidgets extends StatelessWidget {
                       SizedBox(height: 12.hp),
                       VerticalKeyValue(
                         title: LocaleKeys.address.tr(),
-                        value: user?.address ?? "",
+                        value: user?.address.capitalize() ?? "",
                       ),
                     ],
                   ),

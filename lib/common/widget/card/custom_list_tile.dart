@@ -22,6 +22,7 @@ class CustomListTile extends StatelessWidget {
   final IconData? suffixIcon;
   final Color suffixColor;
   final VoidCallback? onPressed;
+  final bool isAssetImage;
   CustomListTile({
     required this.title,
     this.description = "",
@@ -42,6 +43,7 @@ class CustomListTile extends StatelessWidget {
     this.suffixIcon,
     this.suffixColor = CustomTheme.gray,
     this.onPressed,
+    this.isAssetImage = false,
   }) : assert(image.isEmpty || leading == null || icon == null);
 
   @override
@@ -70,12 +72,28 @@ class CustomListTile extends StatelessWidget {
           children: [
             if (leading != null) leading!,
             if (image.isNotEmpty)
-              CustomCachedNetworkImage(
-                url: image,
-                fit: BoxFit.cover,
-                height: 40,
-                width: 40,
-              ),
+              switch (isAssetImage) {
+                true => Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: iconColor.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.cover,
+                      height: 30,
+                      width: 30,
+                      color: iconColor,
+                    ),
+                  ),
+                false => CustomCachedNetworkImage(
+                    url: image,
+                    fit: BoxFit.cover,
+                    height: 40,
+                    width: 40,
+                  )
+              },
             if (icon != null)
               Container(
                 padding: const EdgeInsets.all(12),

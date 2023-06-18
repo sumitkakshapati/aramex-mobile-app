@@ -19,15 +19,15 @@ class EnvValue {
     appEnvironment: AppEnvironment.Development,
   );
 
-  static final Env staging = Env(
-    baseUrl: 'http://15.207.84.87:8848/api',
-    imageUrl: 'http://15.207.84.87:8848/api',
+  static final Env staging = Env( 
+    baseUrl: 'https://aramaxapi.expoexpressnp.com/api',
+    imageUrl: 'https://aramaxapi.expoexpressnp.com/api',
     appEnvironment: AppEnvironment.Stage,
   );
 
   static final Env production = Env(
-    baseUrl: 'http://15.207.84.87:8848/api',
-    imageUrl: 'http://15.207.84.87:8848/api',
+    baseUrl: 'https://aramaxapi.expoexpressnp.com/api',
+    imageUrl: 'https://aramaxapi.expoexpressnp.com/api',
     appEnvironment: AppEnvironment.Production,
   );
 }

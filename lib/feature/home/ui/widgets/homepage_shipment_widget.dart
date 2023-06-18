@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:aramex/app/theme.dart';
+import 'package:aramex/common/constant/assets.dart';
 import 'package:aramex/common/constant/locale_keys.dart';
 import 'package:aramex/common/enum/date_duration.dart';
 import 'package:aramex/common/icons/aramex_icons.dart';
@@ -100,7 +101,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
             children: [
               ShipmentModeCard(
                 amount: widget.homepageData.shipmentMode.cod.codValue,
-                icon: Aramex.codshipment,
+                image: Assets.totalShipment,
                 title: LocaleKeys.totalShipment.tr(),
                 color: CustomTheme.skyBlue,
                 noOfShipment:
@@ -114,7 +115,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
               ),
               ShipmentModeCard(
                 amount: widget.homepageData.shipmentMode.cod.codValue,
-                icon: Aramex.codshipment,
+                image: Assets.codShipment,
                 title: LocaleKeys.codShipment.tr(),
                 color: CustomTheme.primaryColor,
                 noOfShipment: widget.homepageData.shipmentMode.cod.noOfShipment,
@@ -128,7 +129,7 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
               ShipmentModeCard(
                 amount: widget.homepageData.shipmentMode.prepaid.codValue,
                 topPadding: 16,
-                icon: Aramex.codshipment,
+                image: Assets.prepaidShipment,
                 title: LocaleKeys.prepaidShipment.tr(),
                 color: CustomTheme.green,
                 showCodValue: false,
@@ -143,7 +144,8 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
           child: Column(
             children: [
               CustomListTile(
-                icon: Aramex.codcollected,
+                image: Assets.totalCodCollected,
+                isAssetImage: true,
                 title: LocaleKeys.totalCodCollected.tr(),
                 description: widget.homepageData.codCollected.formatInRupee(),
                 bottomPadding: 14,
@@ -156,7 +158,8 @@ class _HomepageShipmentWidgetState extends State<HomepageShipmentWidget> {
                 dashColor: CustomTheme.gray,
               ),
               CustomListTile(
-                icon: Aramex.codpaid,
+                image: Assets.totalCodPaid,
+                isAssetImage: true,
                 title: LocaleKeys.totalCodPaid.tr(),
                 description: widget.homepageData.codPaid.formatInRupee(),
                 descriptionColor: CustomTheme.lightTextColor,

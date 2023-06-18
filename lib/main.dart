@@ -8,12 +8,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-
-  runZonedGuarded(() {
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await EasyLocalization.ensureInitialized();
     runApp(
-      LocalWrapper(child: AppProd(env: EnvValue.development)),
+      LocalWrapper(child: AppProd(env: EnvValue.production)),
     );
   }, (e, s) {
     Log.e(e);

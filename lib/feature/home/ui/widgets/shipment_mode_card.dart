@@ -3,7 +3,7 @@ import 'package:aramex/common/util/number_utils.dart';
 import 'package:flutter/material.dart';
 
 class ShipmentModeCard extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
   final String title;
   final int noOfShipment;
   final double amount;
@@ -11,17 +11,20 @@ class ShipmentModeCard extends StatelessWidget {
   final double topPadding;
   final double bottomPadding;
   final bool showCodValue;
+  final String image;
   const ShipmentModeCard({
     Key? key,
     required this.amount,
     required this.color,
-    required this.icon,
+    this.icon,
     required this.noOfShipment,
     required this.title,
     this.bottomPadding = 0,
     this.topPadding = 0,
     this.showCodValue = true,
-  }) : super(key: key);
+    this.image = "",
+  })  : assert(icon != null || image.length != 0),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +44,18 @@ class ShipmentModeCard extends StatelessWidget {
               color: color.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              icon,
-              color: color,
-            ),
+            child: icon != null
+                ? Icon(
+                    icon,
+                    color: color,
+                  )
+                : Image.asset(
+                    image,
+                    color: color,
+                    fit: BoxFit.cover,
+                    height: 30,
+                    width: 30,
+                  ),
           ),
           const SizedBox(width: 12),
           Expanded(

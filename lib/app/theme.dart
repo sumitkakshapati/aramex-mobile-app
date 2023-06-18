@@ -36,7 +36,9 @@ class CustomTheme {
         const AppBarTheme(iconTheme: IconThemeData(color: primaryColor)),
     scaffoldBackgroundColor: backgroundColor,
     iconTheme: const IconThemeData(color: darkerBlack),
-    bottomAppBarColor: Colors.white,
+    bottomAppBarTheme: const BottomAppBarTheme(
+      color: Colors.white,
+    ),
     fontFamily: Fonts.quickSand,
     textTheme: const TextTheme(
       headline1: TextStyle(
@@ -67,7 +69,9 @@ class CustomTheme {
         const AppBarTheme(iconTheme: IconThemeData(color: primaryColor)),
     scaffoldBackgroundColor: darkGray,
     iconTheme: const IconThemeData(color: Colors.white),
-    bottomAppBarColor: darkGray,
+    bottomAppBarTheme: const BottomAppBarTheme(
+      color: darkGray,
+    ),
     fontFamily: Fonts.quickSand,
     textTheme: const TextTheme(
       headline1: TextStyle(
